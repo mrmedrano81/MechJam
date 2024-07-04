@@ -53,7 +53,8 @@ public class CreateFolders : EditorWindow
              {
              "PlayerPrefabs",
              "EntityPrefabs",
-             "EnemyPrefabs"
+             "EnemyPrefabs",
+             ""
              };
         foreach (string subfolder in uiFolders)
         {
