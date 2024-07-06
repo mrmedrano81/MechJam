@@ -10,40 +10,23 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f, 10f)]
     [SerializeField] private float moveSpeed;
 
-    [SerializeField] NanoBotInputs nanobotInputs;
 
-    Vector2 moveDirection = Vector2.zero;
-
-    private InputAction move;
-    
-    private void OnEnable()
-    {
-        move = nanobotInputs.Player.Move;
-        move.Enable();
-    }
-
-    private void OnDisable()
-    {
-        move.Disable();
-    }
-
-    private void Awake()
-    {
-        nanobotInputs = new NanoBotInputs();
-    }
+    float movementInput;
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveDirection = move.ReadValue<Vector2>();
+        rb.velocity = new Vector2(movementInput * moveSpeed, rb.velocity.y);
+        
     }
-
-    private void FixedUpdate()
+   
+    void OnMove2(InputValue value)
     {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, 0);
+        movementInput = value.Get<float>();
     }
+    
 }
