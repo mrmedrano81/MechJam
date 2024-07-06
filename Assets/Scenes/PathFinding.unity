@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 119776463}
   - component: {fileID: 119776462}
   - component: {fileID: 119776461}
+  - component: {fileID: 119776464}
   m_Layer: 0
   m_Name: Seeker
   m_TagString: Untagged
@@ -243,6 +244,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &119776464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119776460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9974b7bbdc1ce3d4e8aa6d8ed7f24e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1682689291}
+  speed: 5
 --- !u!1 &159906781
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,6 +789,7 @@ GameObject:
   - component: {fileID: 400306964}
   - component: {fileID: 400306965}
   - component: {fileID: 400306966}
+  - component: {fileID: 400306967}
   m_Layer: 0
   m_Name: A*
   m_TagString: Untagged
@@ -808,7 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dda4d91d332fc4dafe48ba776e2dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnlyDisplayPathGizmos: 0
+  displayGrid: 0
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 64
@@ -826,8 +842,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec6f4b06be61814ebc6ec1761df6d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeker: {fileID: 119776463}
-  target: {fileID: 1682689291}
+--- !u!114 &400306967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400306963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29862c9308e183e4f9cd710cf7e2c82b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &422892854
 GameObject:
   m_ObjectHideFlags: 0
