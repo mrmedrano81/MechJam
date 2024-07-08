@@ -30,7 +30,7 @@ public class Unit : MonoBehaviour
 
     protected virtual void Update()
     {
-
+        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -49,26 +49,30 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        Vector3 currentWaypoint = path[0];
-
-        while (true)
+        if (path[0] != null)
         {
-            //if (transform.position == currentWaypoint)
-            if (Vector3.Distance(transform.position,  currentWaypoint) < 0.1f)
+            Vector3 currentWaypoint = path[0];
+
+            while (true)
             {
-                targetIndex++;
-                if (targetIndex >= path.Length)
+                //if (transform.position == currentWaypoint)
+                if (Vector3.Distance(transform.position, currentWaypoint) < 0.1f)
                 {
-                    yield break;
+                    targetIndex++;
+                    if (targetIndex >= path.Length)
+                    {
+                        yield break;
+                    }
+                    currentWaypoint = path[targetIndex];
                 }
-                currentWaypoint = path[targetIndex];
+
+                lookDir = (currentWaypoint - transform.position).normalized;
+
+                //transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                yield return null;
             }
-
-            lookDir = (currentWaypoint - transform.position).normalized;
-
-            //transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-            yield return null;
         }
+
     }
 
 

@@ -18,13 +18,16 @@ public class WBCScript : Unit
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, searchRadius, (Vector2)transform.position, 0f, layerMasks);
 
-        if (hits.Length < 0)
+        //Logger.Log(hits.Length);
+        if (hits.Length < 1)
         {
+            inRange = false;
             return;
         }
 
         foreach (RaycastHit2D hit in hits)
         {
+            Logger.Log("Hits: ", hit);
             if (hit.collider.gameObject.CompareTag("Player"))
             {
                 inRange = true;
