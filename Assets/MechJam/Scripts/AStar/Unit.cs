@@ -3,16 +3,34 @@ using System.Collections;
 
 public class Unit : MonoBehaviour
 {
-
-
+    public Rigidbody2D rb;
     public Transform target;
     public float speed;
     Vector3[] path;
     int targetIndex;
+    public Vector2 lookDir;
+    public bool inRange;
 
-    void Start()
+    [Header("Unit Parameters")]
+    public float searchRadius;
+
+    [Header("Logging")]
+    [SerializeField] public Logger Logger;
+
+    protected virtual void Awake()
+    {
+        inRange = false;
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    protected virtual void Start()
     {
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+    }
+
+    protected virtual void Update()
+    {
+
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -22,16 +40,21 @@ public class Unit : MonoBehaviour
             path = newPath;
             targetIndex = 0;
             StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
+            if (!inRange)
+            {
+                StartCoroutine("FollowPath");
+            }
         }
     }
 
     IEnumerator FollowPath()
     {
         Vector3 currentWaypoint = path[0];
+
         while (true)
         {
-            if (transform.position == currentWaypoint)
+            //if (transform.position == currentWaypoint)
+            if (Vector3.Distance(transform.position,  currentWaypoint) < 0.1f)
             {
                 targetIndex++;
                 if (targetIndex >= path.Length)
@@ -41,13 +64,16 @@ public class Unit : MonoBehaviour
                 currentWaypoint = path[targetIndex];
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-            yield return null;
+            lookDir = (currentWaypoint - transform.position).normalized;
 
+            //transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+            yield return null;
         }
     }
 
-    public void OnDrawGizmos()
+
+
+    protected virtual void OnDrawGizmos()
     {
         if (path != null)
         {
