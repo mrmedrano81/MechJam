@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EntityTiles_64x64_2
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -330193954, guid: b1f743eca5d851e42ae2c7a06c412dbe, type: 3}
-  m_Color: {r: 0.8301887, g: 0.6696333, b: 0.6696333, a: 1}
+  m_Color: {r: 0.93962264, g: 0.89884657, b: 0.89884657, a: 1}
   m_Transform:
     e00: 1
     e01: 0
