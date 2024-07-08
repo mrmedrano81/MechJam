@@ -296,6 +296,17 @@ public partial class @NanoBotInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""016bd868-14d6-4b16-9c2d-2ec8ed5fa6b8"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""bc6ce082-1767-4f5c-bcf4-ebe6c1ab92ce"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
