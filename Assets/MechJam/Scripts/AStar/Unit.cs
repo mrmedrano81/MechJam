@@ -12,9 +12,12 @@ public class Unit : MonoBehaviour
     int targetIndex;
     public Vector2 lookDir;
     public bool inRange;
+    public bool followPath;
 
     [Header("Unit Parameters")]
     public float searchRadius;
+    public float pathUpdateMoveThreshold;
+    public float minPathUpdateTime;
 
     [Header("Logging")]
     [SerializeField] public Logger Logger;
@@ -27,12 +30,13 @@ public class Unit : MonoBehaviour
 
     protected virtual void Start()
     {
+        StartCoroutine(UpdatePath());
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 
     protected virtual void Update()
     {
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -49,6 +53,28 @@ public class Unit : MonoBehaviour
         }
     }
 
+    IEnumerator UpdatePath()
+    {
+        if (Time.timeSinceLevelLoad < 0.3f)
+        {
+            yield return new WaitForSeconds(0.3f);
+        }
+        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+
+        float sqrMoveThreshold = pathUpdateMoveThreshold * pathUpdateMoveThreshold;
+        Vector3 targetPosOld = target.position;
+
+        while (true)
+        {
+            yield return new WaitForSeconds(minPathUpdateTime);
+            if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold)
+            {
+                PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+                targetPosOld = target.position;
+            }
+        }
+    }
+
     IEnumerator FollowPath()
     {
         if (path.Length > 0)
@@ -57,7 +83,6 @@ public class Unit : MonoBehaviour
 
             while (true)
             {
-                //if (transform.position == currentWaypoint)
                 if (Vector3.Distance(transform.position, currentWaypoint) < 0.1f)
                 {
                     targetIndex++;

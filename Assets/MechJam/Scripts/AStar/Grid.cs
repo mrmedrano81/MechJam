@@ -89,7 +89,6 @@ public class Grid : MonoBehaviour
                     }
                 }
 
-
                 grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
             }
         }

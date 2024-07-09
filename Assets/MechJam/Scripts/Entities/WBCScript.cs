@@ -7,8 +7,10 @@ public class WBCScript : Unit
     [Header("WBC Parameters")]
     [SerializeField] private LayerMask layerMasks;
 
-    public Vector3 currentDir;
+    Vector3 currentDir;
+    float currentSpeed;
     public float directionChangeSpeed;
+    public float slowingSpeed;
 
     protected override void Start()
     {
@@ -47,15 +49,17 @@ public class WBCScript : Unit
     {
         if (inRange)
         {
-            rb.velocity = Vector3.zero;
+            currentSpeed = Mathf.Lerp(currentSpeed, 0, Time.fixedDeltaTime * slowingSpeed);
         }
         else
         {
-            
             // Gradually change the direction to lookDir
-            currentDir = Vector3.Slerp(currentDir, lookDir, Time.deltaTime * directionChangeSpeed);
-            rb.velocity = currentDir.normalized * speed;
+            currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.fixedDeltaTime * slowingSpeed);
+            //currentDir = Vector3.Lerp(currentDir, lookDir, Time.fixedDeltaTime * directionChangeSpeed);
+            currentDir = lookDir;
+            //rb.velocity = lookDir * speed * Time.fixedDeltaTime;
         }
+        rb.velocity = currentDir.normalized * currentSpeed * Time.fixedDeltaTime;
     }
 
     protected override void OnDrawGizmos()
