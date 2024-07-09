@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class Unit : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Transform target;
     public float speed;
+    public float turnDistance;
     Vector3[] path;
     int targetIndex;
     public Vector2 lookDir;
@@ -49,7 +51,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        if (path[0] != null)
+        if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];
 
@@ -84,7 +86,7 @@ public class Unit : MonoBehaviour
             for (int i = targetIndex; i < path.Length; i++)
             {
                 Gizmos.color = Color.black;
-                Gizmos.DrawCube(path[i], Vector3.one);
+                Gizmos.DrawCube(path[i], Vector3.one*0.2f);
 
                 if (i == targetIndex)
                 {

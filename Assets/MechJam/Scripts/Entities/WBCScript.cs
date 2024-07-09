@@ -27,7 +27,6 @@ public class WBCScript : Unit
 
         foreach (RaycastHit2D hit in hits)
         {
-            Logger.Log("Hits: ", hit);
             if (hit.collider.gameObject.CompareTag("Player"))
             {
                 inRange = true;

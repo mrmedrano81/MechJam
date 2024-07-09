@@ -286,10 +286,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   target: {fileID: 1682689291}
-  speed: 4
+  speed: 1
+  turnDistance: 1
   lookDir: {x: 0, y: 0}
   inRange: 0
-  searchRadius: 2
+  searchRadius: 1
   Logger: {fileID: 548146173}
   layerMasks:
     serializedVersion: 2
@@ -304,7 +305,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1809710310604897824, guid: 0204a67186d14f943abf934021afab6f, type: 3}
       propertyPath: _showLogs
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2052272821439048326, guid: 0204a67186d14f943abf934021afab6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -539,7 +540,7 @@ Transform:
   m_GameObject: {fileID: 1682689289}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.93, y: -3.25, z: 0}
+  m_LocalPosition: {x: -13.32, y: -4.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -673,8 +674,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
+      propertyPath: Logger
+      value: 
+      objectReference: {fileID: 548146173}
+    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
+      propertyPath: blurSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
       propertyPath: nodeRadius
-      value: 0.625
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
       propertyPath: gridWorldSize.x
@@ -683,6 +692,30 @@ PrefabInstance:
     - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
       propertyPath: gridWorldSize.y
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
+      propertyPath: obstacleProximityPenalty
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
+      propertyPath: walkableRegions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
+      propertyPath: walkableRegions.Array.data[0].terrainPenalty
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
+      propertyPath: walkableRegions.Array.data[1].terrainPenalty
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
+      propertyPath: walkableRegions.Array.data[0].terrainMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
+      propertyPath: walkableRegions.Array.data[1].terrainMask.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

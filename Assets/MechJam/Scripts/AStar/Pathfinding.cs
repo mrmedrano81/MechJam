@@ -56,7 +56,7 @@ public class Pathfinding : MonoBehaviour
                 {
                     if (!neighbor.walkable || closedSet.Contains(neighbor)) continue;
 
-                    int newMoveCostToNeighbor = current.g_cost + GetDistance(current, neighbor);
+                    int newMoveCostToNeighbor = current.g_cost + GetDistance(current, neighbor) + neighbor.movementPenalty;
 
                     if (newMoveCostToNeighbor < neighbor.g_cost || !openSet.Contains(neighbor))
                     {
@@ -65,6 +65,7 @@ public class Pathfinding : MonoBehaviour
                         neighbor.parent = current;
 
                         if (!openSet.Contains(neighbor)) openSet.Add(neighbor);
+                        else openSet.UpdateItem(neighbor);
                     }
                 }
             }
@@ -95,8 +96,6 @@ public class Pathfinding : MonoBehaviour
         
         Array.Reverse(waypoints);
         return waypoints;
-
-
     }
 
     Vector3[] SimplifyPath(List<Node> path)
