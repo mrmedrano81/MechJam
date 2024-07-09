@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Lasering : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private LayerMask hitSomething;
     void Start()
     {
         
@@ -13,6 +13,14 @@ public class Lasering : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    RaycastHit2D hit = Physics2D.Raycast(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), hitSomething);
+
+        //    if (hit.collider != null)
+        //    {
+        //        Debug.Log("PLatform!");
+        //    }
+        //}
     }
 }

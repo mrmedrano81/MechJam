@@ -370,7 +370,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.001036644, y: 0.3906271}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -381,7 +381,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.002073, y: 0.2187458}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &130467156
 GameObject:
@@ -419,7 +419,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.4566037, g: 0.4566037, b: 0.4566037, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -444,7 +444,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 18.345392
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -926,6 +926,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b871a1353dd96cf4886de9fd28a0c8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSomething:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &1077000616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,10 +941,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23f022868f4a8340abc9d3f295ad83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hookLength: 2
+  hookLength: 0
   hookLayer:
     serializedVersion: 2
     m_Bits: 64
+  joint: {fileID: 1077000619}
 --- !u!114 &1077000617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,7 +1113,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
-  m_Distance: 8.569528
+  m_Distance: 2
   m_MaxDistanceOnly: 0
 --- !u!1 &1554823741
 GameObject:
@@ -1153,7 +1157,7 @@ GameObject:
   - component: {fileID: 1707230558}
   - component: {fileID: 1707230557}
   - component: {fileID: 1707230559}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Celing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
