@@ -7,6 +7,15 @@ public class WBCScript : Unit
     [Header("WBC Parameters")]
     [SerializeField] private LayerMask layerMasks;
 
+    public Vector3 currentDir;
+    public float directionChangeSpeed;
+
+    protected override void Start()
+    {
+        base.Start();
+        currentDir = Vector3.zero;
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -42,7 +51,10 @@ public class WBCScript : Unit
         }
         else
         {
-            rb.velocity = lookDir * speed;
+            
+            // Gradually change the direction to lookDir
+            currentDir = Vector3.Slerp(currentDir, lookDir, Time.deltaTime * directionChangeSpeed);
+            rb.velocity = currentDir.normalized * speed;
         }
     }
 
