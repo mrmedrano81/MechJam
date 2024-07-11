@@ -7,10 +7,20 @@ public class WBCScript : Unit
     [Header("WBC Parameters")]
     [SerializeField] private LayerMask layerMasks;
 
-    Vector3 currentDir;
-    float currentSpeed;
+    [Header("Movement Parameters")]
     public float directionChangeSpeed;
     public float slowingSpeed;
+
+
+    Vector3 currentDir;
+    float currentSpeed;
+    bool inRange;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        inRange = false;
+    }
 
     protected override void Start()
     {
@@ -22,14 +32,13 @@ public class WBCScript : Unit
     {
         base.Update();
         CheckRange();
-        MovementLogic();
+        //MovementLogic();
     }
 
     public void CheckRange()
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, searchRadius, (Vector2)transform.position, 0f, layerMasks);
 
-        //Logger.Log(hits.Length);
         if (hits.Length < 1)
         {
             inRange = false;
@@ -45,22 +54,22 @@ public class WBCScript : Unit
         }
     }
 
-    public void MovementLogic()
-    {
-        if (inRange)
-        {
-            currentSpeed = Mathf.Lerp(currentSpeed, 0, Time.fixedDeltaTime * slowingSpeed);
-        }
-        else
-        {
-            // Gradually change the direction to lookDir
-            currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.fixedDeltaTime * slowingSpeed);
-            //currentDir = Vector3.Lerp(currentDir, lookDir, Time.fixedDeltaTime * directionChangeSpeed);
-            currentDir = lookDir;
-            //rb.velocity = lookDir * speed * Time.fixedDeltaTime;
-        }
-        rb.velocity = currentDir.normalized * currentSpeed * Time.fixedDeltaTime;
-    }
+    //public void MovementLogic()
+    //{
+    //    if (inRange)
+    //    {
+    //        currentSpeed = Mathf.Lerp(currentSpeed, 0, Time.fixedDeltaTime * slowingSpeed);
+    //    }
+    //    else
+    //    {
+    //        // Gradually change the direction to lookDir
+    //        currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.fixedDeltaTime * slowingSpeed);
+    //        //currentDir = Vector3.Lerp(currentDir, lookDir, Time.fixedDeltaTime * directionChangeSpeed);
+    //        currentDir = lookDir;
+    //        //rb.velocity = lookDir * speed * Time.fixedDeltaTime;
+    //    }
+    //    rb.velocity = currentDir.normalized * currentSpeed * Time.fixedDeltaTime;
+    //}
 
     protected override void OnDrawGizmos()
     {

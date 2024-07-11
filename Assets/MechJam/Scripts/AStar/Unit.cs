@@ -4,14 +4,11 @@ using Unity.VisualScripting;
 
 public class Unit : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Transform target;
-    public float speed;
-    public float turnDistance;
+    private Transform target;
     Vector3[] path;
     int targetIndex;
+    Coroutine updatePathRoutine;
     public Vector2 lookDir;
-    public bool inRange;
     public bool followPath;
 
     [Header("Unit Parameters")]
@@ -24,19 +21,35 @@ public class Unit : MonoBehaviour
 
     protected virtual void Awake()
     {
-        inRange = false;
-        rb = GetComponent<Rigidbody2D>();
+        followPath = false;
     }
 
     protected virtual void Start()
     {
-        StartCoroutine(UpdatePath());
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        //StartCoroutine(UpdatePath());
+        //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 
     protected virtual void Update()
     {
+        if (followPath && target != null)
+        {
+            if (updatePathRoutine == null)
+            {
+                updatePathRoutine = StartCoroutine(UpdatePath());
+            }
+            //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        }
+        else
+        {
+            StopAllCoroutines();
+        }
         //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+    }
+
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -46,7 +59,7 @@ public class Unit : MonoBehaviour
             path = newPath;
             targetIndex = 0;
             StopCoroutine("FollowPath");
-            if (!inRange)
+            if (followPath)
             {
                 StartCoroutine("FollowPath");
             }
@@ -95,14 +108,12 @@ public class Unit : MonoBehaviour
 
                 lookDir = (currentWaypoint - transform.position).normalized;
 
-                //transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+
                 yield return null;
             }
         }
 
     }
-
-
 
     protected virtual void OnDrawGizmos()
     {
