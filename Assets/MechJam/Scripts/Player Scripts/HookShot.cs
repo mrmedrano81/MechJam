@@ -5,16 +5,25 @@ using UnityEngine.InputSystem;
 
 public class HookShot : MonoBehaviour
 {
-    [SerializeField] private float hookLength;
-    [SerializeField] private LayerMask hookLayer;
+    [SerializeField] private GameObject grapple;
+
+    [SerializeField] private Rigidbody2D rb;
+
+    [SerializeField] private Transform firePoint;
 
 
-    [SerializeField] private NanoBotInputs nanoBotInput;
+    //[SerializeField] private float hookLength;
+    //[SerializeField] private LayerMask hookLayer;
 
-    private Vector3 hookPoint;
-    [SerializeField] private DistanceJoint2D joint;
 
-    private InputAction fire;
+    //[SerializeField] private NanoBotInputs nanoBotInput;
+
+    //private Vector3 hookPoint;
+    //[SerializeField] private DistanceJoint2D joint;
+
+    private Vector3 mousePos;
+
+    //private InputAction fireGrapple;
 
     //private void Awake()
     //{
@@ -23,77 +32,64 @@ public class HookShot : MonoBehaviour
 
     //private void OnEnable()
     //{
-    //    fire = nanoBotInput.Player.Fire;
-    //    fire.Enable();
-    //    fire.performed += Grapple;
+    //    fireGrapple = nanoBotInput.Player.Grapple;
+    //    fireGrapple.Enable();
+    //    fireGrapple.performed += Grapple;
     //}
 
     //private void OnDisable()
     //{
-    //    fire.Disable();
+    //    fireGrapple.Disable();
     //}
     void Start()
     {
-        joint = GetComponent<DistanceJoint2D>();
-        joint.enabled = false;
-
+        rb = GetComponent<Rigidbody2D>();
+        //joint = GetComponent<DistanceJoint2D>();
+        //joint.enabled = false;
     }
     private void Update()
     {
-        Debug.DrawRay(transform.position,Camera.main.ScreenToWorldPoint(Input.mousePosition), Color.red);
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("mouse1");
-            RaycastHit2D hit = Physics2D.Raycast(
-            transform.position,
-            Camera.main.ScreenToWorldPoint(Input.mousePosition),
-            Mathf.Infinity,
-            hookLayer
-            );
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 rotation = (mousePos - transform.position).normalized;
 
-            if (hit.collider != null)
-            {
-                Debug.Log("Hit!");
-                hookPoint = hit.point;
-                hookPoint.z = 0;
-                joint.connectedAnchor = hookPoint;
-                joint.enabled = true;
-                joint.distance = hookLength;
-            }
+        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+
+        rb.rotation = rotZ;
+
+        if (Input.GetMouseButtonDown(0)) {
+            var hook = Instantiate(grapple, firePoint.position, firePoint.rotation);
+            hook.GetComponent<Grapplehook>().caster = transform;
         }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("mouse2");
-            joint.enabled = false;
-        }
+        Debug.DrawRay(firePoint.position, mousePos, Color.red);
     }
 
-    //public void Grapple(InputAction.CallbackContext context)
-    //{
-    //    Debug.Log("Pressed");
-    //    //if (context.performed)
-    //    //{
-    //        RaycastHit2D hit = Physics2D.Raycast(
-    //            origin: Camera.main.ScreenToWorldPoint(Input.mousePosition),
-    //            direction: Vector2.zero,
-    //            distance: Mathf.Infinity,
-    //            layerMask: hookLayer
-    //            );
+    public void Grapple(InputAction.CallbackContext context)
+    {
+        Debug.Log("Pressed");
+        
+        //if (context.performed)
+        //{
+        //    RaycastHit2D hit = Physics2D.Raycast(
+        //    transform.position,
+        //    Camera.main.ScreenToWorldPoint(Input.mousePosition),
+        //    Mathf.Infinity,
+        //    hookLayer
+        //    );
 
-    //        if (hit.collider != null)
-    //        {
-    //            hookPoint = hit.point;
-    //            hookPoint.z = 0;
-    //            joint.connectedAnchor = hookPoint;
-    //            joint.enabled = true;
-    //            joint.distance = hookLength;
-    //        }
-    //    //}
+        //    if (hit.collider != null)
+        //    {
+        //        hookPoint = hit.point;
+        //        hookPoint.z = 0;
+        //        joint.connectedAnchor = hookPoint;
+        //        joint.enabled = true;
+        //        joint.distance = hookLength;
+        //    }
+        //}
 
-    //    //else if (context.canceled)
-    //    //{
-    //    //    joint.enabled = false;
-    //    //}
-    //}    
+        //else if (context.canceled)
+        //{
+        //    joint.enabled = false;
+        //}
+    }
 }

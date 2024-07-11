@@ -71,6 +71,15 @@ public partial class @NanoBotInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Grapple"",
+                    ""type"": ""Button"",
+                    ""id"": ""a587d3e1-80ce-4d09-b093-f7e49ce2453f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -359,6 +368,17 @@ public partial class @NanoBotInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Move2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f43afe8-c9fb-4136-89f6-efeb6cfca69a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -949,6 +969,7 @@ public partial class @NanoBotInputs: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Move2 = m_Player.FindAction("Move2", throwIfNotFound: true);
+        m_Player_Grapple = m_Player.FindAction("Grapple", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1027,6 +1048,7 @@ public partial class @NanoBotInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Move2;
+    private readonly InputAction m_Player_Grapple;
     public struct PlayerActions
     {
         private @NanoBotInputs m_Wrapper;
@@ -1036,6 +1058,7 @@ public partial class @NanoBotInputs: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Move2 => m_Wrapper.m_Player_Move2;
+        public InputAction @Grapple => m_Wrapper.m_Player_Grapple;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1060,6 +1083,9 @@ public partial class @NanoBotInputs: IInputActionCollection2, IDisposable
             @Move2.started += instance.OnMove2;
             @Move2.performed += instance.OnMove2;
             @Move2.canceled += instance.OnMove2;
+            @Grapple.started += instance.OnGrapple;
+            @Grapple.performed += instance.OnGrapple;
+            @Grapple.canceled += instance.OnGrapple;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1079,6 +1105,9 @@ public partial class @NanoBotInputs: IInputActionCollection2, IDisposable
             @Move2.started -= instance.OnMove2;
             @Move2.performed -= instance.OnMove2;
             @Move2.canceled -= instance.OnMove2;
+            @Grapple.started -= instance.OnGrapple;
+            @Grapple.performed -= instance.OnGrapple;
+            @Grapple.canceled -= instance.OnGrapple;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1266,6 +1295,7 @@ public partial class @NanoBotInputs: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMove2(InputAction.CallbackContext context);
+        void OnGrapple(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
