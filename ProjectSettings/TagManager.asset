@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Enemy
   - Unbreakable
   - Breakable
   layers:
@@ -13,8 +14,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Unwalkable
+  - Platform
+  - Ground
   - Player
+  - Ceiling
+  - Unwalkable
   - 
   - 
   - 
