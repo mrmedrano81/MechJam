@@ -12,6 +12,7 @@ public class HookShot : MonoBehaviour
     [SerializeField] private Transform firePoint;
 
 
+    [SerializeField] private float hookDistance;
     [SerializeField] private float hookLength;
     [SerializeField] private LayerMask hookLayer;
 
@@ -30,7 +31,8 @@ public class HookShot : MonoBehaviour
     }
     private void Update()
     {
-        Debug.DrawRay(firePoint.position, mousePos, Color.red);
+        Vector2 lookDir = (mousePos - firePoint.position);
+        Debug.DrawRay(firePoint.position, lookDir, Color.red);
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //Vector2 rotation = (mousePos - transform.position).normalized;
 
@@ -45,8 +47,8 @@ public class HookShot : MonoBehaviour
 
             RaycastHit2D hit = Physics2D.Raycast(
             transform.position,
-            mousePos,
-            Mathf.Infinity,
+            lookDir,
+            hookDistance,
             hookLayer
             );
 
@@ -66,5 +68,11 @@ public class HookShot : MonoBehaviour
 
     }
 
-   
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, hookDistance);
+    }
+
+
 }
