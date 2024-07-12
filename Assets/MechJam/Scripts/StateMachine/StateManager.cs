@@ -20,7 +20,7 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
     {
         EState nextStateKey = currentState.GetNextState();
 
-        Debug.Log("State: " + nextStateKey);
+        //Debug.Log("State: " + nextStateKey);
 
         if (!isTransitioningState && nextStateKey.Equals(currentState.StateKey))
         {
@@ -32,7 +32,7 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
     {
         EState nextStateKey = currentState.GetNextState();
 
-        Debug.Log("State: " + nextStateKey);
+        //Debug.Log("State: " + nextStateKey);
 
         if (!isTransitioningState && nextStateKey.Equals(currentState.StateKey))
         {

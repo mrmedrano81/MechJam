@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     public float patrolRange;
     public float resetPathRadius;
     public float resetPathDistance;
-    public LayerMask wallMask;
+    public LayerMask solidBlockMask;
     public float changeDirectionCooldown;
     private float lastDirectionChangeTime;
     private Vector3 originalPosition;
@@ -47,7 +47,7 @@ public class Movement : MonoBehaviour
     {
         if (Time.time - lastDirectionChangeTime > changeDirectionCooldown)
         {
-            if (CheckRange(wallMask, resetPathRadius))
+            if (CheckRange(solidBlockMask, resetPathRadius))
             {
                 ChangeDirection();
             }
@@ -164,6 +164,15 @@ public class Movement : MonoBehaviour
     public bool CheckRange(LayerMask _layerMask, float _searchRadius, string tag = "None")
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _searchRadius, (Vector2)transform.position, 0f, _layerMask);
+        RaycastHit2D[] hitss = Physics2D.CircleCastAll(transform.position, _searchRadius, (Vector2)transform.position, 0f);
+
+        if (hitss.Length > 0)
+        {
+            foreach (RaycastHit2D hit in hitss)
+            {
+                Debug.Log(hit.collider.gameObject.layer);
+            }
+        }
 
         if (hits.Length > 0)
         {

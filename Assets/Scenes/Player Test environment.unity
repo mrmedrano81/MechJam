@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &23830206
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &93139110
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -445,7 +445,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 18.345392
+  orthographic size: 10.02
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -488,6 +488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ed41188c8e5e349be25991a7757fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: -10}
+  smoothTime: 0.25
   target: {fileID: 1581525413}
 --- !u!1 &488569347
 GameObject:
@@ -506,7 +508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &488569348
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -636,7 +638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &648327354
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -766,7 +768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &769558611
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -896,7 +898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &851739783
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1022,17 +1024,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2960606682375383296, guid: 8ab931c9bac574947986cf384c7777c3, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3301667558731251516, guid: 8ab931c9bac574947986cf384c7777c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.72
+      value: -7.34
       objectReference: {fileID: 0}
     - target: {fileID: 3301667558731251516, guid: 8ab931c9bac574947986cf384c7777c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.72
+      value: -6.54
       objectReference: {fileID: 0}
     - target: {fileID: 3301667558731251516, guid: 8ab931c9bac574947986cf384c7777c3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1070,10 +1068,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6952257922174705321, guid: 8ab931c9bac574947986cf384c7777c3, type: 3}
-      propertyPath: hookDistance
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1096,7 +1090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1707230557
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2180299382127481100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,9 +49,9 @@ GameObject:
   - component: {fileID: 8765665425187269022}
   - component: {fileID: 3311230648064241600}
   - component: {fileID: 5008007277808348194}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,8 +111,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1362772441
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -211,10 +211,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8283698192484694112}
   firePoint: {fileID: 7024284235239797497}
+  hookDistance: 8
   hookLength: 0
   hookLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   joint: {fileID: 5008007277808348194}
 --- !u!114 &2960606682375383296
 MonoBehaviour:
@@ -223,7 +224,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6453736959740347351}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b871a1353dd96cf4886de9fd28a0c8f8, type: 3}
   m_Name: 
@@ -263,7 +264,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2180299382127481100}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 128
   groundCheckSize: {x: 1.65, y: 0.05}
   baseGravity: 2
   maxFallSpeed: 18
@@ -429,7 +430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7024284235239797497}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

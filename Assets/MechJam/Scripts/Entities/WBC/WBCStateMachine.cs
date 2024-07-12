@@ -9,12 +9,12 @@ using UnityEngine;
 public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
 {
     [Header("Player Aggro Parameters")]
-    public Transform player;
-    public LayerMask playerMask;
+    public LayerMask playerLayerMask;
+
     public float maintainAggroRadius;
 
     [Header("Virus Aggro Parameters")]
-    public LayerMask virusMask;
+    public LayerMask virusLayerMask;
     public float detectVirusRadius;
 
     private Health healthComponent;
@@ -43,9 +43,9 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
             new WBCIdleState(
                 WBCState.Idle, 
                 movementComponent,
-                playerMask,
+                playerLayerMask,
                 maintainAggroRadius,
-                virusMask,
+                virusLayerMask,
                 detectVirusRadius));
 
         states.Add(WBCState.AggroPlayer, 
@@ -53,9 +53,9 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
                 WBCState.AggroPlayer,
                 WBCPathfinder,
                 movementComponent, 
-                playerMask,
+                playerLayerMask,
                 maintainAggroRadius,
-                virusMask,
+                virusLayerMask,
                 detectVirusRadius
                 ));
 
