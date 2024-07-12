@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2173457909337828230}
   - component: {fileID: 3551389702089895165}
   - component: {fileID: 7427865405565962052}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WhiteBloodCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -178,6 +178,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28917eee31bc5f346b15adb1a237ebfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  maintainAggroRadius: 4
+  virusMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  detectVirusRadius: 3
 --- !u!114 &2173457909337828230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,12 +199,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9974b7bbdc1ce3d4e8aa6d8ed7f24e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookDir: {x: 0, y: 0}
-  followPath: 0
-  searchRadius: 0
   pathUpdateMoveThreshold: 0.5
   minPathUpdateTime: 0.3
   Logger: {fileID: 0}
+  lookDir: {x: 0, y: 0}
 --- !u!114 &3551389702089895165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,12 +232,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa98d2112ca4fce469abd1a55b20d4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 70
+  moveSpeed: 5
   slowingSpeed: 10
+  rotationSpeed: 0
   patrolMoveSpeedScale: 0.5
   patrolRange: 6
-  resetPathRadius: 0.6
+  resetPathRadius: 0.52
   resetPathDistance: 1
-  triggerPathChangeMask:
+  wallMask:
     serializedVersion: 2
     m_Bits: 64
+  changeDirectionCooldown: 0.3

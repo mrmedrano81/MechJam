@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     public float patrolRange;
     public float resetPathRadius;
     public float resetPathDistance;
-    public LayerMask triggerPathChangeMask;
+    public LayerMask wallMask;
     public float changeDirectionCooldown;
     private float lastDirectionChangeTime;
     private Vector3 originalPosition;
@@ -47,30 +47,31 @@ public class Movement : MonoBehaviour
     {
         if (Time.time - lastDirectionChangeTime > changeDirectionCooldown)
         {
-            //if (CheckForwardRange(triggerPathChangeMask, lookDir, resetPathDistance))
-            //{
-            //    ChangeDirection();
-            //}
-
-            if (CheckRange(triggerPathChangeMask, resetPathRadius))
+            if (CheckRange(wallMask, resetPathRadius))
             {
                 ChangeDirection();
             }
 
-            else if (Vector2.Distance((Vector2)transform.position, patrolTarget) < 0.1f)
+            else if (Vector2.Distance((Vector2)transform.position, patrolTarget) < 0.5f)
             {
                 Debug.Log("set point");
                 StopMovement();
-                ChangeSpeedGradual(moveSpeed);
                 patrolTarget = SetNewTarget();
                 lookDir = (patrolTarget - (Vector2)transform.position);
             }
-
-            ChangeSpeedGradual(moveSpeed);
-            MoveTowardsDirection(lookDir);
         }
+
+        ChangeSpeedGradual(moveSpeed);
+        MoveTowardsDirection(lookDir);
     }
 
+
+    public void SetNewPatrolPath()
+    {
+        StopMovement();
+        patrolTarget = SetNewTarget();
+        lookDir = (patrolTarget - (Vector2)transform.position);
+    }
 
     private Vector2 SetNewTarget()
     {
@@ -85,7 +86,7 @@ public class Movement : MonoBehaviour
         return -direction;
     }
 
-    private void ChangeDirection()
+    public void ChangeDirection()
     {
         StopMovement();
         lookDir = SetOppositeDirection(lookDir);
@@ -93,14 +94,46 @@ public class Movement : MonoBehaviour
         lastDirectionChangeTime = Time.time;
     }
 
+    public void ResetSpeed()
+    {
+        currentSpeed = moveSpeed;
+    }
+
     public void MoveTowardsDirection(Vector2 _lookDir)
     {
-        rb.velocity = _lookDir.normalized * moveSpeed * Time.deltaTime;
+        rb.velocity = _lookDir.normalized * currentSpeed;
     }
 
     public void ChangeSpeedGradual(float _finalSpeed)
     {
         currentSpeed = Mathf.Lerp(currentSpeed, _finalSpeed, Time.deltaTime * slowingSpeed);
+    }
+
+    public Transform GetTargetIfInRange(LayerMask _layerMask, float _searchRadius, string tag = "None")
+    {
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _searchRadius, (Vector2)transform.position, 0f, _layerMask);
+
+        if (hits.Length > 0)
+        {
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (tag == "None")
+                {
+                    return hit.collider.gameObject.transform;
+                }
+                else if (hit.collider.gameObject.CompareTag(tag))
+                {
+                    return hit.collider.gameObject.transform;
+                }
+
+                else return null;
+            }
+            return null;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public bool CheckForwardRange(LayerMask _layerMask, Vector2 _searchDirection, float _searchLength, string tag = "None")

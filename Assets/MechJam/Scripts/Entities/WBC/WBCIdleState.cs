@@ -6,60 +6,95 @@ public class WBCIdleState : BaseState<WBCStateMachine.WBCState>
 {
     private Movement movementComponent;
 
-    public WBCIdleState(WBCStateMachine.WBCState key, Movement _movementComponent) : base(key)
+    [Header("Player Aggro Parameters")]
+    public Transform player;
+    public LayerMask playerMask;
+    public float maintainAggroRadius;
+
+    [Header("Player Aggro Parameters")]
+    public LayerMask virusMask;
+    public float detectVirusRadius;
+
+    public WBCIdleState(
+        WBCStateMachine.WBCState key, 
+        Movement _movementComponent,
+        LayerMask _playerMask,
+        float _maintainAggroRadius,
+        LayerMask _virusMasks, 
+        float _detectVirusRadius
+        ) : base(key)
     {
         movementComponent = _movementComponent;
+        playerMask = _playerMask;
+        virusMask = _virusMasks;
+        maintainAggroRadius = _maintainAggroRadius;
+        detectVirusRadius = _detectVirusRadius;
     }
 
     public override void EnterState()
     {
-        Debug.Log("WBCIdleState: Enter State");
+        movementComponent.SetNewPatrolPath();
     }
 
     public override void ExitState()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override WBCStateMachine.WBCState GetNextState()
     {
-        //Debug.Log("WBCIdleState: Enter State " + StateKey);
-        return StateKey;
+        if (movementComponent.CheckRange(virusMask, detectVirusRadius))
+        {
+            return WBCStateMachine.WBCState.AttackVirus;
+        }
+        else if (movementComponent.CheckRange(playerMask, maintainAggroRadius))
+        {
+            return WBCStateMachine.WBCState.AggroPlayer;
+        }
+        else
+        {
+            return WBCStateMachine.WBCState.Idle;
+        }
     }
 
     public override void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("collided with: " + other.gameObject.name);
+        //Debug.Log("collided with: " + other.gameObject.name);
     }
 
     public override void OnCollisionExit2D(Collision2D other)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnCollisionStay2D(Collision2D other)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
-        throw new System.NotImplementedException();
+        movementComponent.SetNewPatrolPath();
     }
 
     public override void OnTriggerExit2D(Collider2D other)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void OnTriggerStay2D(Collider2D other)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void UpdateState()
     {
-        movementComponent.Patrol();
+        
         //Debug.Log("WBCIdleState: Update State");
+    }
+
+    public override void FixedUpdateState()
+    {
+        movementComponent.Patrol();
     }
 }

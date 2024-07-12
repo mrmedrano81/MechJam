@@ -4,20 +4,22 @@ using Unity.VisualScripting;
 
 public class Unit : MonoBehaviour
 {
-    private Transform target;
+    
     Vector3[] path;
     int targetIndex;
     Coroutine updatePathRoutine;
-    public Vector2 lookDir;
-    public bool followPath;
 
-    [Header("Unit Parameters")]
-    public float searchRadius;
+    [Header("Path Update Settings")]
     public float pathUpdateMoveThreshold;
     public float minPathUpdateTime;
 
     [Header("Logging")]
     [SerializeField] public Logger Logger;
+
+    [Header("[READONLY] Pathfinding Settings")]
+    private Transform target;
+    public Vector2 lookDir;
+    private bool followPath;
 
     protected virtual void Awake()
     {
@@ -26,43 +28,41 @@ public class Unit : MonoBehaviour
 
     protected virtual void Start()
     {
-        //StartCoroutine(UpdatePath());
+        updatePathRoutine =  StartCoroutine(UpdatePath());
         //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 
     protected virtual void Update()
     {
-        if (followPath && target != null)
-        {
-            if (updatePathRoutine == null)
-            {
-                updatePathRoutine = StartCoroutine(UpdatePath());
-            }
-            //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-        }
-        else
-        {
-            StopAllCoroutines();
-        }
+        //if (followPath && target != null)
+        //{
+        //    if (updatePathRoutine == null)
+        //    {
+        //        updatePathRoutine = StartCoroutine(UpdatePath());
+        //    }
+        //    //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        //}
+        //else
+        //{
+        //    StopAllCoroutines();
+        //}
         //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 
-    public void SetTarget(Transform _target)
+    public void SetConditions(Transform _target, bool _followPath)
     {
         target = _target;
+        followPath = _followPath;
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
-        if (pathSuccessful)
+        if (pathSuccessful && followPath)
         {
             path = newPath;
             targetIndex = 0;
             StopCoroutine("FollowPath");
-            if (followPath)
-            {
-                StartCoroutine("FollowPath");
-            }
+            StartCoroutine("FollowPath");
         }
     }
 
@@ -72,6 +72,12 @@ public class Unit : MonoBehaviour
         {
             yield return new WaitForSeconds(0.3f);
         }
+
+        while (target == null)
+        {
+            yield return null;
+        }
+
         PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
 
         float sqrMoveThreshold = pathUpdateMoveThreshold * pathUpdateMoveThreshold;
@@ -80,7 +86,7 @@ public class Unit : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(minPathUpdateTime);
-            if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold)
+            if (target != null && (target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold)
             {
                 PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
                 targetPosOld = target.position;
@@ -101,6 +107,7 @@ public class Unit : MonoBehaviour
                     targetIndex++;
                     if (targetIndex >= path.Length)
                     {
+                        lookDir = Vector3.zero;
                         yield break;
                     }
                     currentWaypoint = path[targetIndex];
@@ -108,11 +115,9 @@ public class Unit : MonoBehaviour
 
                 lookDir = (currentWaypoint - transform.position).normalized;
 
-
                 yield return null;
             }
         }
-
     }
 
     protected virtual void OnDrawGizmos()

@@ -6,6 +6,11 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
 {
     private Attack attackComponent;
     private Movement movementComponent;
+    private Unit pathFinder;
+
+    private Transform virus;
+    public LayerMask virusMask;
+    public float detectVirusRadius;
 
     public WBCAttackVirusState(WBCStateMachine.WBCState key, Movement _movementComponent, Attack _attackComponent) : base(key)
     {
@@ -15,12 +20,12 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
 
     public override void EnterState()
     {
-        throw new System.NotImplementedException();
+        pathFinder.SetConditions(virus, true);
     }
 
     public override void ExitState()
     {
-        throw new System.NotImplementedException();
+        pathFinder.SetConditions(null, false);
     }
 
     public override WBCStateMachine.WBCState GetNextState()
@@ -60,6 +65,11 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
 
     public override void UpdateState()
     {
-        Debug.Log("Damage: " + attackComponent.damage);
+        //Debug.Log("Damage: " + attackComponent.damage);
+    }
+
+    public override void FixedUpdateState()
+    {
+        //throw new System.NotImplementedException();
     }
 }
