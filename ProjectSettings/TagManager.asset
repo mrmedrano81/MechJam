@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Unbreakable
+  - Breakable
   layers:
   - Default
   - TransparentFX
@@ -16,6 +18,9 @@ TagManager:
   - Ground
   - Player
   - Ceiling
+  - Unwalkable
+  - 
+  - 
   - 
   - 
   - 
@@ -41,4 +46,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3429434687
+    locked: 0
+  - name: Foreground
+    uniqueID: 809685375
     locked: 0
