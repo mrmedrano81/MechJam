@@ -12,15 +12,20 @@ public class Grapplehook : MonoBehaviour
 
     [SerializeField] private float range, rangeMax;
 
+    [SerializeField] private DistanceJoint2D joint;
+
+    private Vector3 hookPoint;
+
     [HideInInspector] 
     public Transform caster;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        joint = GetComponent<DistanceJoint2D>();
     }
     private void Update()
     {
-
+        
     }
 
     private void FixedUpdate()
@@ -30,14 +35,26 @@ public class Grapplehook : MonoBehaviour
         // rb.AddForce(transform.right  * Time.deltaTime);
         
 
-        var dist = Vector2.Distance(transform.position, caster.position);
+        //var dist = Vector2.Distance(transform.position, caster.position);
 
-        if (dist > range)
-        {
-            //Destroy(gameObject);
-            //transform.LookAt(caster, Vector3.zero);
+        //if (dist > range)
+        //{
+        //    //Destroy(gameObject);
+        //    //transform.LookAt(caster, Vector3.zero);
 
-        }
+        //}
 
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision != null)
+    //    {
+    //        hookPoint = collision.point;
+    //        hookPoint.z = 0;
+    //        joint.connectedAnchor = hookPoint;
+    //        joint.enabled = true;
+    //        joint.distance = hookLength;
+    //    }
+    //}
 }
