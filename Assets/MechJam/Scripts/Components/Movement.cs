@@ -45,6 +45,12 @@ public class Movement : MonoBehaviour
 
     public void Patrol()
     {
+        //RaycastHit2D hitA = Physics2D.Raycast(transform.position, lookDir, Mathf.Infinity);
+        //RaycastHit2D hitB = Physics2D.Raycast(transform.position, lookDir, Mathf.Infinity, solidBlockMask);
+
+        //if (hitA) Debug.Log(hitA.collider.gameObject.layer);
+        //if (hitB) Debug.Log("b: " + hitB.collider.gameObject.layer);
+
         if (Time.time - lastDirectionChangeTime > changeDirectionCooldown)
         {
             if (CheckRange(solidBlockMask, resetPathRadius))
@@ -111,19 +117,19 @@ public class Movement : MonoBehaviour
 
     public Transform GetTargetIfInRange(LayerMask _layerMask, float _searchRadius, string tag = "None")
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _searchRadius, (Vector2)transform.position, 0f, _layerMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
 
         if (hits.Length > 0)
         {
-            foreach (RaycastHit2D hit in hits)
+            foreach (Collider2D hit in hits)
             {
                 if (tag == "None")
                 {
-                    return hit.collider.gameObject.transform;
+                    return hit.gameObject.transform;
                 }
-                else if (hit.collider.gameObject.CompareTag(tag))
+                else if (hit.gameObject.CompareTag(tag))
                 {
-                    return hit.collider.gameObject.transform;
+                    return hit.gameObject.transform;
                 }
 
                 else return null;
@@ -136,53 +142,21 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public bool CheckForwardRange(LayerMask _layerMask, Vector2 _searchDirection, float _searchLength, string tag = "None")
-    {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, _searchDirection, _searchLength, _layerMask);
-
-        if (hits.Length > 0)
-        {
-            foreach (RaycastHit2D hit in hits)
-            {
-                if (tag == "None")
-                {
-                    return true;
-                }
-                else if (hit.collider.gameObject.CompareTag(tag))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     public bool CheckRange(LayerMask _layerMask, float _searchRadius, string tag = "None")
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _searchRadius, (Vector2)transform.position, 0f, _layerMask);
-        RaycastHit2D[] hitss = Physics2D.CircleCastAll(transform.position, _searchRadius, (Vector2)transform.position, 0f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
 
-        if (hitss.Length > 0)
-        {
-            foreach (RaycastHit2D hit in hitss)
-            {
-                Debug.Log(hit.collider.gameObject.layer);
-            }
-        }
+        //RaycastHit2D ray = Physics2D.ra
 
         if (hits.Length > 0)
         {
-            foreach (RaycastHit2D hit in hits)
+            foreach (Collider2D hit in hits)
             {
                 if (tag == "None")
                 {
                     return true;
                 }
-                else if (hit.collider.gameObject.CompareTag(tag))
+                else if (hit.gameObject.CompareTag(tag))
                 {
                     return true;
                 }
