@@ -19,11 +19,11 @@ GameObject:
   - component: {fileID: 3551389702089895165}
   m_Layer: 9
   m_Name: WhiteBloodCell
-  m_TagString: Untagged
+  m_TagString: WhiteBloodCell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &94415771264269538
 Transform:
   m_ObjectHideFlags: 0
@@ -185,17 +185,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa98d2112ca4fce469abd1a55b20d4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  slowingSpeed: 2
-  rotationSpeed: 0
-  patrolMoveSpeedScale: 0.5
+  moveSpeed: 3
+  slowingSpeed: 0.5
+  patrolMoveSpeed: 0
   patrolRange: 8
-  resetPathRadius: 0.5
+  collisionDetectRadius: 0.5
   resetPathDistance: 0.3
   solidBlockMask:
     serializedVersion: 2
     m_Bits: 128
   changeDirectionCooldown: 0.3
+  originalPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &968691436673969959
 MonoBehaviour:
   m_ObjectHideFlags: 0

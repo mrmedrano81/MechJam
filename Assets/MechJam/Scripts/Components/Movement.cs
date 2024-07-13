@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,28 +9,25 @@ public class Movement : MonoBehaviour
 {
     public float moveSpeed;
     public float slowingSpeed;
-    public float rotationSpeed;
-    private float currentRotationSpeed;
     private float currentSpeed;
     private Vector2 currentLookDir;
     private Vector2 lookDir;
     private Rigidbody2D rb;
 
     [Header("Patrol Settings")]
-    public float patrolMoveSpeedScale;
+    public float patrolMoveSpeed;
     public float patrolRange;
-    public float resetPathRadius;
+    public float collisionDetectRadius;
     public float resetPathDistance;
     public LayerMask solidBlockMask;
     public float changeDirectionCooldown;
+    public Vector3 originalPosition;
     private float lastDirectionChangeTime;
-    private Vector3 originalPosition;
     private Vector2 patrolTarget;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        currentRotationSpeed = rotationSpeed;
         rb = GetComponent<Rigidbody2D>();
         currentSpeed = moveSpeed;
         originalPosition = transform.position;
@@ -43,24 +41,28 @@ public class Movement : MonoBehaviour
         currentSpeed = 0;
     }
 
+    public void UpdateOriginalPosition()
+    {
+        originalPosition = transform.position;
+    }
+
+    public void UpdateOriginalPosition(Transform _newTransform)
+    {
+        originalPosition = _newTransform.position;
+    }
+
     public void Patrol()
     {
-        //RaycastHit2D hitA = Physics2D.Raycast(transform.position, lookDir, Mathf.Infinity);
-        //RaycastHit2D hitB = Physics2D.Raycast(transform.position, lookDir, Mathf.Infinity, solidBlockMask);
-
-        //if (hitA) Debug.Log(hitA.collider.gameObject.layer);
-        //if (hitB) Debug.Log("b: " + hitB.collider.gameObject.layer);
-
         if (Time.time - lastDirectionChangeTime > changeDirectionCooldown)
         {
-            if (CheckRange(solidBlockMask, resetPathRadius))
+            if (CheckRange(solidBlockMask, collisionDetectRadius))
             {
                 ChangeDirection();
             }
 
             else if (Vector2.Distance((Vector2)transform.position, patrolTarget) < 0.5f)
             {
-                Debug.Log("set point");
+                //Debug.Log("set point");
                 StopMovement();
                 patrolTarget = SetNewTarget();
                 lookDir = (patrolTarget - (Vector2)transform.position);
@@ -79,15 +81,23 @@ public class Movement : MonoBehaviour
         lookDir = (patrolTarget - (Vector2)transform.position);
     }
 
-    private Vector2 SetNewTarget()
+    public Vector2 SetNewTarget()
     {
-        Vector2 randomExtension = new Vector2(Random.Range(-patrolRange, patrolRange), Random.Range(-patrolRange, patrolRange));
+        Vector2 randomExtension = new Vector2(Random.Range(-patrolRange, patrolRange), Random.Range(-patrolRange, patrolRange))/2;
         Vector2 randomPoint = (Vector2)originalPosition + randomExtension;
 
         return randomPoint;
     }
 
-    private Vector2 SetOppositeDirection(Vector2 direction)
+    public Vector2 SetNewTarget(float patrolRange)
+    {
+        Vector2 randomExtension = new Vector2(Random.Range(-patrolRange, patrolRange), Random.Range(-patrolRange, patrolRange)) / 2;
+        Vector2 randomPoint = (Vector2)originalPosition + randomExtension;
+
+        return randomPoint;
+    }
+
+    public Vector2 SetOppositeDirection(Vector2 direction)
     {
         return -direction;
     }
@@ -174,11 +184,11 @@ public class Movement : MonoBehaviour
         if (originalPosition != null)
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(originalPosition, patrolRange);
+            Gizmos.DrawWireCube(originalPosition, new Vector3(patrolRange, patrolRange, 0));
         }
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, resetPathRadius);
+        Gizmos.DrawWireSphere(transform.position, collisionDetectRadius);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, patrolTarget);

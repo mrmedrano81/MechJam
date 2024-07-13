@@ -28,37 +28,9 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
         pathFinder.SetConditions(null, false);
     }
 
+    
+
     public override WBCStateMachine.WBCState GetNextState()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnCollisionEnter2D(Collision2D other)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnCollisionExit2D(Collision2D other)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnCollisionStay2D(Collision2D other)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnTriggerEnter2D(Collider2D other)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnTriggerExit2D(Collider2D other)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void OnTriggerStay2D(Collider2D other)
     {
         throw new System.NotImplementedException();
     }
@@ -72,4 +44,39 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
     {
         //throw new System.NotImplementedException();
     }
+
+    #region Collision and Trigger Logic
+    public override void OnCollisionEnter2D(Collision2D other)
+    {
+    }
+
+    public override void OnCollisionExit2D(Collision2D other)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public override void OnCollisionStay2D(Collision2D other)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public override void OnTriggerEnter2D(Collider2D other)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public override void OnTriggerExit2D(Collider2D other)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public override void OnTriggerStay2D(Collider2D other)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    #endregion
+
+
+
 }
