@@ -7,8 +7,8 @@ TagManager:
   - Enemy
   - Unbreakable
   - Breakable
-  - WhiteBloodCell
   - RedBloodCell
+  - WhiteBloodCell
   layers:
   - Default
   - TransparentFX

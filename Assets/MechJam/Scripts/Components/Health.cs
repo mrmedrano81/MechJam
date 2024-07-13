@@ -9,12 +9,14 @@ public class Health : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        isDead = false;
         currentHealth = maxHealth;
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        Debug.Log("taking damage, health: " + currentHealth);
 
         if (currentHealth <= 0)
         {

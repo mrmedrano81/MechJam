@@ -1,6 +1,8 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -83,7 +85,9 @@ public class Movement : MonoBehaviour
 
     public Vector2 SetNewTarget()
     {
-        Vector2 randomExtension = new Vector2(Random.Range(-patrolRange, patrolRange), Random.Range(-patrolRange, patrolRange))/2;
+        Vector2 randomExtension = new Vector2(
+            UnityEngine.Random.Range(-patrolRange, patrolRange), 
+            UnityEngine.Random.Range(-patrolRange, patrolRange))/2;
         Vector2 randomPoint = (Vector2)originalPosition + randomExtension;
 
         return randomPoint;
@@ -91,7 +95,9 @@ public class Movement : MonoBehaviour
 
     public Vector2 SetNewTarget(float patrolRange)
     {
-        Vector2 randomExtension = new Vector2(Random.Range(-patrolRange, patrolRange), Random.Range(-patrolRange, patrolRange)) / 2;
+        Vector2 randomExtension = new Vector2(
+            UnityEngine.Random.Range(-patrolRange, patrolRange),  
+            UnityEngine.Random.Range(-patrolRange, patrolRange)) / 2;
         Vector2 randomPoint = (Vector2)originalPosition + randomExtension;
 
         return randomPoint;
@@ -129,6 +135,7 @@ public class Movement : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
 
+        Array.Reverse(hits);
         if (hits.Length > 0)
         {
             foreach (Collider2D hit in hits)
@@ -154,6 +161,7 @@ public class Movement : MonoBehaviour
 
     public bool CheckRange(LayerMask _layerMask, float _searchRadius, string tag = "None")
     {
+
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
 
         //RaycastHit2D ray = Physics2D.ra
@@ -162,6 +170,8 @@ public class Movement : MonoBehaviour
         {
             foreach (Collider2D hit in hits)
             {
+                
+
                 if (tag == "None")
                 {
                     return true;

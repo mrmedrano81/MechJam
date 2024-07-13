@@ -19,11 +19,11 @@ GameObject:
   - component: {fileID: 3551389702089895165}
   m_Layer: 9
   m_Name: WhiteBloodCell
-  m_TagString: WhiteBloodCell
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &94415771264269538
 Transform:
   m_ObjectHideFlags: 0
@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  s_damageCooldown: 0
   dotDamage: 1
   s_dotDuration: 1
   s_dotInterval: 1

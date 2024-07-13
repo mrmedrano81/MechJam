@@ -26,17 +26,16 @@ public class C_VirusMovingState : BaseState<C_VirusStateMachine.EState>
         transitionToAttack = false;
 
         target = null;
-
+        
         for (int i = 0; i < c_virusSO.targetLayers.Length; i++)
         {
             for (int j = 0; j < c_virusSO.targetTags.Length; j++)
             {
-                target = movement.GetTargetIfInRange(c_virusSO.targetLayers[i], Mathf.Infinity, c_virusSO.targetTags[j]);
+                target = movement.GetTargetIfInRange(c_virusSO.targetLayers[i], Mathf.Infinity);
 
                 if (target != null)
                 {
-                    Debug.Log("Target found: " + c_virusSO.targetTags[j]);
-                    break;
+                    return;
                 }
                 else
                 {
@@ -50,16 +49,17 @@ public class C_VirusMovingState : BaseState<C_VirusStateMachine.EState>
     {
         transitionToAttack = false;
         pathfInder.SetConditions(null, false);
-        movement.StopMovement();
+        //movement.StopMovement();
     }
 
     public override void UpdateState()
     {
-        pathfInder.SetConditions(target, true);
+        
     }
 
     public override void FixedUpdateState()
     {
+        pathfInder.SetConditions(target, true);
         movement.MoveTowardsDirection(pathfInder.lookDir);
     }
 
