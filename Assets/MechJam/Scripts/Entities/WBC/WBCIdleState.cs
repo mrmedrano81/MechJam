@@ -33,19 +33,21 @@ public class WBCIdleState : BaseState<WBCStateMachine.WBCState>
 
     public override void EnterState()
     {
+        movementComponent.UpdateOriginalPosition();
         movementComponent.SetNewPatrolPath();
     }
 
     public override void ExitState()
     {
-        
+        movementComponent.StopMovement();
+        movementComponent.ResetSpeed();
     }
 
     public override WBCStateMachine.WBCState GetNextState()
     {
         if (movementComponent.CheckRange(virusMask, detectVirusRadius))
         {
-            return WBCStateMachine.WBCState.AttackVirus;
+            return WBCStateMachine.WBCState.AggroVirus;
         }
         else if (movementComponent.CheckRange(playerMask, maintainAggroRadius))
         {
@@ -56,6 +58,8 @@ public class WBCIdleState : BaseState<WBCStateMachine.WBCState>
             return WBCStateMachine.WBCState.Idle;
         }
     }
+
+    #region Collision and Trigger logic
 
     public override void OnCollisionEnter2D(Collision2D other)
     {
@@ -86,6 +90,8 @@ public class WBCIdleState : BaseState<WBCStateMachine.WBCState>
     {
         
     }
+
+    #endregion
 
     public override void UpdateState()
     {
