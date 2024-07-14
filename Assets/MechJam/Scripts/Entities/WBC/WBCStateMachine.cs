@@ -27,6 +27,7 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
     {
         Idle,
         AggroPlayer,
+        AggroVirus,
         AttackVirus
     }
 
@@ -59,13 +60,33 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
                 detectVirusRadius
                 ));
 
+        states.Add(WBCState.AggroVirus,
+            new WBCAggroVirusState(
+                WBCState.AggroVirus,
+                WBCPathfinder,
+                movementComponent,
+                virusLayerMask,
+                detectVirusRadius
+                ));
+
         states.Add(WBCState.AttackVirus, 
             new WBCAttackVirusState(
                 WBCState.AttackVirus, 
+                WBCPathfinder,
                 movementComponent, 
-                attackComponent
+                attackComponent,
+                playerLayerMask,
+                maintainAggroRadius,
+                virusLayerMask,
+                detectVirusRadius
                 ));
 
         currentState = states[WBCState.Idle];
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectVirusRadius);
     }
 }
