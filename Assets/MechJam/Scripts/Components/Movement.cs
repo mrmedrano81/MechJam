@@ -131,27 +131,62 @@ public class Movement : MonoBehaviour
         currentSpeed = Mathf.Lerp(currentSpeed, _finalSpeed, Time.deltaTime * slowingSpeed);
     }
 
-    public Transform GetTargetIfInRange(LayerMask _layerMask, float _searchRadius, string tag = "None")
+    public Transform GetTargetIfInRange(LayerMask _layerMask, float _searchRadius, string tag = "None", bool targetNearest = false)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
 
-        Array.Reverse(hits);
         if (hits.Length > 0)
         {
-            foreach (Collider2D hit in hits)
+            if (targetNearest == true)
             {
-                if (tag == "None")
+                Transform nearest = null;
+                float shortestDistance = Mathf.Infinity;
+                foreach (Collider2D hit in hits)
                 {
-                    return hit.gameObject.transform;
-                }
-                else if (hit.gameObject.CompareTag(tag))
-                {
-                    return hit.gameObject.transform;
+                    if (tag == "None")
+                    {
+                        float currentDistance = Vector3.Distance(transform.position, hit.gameObject.transform.position);
+
+                        if (shortestDistance > currentDistance)
+                        {
+                            shortestDistance = currentDistance;
+                            nearest = hit.gameObject.transform;
+                        }
+
+                    }
+                    else if (hit.gameObject.CompareTag(tag))
+                    {
+                        float currentDistance = Vector3.Distance(transform.position, hit.gameObject.transform.position);
+
+                        if (shortestDistance > currentDistance)
+                        {
+                            shortestDistance = currentDistance;
+                            nearest = hit.gameObject.transform;
+                        }
+                    }
                 }
 
-                else return null;
+                return nearest;
+
             }
-            return null;
+            else
+            {
+                Debug.Log(hits.Length);
+                foreach (Collider2D hit in hits)
+                {
+                    if (tag == "None")
+                    {
+                        return hit.gameObject.transform;
+                    }
+                    else if (hit.gameObject.CompareTag(tag))
+                    {
+                        return hit.gameObject.transform;
+                    }
+
+                    else return null;
+                }
+                return null;
+            }
         }
         else
         {

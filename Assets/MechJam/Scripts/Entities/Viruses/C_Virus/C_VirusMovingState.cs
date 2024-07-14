@@ -26,21 +26,17 @@ public class C_VirusMovingState : BaseState<C_VirusStateMachine.EState>
         transitionToAttack = false;
 
         target = null;
-        
-        for (int i = 0; i < c_virusSO.targetLayers.Length; i++)
+        for (int j = 0; j < c_virusSO.targetTags.Length; j++)
         {
-            for (int j = 0; j < c_virusSO.targetTags.Length; j++)
-            {
-                target = movement.GetTargetIfInRange(c_virusSO.targetLayers[i], Mathf.Infinity);
+            target = movement.GetTargetIfInRange(c_virusSO.targetLayer, Mathf.Infinity, c_virusSO.targetTags[j], true);
 
-                if (target != null)
-                {
-                    return;
-                }
-                else
-                {
-                    Debug.Log("No Target Found");
-                }
+            if (target != null)
+            {
+                return;
+            }
+            else
+            {
+                Debug.Log("No Target Found");
             }
         }
     }
@@ -79,13 +75,7 @@ public class C_VirusMovingState : BaseState<C_VirusStateMachine.EState>
     #region Collision and Trigger Logic
     public override void OnCollisionEnter2D(Collision2D other)
     {
-        foreach (string _tag in  c_virusSO.targetTags)
-        {
-            if (other.collider.gameObject.CompareTag(_tag))
-            {
-                transitionToAttack = true;
-            }
-        }
+
     }
 
     public override void OnCollisionExit2D(Collision2D other)
@@ -98,6 +88,13 @@ public class C_VirusMovingState : BaseState<C_VirusStateMachine.EState>
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
+        foreach (string _tag in c_virusSO.targetTags)
+        {
+            if (other.gameObject.CompareTag(_tag))
+            {
+                transitionToAttack = true;
+            }
+        }
     }
 
     public override void OnTriggerExit2D(Collider2D other)
@@ -106,6 +103,7 @@ public class C_VirusMovingState : BaseState<C_VirusStateMachine.EState>
 
     public override void OnTriggerStay2D(Collider2D other)
     {
+
     }
     #endregion
 }

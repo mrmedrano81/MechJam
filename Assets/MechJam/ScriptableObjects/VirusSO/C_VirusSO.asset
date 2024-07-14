@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: C_VirusSO
   m_EditorClassIdentifier: Assembly-CSharp::C_VirusSO
-  targetLayers:
-  - serializedVersion: 2
+  targetLayer:
+    serializedVersion: 2
     m_Bits: 512
   targetTags:
   - RedBloodCell

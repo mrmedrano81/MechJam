@@ -39,14 +39,15 @@ public class WBCIdleState : BaseState<WBCStateMachine.WBCState>
 
     public override void ExitState()
     {
-        
+        movementComponent.StopMovement();
+        movementComponent.ResetSpeed();
     }
 
     public override WBCStateMachine.WBCState GetNextState()
     {
         if (movementComponent.CheckRange(virusMask, detectVirusRadius))
         {
-            return WBCStateMachine.WBCState.AttackVirus;
+            return WBCStateMachine.WBCState.AggroVirus;
         }
         else if (movementComponent.CheckRange(playerMask, maintainAggroRadius))
         {

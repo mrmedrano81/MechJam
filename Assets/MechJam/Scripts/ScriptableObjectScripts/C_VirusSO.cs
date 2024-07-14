@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "C_VirusSO", menuName = "VirusSO/C_VirusSO")]
 public class C_VirusSO : ScriptableObject
 {
-    public LayerMask[] targetLayers;
+    public LayerMask targetLayer;
     public string[] targetTags;
 }

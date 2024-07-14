@@ -33,32 +33,28 @@ public class C_VirusAttackScript : BaseState<C_VirusStateMachine.EState>
 
     public override void UpdateState()
     {
-
-        foreach (LayerMask layer in c_virusSO.targetLayers)
+        foreach (string tag in c_virusSO.targetTags)
         {
-            foreach (string tag in c_virusSO.targetTags)
-            {
-                //Debug.Log(layer + ", " + tag);
+            //Debug.Log(layer + ", " + tag);
 
-                if (movement.CheckRange(layer, attack.range, tag))
+            if (movement.CheckRange(c_virusSO.targetLayer, attack.range, tag))
+            {
+                cellHealth = attack.GetHealthComponentIfInRange(c_virusSO.targetLayer, attack.range, tag);
+                if (cellHealth != null)
                 {
-                    cellHealth = attack.GetHealthComponentIfInRange(layer, attack.range, tag);
-                    if (cellHealth != null)
+                    if (cellHealth.IsDead)
                     {
-                        if (cellHealth.IsDead)
-                        {
-                            targetDead = true;
-                        }
-                        else
-                        {
-                            attack.DoDamage(cellHealth);
-                        }
+                        targetDead = true;
                     }
+                    else
+                    {
+                        attack.DoDamage(cellHealth);
+                    }   
                 }
-                else
-                {
-                    targetMovedAway = true;
-                }
+            }
+            else
+            {
+                targetMovedAway = true;
             }
         }
     }
@@ -83,7 +79,7 @@ public class C_VirusAttackScript : BaseState<C_VirusStateMachine.EState>
     #region Collision and Trigger logic
     public override void OnCollisionEnter2D(Collision2D other)
     {
-
+        
     }
 
     public override void OnCollisionExit2D(Collision2D other)
@@ -98,14 +94,17 @@ public class C_VirusAttackScript : BaseState<C_VirusStateMachine.EState>
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
+        
     }
 
     public override void OnTriggerExit2D(Collider2D other)
     {
+        
     }
 
     public override void OnTriggerStay2D(Collider2D other)
     {
+        
     }
 
     #endregion
