@@ -6,9 +6,10 @@ TagManager:
   tags:
   - Enemy
   - Unbreakable
-  - Breakable
   - RedBloodCell
   - WhiteBloodCell
+  - CholesterolBlock
+  - CellBlock
   layers:
   - Default
   - TransparentFX
@@ -55,9 +56,9 @@ TagManager:
   - name: Player
     uniqueID: 1362772441
     locked: 0
-  - name: Cell
-    uniqueID: 1839899477
-    locked: 0
   - name: Enemy
     uniqueID: 3660275071
+    locked: 0
+  - name: Cell
+    uniqueID: 1839899477
     locked: 0

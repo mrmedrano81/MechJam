@@ -52,7 +52,7 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
 
     public override WBCStateMachine.WBCState GetNextState()
     {
-        if (virusHealth.IsDead || virusGone)
+        if (virusGone)
         {
             return WBCStateMachine.WBCState.Idle;
         }
@@ -66,9 +66,9 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
     {
         if (movementComponent.CheckRange(virusMasks, attackComponent.range))
         {
-            if (!virusHealth.IsDead)
+            if (virusHealth != null)
             {
-                virusHealth.TakeDamage(attackComponent.damage);
+                attackComponent.DoDamage(virusHealth);
             }
             else
             {
