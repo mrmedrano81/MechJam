@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Enemy
   - Unbreakable
   - Breakable
   layers:
@@ -13,11 +14,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Unwalkable
   - Player
-  - 
-  - 
-  - 
+  - Solid Block
+  - Space
+  - Cell
+  - Virus
   - 
   - 
   - 
@@ -48,4 +49,10 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 809685375
+    locked: 0
+  - name: Player
+    uniqueID: 1362772441
+    locked: 0
+  - name: Enemy
+    uniqueID: 3660275071
     locked: 0
