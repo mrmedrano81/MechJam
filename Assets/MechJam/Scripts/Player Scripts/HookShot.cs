@@ -35,8 +35,6 @@ public class HookShot : MonoBehaviour
         Vector2 lookDir = (mousePos - firePoint.position);
         Debug.DrawRay(firePoint.position, lookDir, Color.red);
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector2 lookDir = mousePos - transform.position;
         Debug.DrawRay(firePoint.position, lookDir, Color.red);
         //Vector2 rotation = (mousePos - transform.position).normalized;
 
