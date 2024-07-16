@@ -10,14 +10,24 @@ public class PlayerMovement : MonoBehaviour
     [Range(0f, 10f)]
     [SerializeField] private float moveSpeed;
 
-    Animator animator;
+    public Animator animator;
   
     float movementInput;
+
+    private string currentState;
+
+
+    //ANIMATION STATES
+    const string PLAYER_IDLE = "idle";
+    const string PLAYER_WALK = "player_walk";
+    const string PLAYER_JUMP_FULL = "player_jump_full";
+    const string PLAYER_MIDAIR = "player_MidAir";
+
     //float downwardInput;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -35,14 +45,33 @@ public class PlayerMovement : MonoBehaviour
         if (movementInput > 0)
         {
             transform.localScale = new Vector3(5f, 5f, 1f);
+
         }
 
         else if(movementInput < 0)
         {
             transform.localScale = new Vector3(-5f,5f,1f);
+
+        }
+
+
+        if (movementInput != 0)
+        {
+            ChangeAnimationState(PLAYER_WALK);
+        }
+        else
+        {
+
+            ChangeAnimationState(PLAYER_IDLE);
         }
 
     }
 
+    void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState) return;
+
+        animator.Play(newState);
+    }
     
 }

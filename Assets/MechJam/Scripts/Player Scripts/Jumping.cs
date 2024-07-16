@@ -19,16 +19,27 @@ public class Jumping : MonoBehaviour
 
     [SerializeField] private int jumpingPower;
 
-   // public bool detectGround;
+    Animator _animator;
+    private string currentState;
+
+    //ANIMATION STATE
+    const string PLAYER_IDLE = "idle";
+    const string PLAYER_JUMP_FULL = "player_jump_full";
+    const string PLAYER_MIDAIR = "player_MidAir";
+    const string PLAYER_JUMP_ONLY = "player_JumpOnly";
+    const string PLAYER_JUMP_LANDING = "player_JumpLanding";
+    public bool detectGround;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
         Gravity();
+
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -42,9 +53,13 @@ public class Jumping : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
+        
+
         if (context.performed && coyoteTimeCounter > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            ChangeAnimationState(PLAYER_JUMP_ONLY);
+            
         }
 
         else if (context.canceled && rb.velocity.y > 0f)
@@ -75,6 +90,31 @@ public class Jumping : MonoBehaviour
         else
         {
             rb.gravityScale = baseGravity;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube(groundCheck.position, groundCheckSize);
+    }
+    void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState) return;
+
+        _animator.Play(newState);
+    }
+
+    //A bool checker to check if animation is still playing
+    bool IsAnimationPlaying(Animator animator, string stateName)
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(stateName) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

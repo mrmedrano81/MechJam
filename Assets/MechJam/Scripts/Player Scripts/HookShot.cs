@@ -35,7 +35,6 @@ public class HookShot : MonoBehaviour
         Vector2 lookDir = (mousePos - firePoint.position);
         Debug.DrawRay(firePoint.position, lookDir, Color.red);
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.DrawRay(firePoint.position, lookDir, Color.red);
         //Vector2 rotation = (mousePos - transform.position).normalized;
 
         //float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
@@ -48,9 +47,9 @@ public class HookShot : MonoBehaviour
             //hook.GetComponent<Grapplehook>().caster = transform;
 
             RaycastHit2D hit = Physics2D.Raycast(
-            transform.position,
+            firePoint.position,
             lookDir,
-            hookDistance,
+            Mathf.Infinity,
             hookLayer
             );
 

@@ -11,7 +11,9 @@ public class Lasering : MonoBehaviour
 
     [SerializeField] private LineRenderer lineRenderer;
 
-    [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform laserFirePoint;
+
+    [SerializeField] private Transform armRotation;
 
     private Vector3 mousePos;
 
@@ -44,20 +46,21 @@ public class Lasering : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), Color.red);
+        Debug.DrawRay(laserFirePoint.position, Camera.main.ScreenToWorldPoint(Input.mousePosition), Color.red);
+        Vector2 laserLookDir = (mousePos - laserFirePoint.position);
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 rotation = (mousePos - transform.position).normalized;
+        Vector2 rotation = (mousePos - armRotation.position).normalized;
 
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-
-        rb.rotation = rotZ;
+        //float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))
         {
+            //armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
+
             lineRenderer.enabled = true;
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, mousePos, hitSomething);
+            RaycastHit2D hit = Physics2D.Raycast(laserFirePoint.position, mousePos, hitSomething);
 
             LaserUpdate();
 
@@ -66,9 +69,10 @@ public class Lasering : MonoBehaviour
                 //do damage to blocks
             }
         }
-        else if (Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButtonUp(0))
         {
             lineRenderer.enabled = false;
+           // armRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
     }
 
@@ -94,7 +98,7 @@ public class Lasering : MonoBehaviour
     {
         var mousPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        lineRenderer.SetPosition(0, firePoint.position);
+        lineRenderer.SetPosition(0, laserFirePoint.position);
         lineRenderer.SetPosition(1, mousPos);
     }
 }
