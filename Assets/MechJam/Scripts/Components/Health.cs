@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        Debug.Log("taking damage, health: " + currentHealth);
+        //Debug.Log("taking damage, health: " + currentHealth);
 
         if (currentHealth <= 0)
         {

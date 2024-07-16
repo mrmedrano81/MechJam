@@ -5,19 +5,42 @@ using UnityEngine;
 public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
 {
     private Movement movement;
+    private Attack attack;
+    private LayerMask targetMask;
+    private Transform target;
 
-    public A_VirusJumpState(A_VirusStateMachine.EState key, Movement movement) : base(key)
+    public A_VirusJumpState(A_VirusStateMachine.EState key, Movement movement, Attack attack, LayerMask targetMask) : base(key)
     {
         this.movement = movement;
+        this.attack = attack;
+        this.targetMask = targetMask;
     }
 
     public override void EnterState()
     {
-        movement.JumpTowards();
+        //if (movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
+        if (!movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
+        {
+            Debug.Log("Enter: not in range");
+            Debug.Break();
+        }
+
+        target = movement.GetTargetIfInRange(targetMask, attack.range, "RedBloodCell", true);
+
+        if (target != null)
+        {
+            movement.SetJumpForceBasedOnTarget(target);
+
+            if (movement.CanJump())
+            {
+                movement.JumpTowards();
+            }
+        }
     }
 
     public override void ExitState()
     {
+        
     }
     public override void UpdateState()
     {
@@ -25,14 +48,26 @@ public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
 
     public override void FixedUpdateState()
     {
-        
+
     }
 
     public override A_VirusStateMachine.EState GetNextState()
     {
         if (movement.isGrounded())
         {
-            return A_VirusStateMachine.EState.Idle;
+            if (target == null)
+            {
+                Debug.Log("Null target");
+                Debug.Break();
+            }
+            if (movement.CheckRange(targetMask, attack.range, "RedBloodCell") && target != null)
+            {
+                return A_VirusStateMachine.EState.Track;
+            }
+            else
+            {
+                return A_VirusStateMachine.EState.Idle;
+            }
         }
         else
         {

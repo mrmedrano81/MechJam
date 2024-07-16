@@ -35,7 +35,13 @@ public class Movement : MonoBehaviour
     public float forwardPathCheckDistance;
     public Vector2 groundCheckSize;
     public LayerMask groundLayer;
+
+    [Header("Jump Settings")]
     public Vector2 jumpForce;
+    public float f_jumpForce;
+    public float jumpCooldown;
+    private Vector2 currentJumpForce;
+    private float lastJumpTime;
 
     protected virtual void Awake()
     {
@@ -45,32 +51,16 @@ public class Movement : MonoBehaviour
         patrolTarget = SetNewTarget();
         lookDir = (patrolTarget - (Vector2)transform.position);
         lastDirectionChangeTime = Time.time;
+        currentJumpForce = jumpForce;
     }
 
+    private void Start()
+    {
+        lastJumpTime = Time.time;
+    }
     protected virtual void FixedUpdate()
     {
         if (balanceRB) BalanceRB();
-    }
-
-    public void BalanceRB()
-    {
-        transform.rotation = Quaternion.identity;
-    }
-
-    public void StopMovement()
-    {
-        rb.velocity = Vector3.zero;
-        currentSpeed = 0;
-    }
-
-    public void UpdateOriginalPosition()
-    {
-        originalPosition = transform.position;
-    }
-
-    public void UpdateOriginalPosition(Transform _newTransform)
-    {
-        originalPosition = _newTransform.position;
     }
 
     #region Patrol functions
@@ -125,7 +115,6 @@ public class Movement : MonoBehaviour
 
     #endregion
 
-
     #region Ground Functions
 
     public bool isGrounded()
@@ -142,16 +131,6 @@ public class Movement : MonoBehaviour
         MoveInHorizontalDirection(lookDir);
     }
 
-    public void JumpTowards(Vector2 _jumpForce)
-    {
-        rb.velocity = _jumpForce;
-    }
-
-    public void JumpTowards()
-    {
-        rb.velocity = jumpForce;
-    }
-
     public void MoveInHorizontalDirection(Vector2 lookDir, float _patrolMoveSpeedMult = 0)
     {
         if (_patrolMoveSpeedMult != 0)
@@ -162,6 +141,11 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector2(lookDir.x * currentSpeed, rb.velocity.y);
         }
+    }
+
+    public void MoveInHorizontalDirection()
+    {
+       rb.velocity = new Vector2(lookDir.x * currentSpeed, rb.velocity.y);
     }
 
     public void GetRandomGroundDirection()
@@ -194,6 +178,78 @@ public class Movement : MonoBehaviour
 
     #endregion
 
+    #region Jumping
+    public void SetJumpForceBasedOnTarget(Transform target)
+    {
+        currentJumpForce = (target.position - transform.position);
+        currentJumpForce = SetJumpForceToHitTarget(currentJumpForce);
+        Debug.Log(currentJumpForce);
+    }
+
+    public Vector2 SetJumpForceToHitTarget(Vector2 target)
+    {
+        // Calculate the vertical velocity needed to reach the target height
+        float verticalVelocity = Mathf.Sqrt(Mathf.Abs(2 * rb.gravityScale * target.y));
+
+        // Calculate the time to reach the highest point
+        float timeToPeak = verticalVelocity / rb.gravityScale;
+
+        // Calculate the horizontal velocity needed to reach the target distance in the time to reach the highest point
+        float horizontalVelocity = target.x / timeToPeak;
+
+        //Debug.Log(verticalVelocity + ", " + timeToPeak + ", " + horizontalVelocity);
+
+        Vector2 newJumpForce = new Vector2(horizontalVelocity, verticalVelocity);
+
+        // Combine the horizontal and vertical components to get the jump force
+        return newJumpForce;
+    }
+
+    public void ResetJumpForce()
+    {
+        currentJumpForce = jumpForce;
+    }
+
+    public void JumpTowards(Vector2 _jumpForce)
+    {
+        rb.velocity = currentJumpForce;
+        lastJumpTime = Time.time;
+    }
+
+    public void JumpTowards()
+    {
+        rb.velocity = currentJumpForce * f_jumpForce;
+        //Vector2 jumpDirection = currentJumpForce * f_jumpForce;
+        //rb.AddForce(new Vector2(currentJumpForce.x * f_jumpForce, f_jumpForce), ForceMode2D.Impulse);
+        //rb.velocity = jumpForce;
+        //rb.velocity = new Vector2(currentJumpForce.x, currentJumpForce.y*f_jumpForce);
+        lastJumpTime = Time.time;
+    }
+
+    public bool CanJump()
+    {
+        if (Time.time - lastJumpTime > jumpCooldown && isGrounded())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    #endregion
+
+    #region Direction and Position
+    public void UpdateOriginalPosition()
+    {
+        originalPosition = transform.position;
+    }
+
+    public void UpdateOriginalPosition(Transform _newTransform)
+    {
+        originalPosition = _newTransform.position;
+    }
+
     public Vector2 SetOppositeDirection(Vector2 direction)
     {
         return -direction;
@@ -205,6 +261,30 @@ public class Movement : MonoBehaviour
         lookDir = SetOppositeDirection(lookDir);
         patrolTarget = (Vector2)transform.position + lookDir.normalized * resetPathDistance;
         lastDirectionChangeTime = Time.time;
+    }
+
+    public void BalanceRB()
+    {
+        transform.rotation = Quaternion.identity;
+    }
+
+    public void SetLookDir(Vector3 _lookDir)
+    {
+        lookDir = _lookDir;
+    }
+
+    public void SetLookDirFacing(Vector3 target)
+    {
+        lookDir = (target - transform.position).normalized;
+    }
+
+    #endregion
+
+    #region Speed and General Movement
+    public void StopMovement()
+    {
+        rb.velocity = Vector3.zero;
+        currentSpeed = 0;
     }
 
     public void ResetSpeed()
@@ -228,13 +308,16 @@ public class Movement : MonoBehaviour
     {
         currentSpeed = Mathf.Lerp(currentSpeed, _finalSpeed, Time.deltaTime * slowingSpeed);
     }
+    #endregion
 
+    #region Range Functions
     public Transform GetTargetIfInRange(LayerMask _layerMask, float _searchRadius, string tag = "None", bool targetNearest = false)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
 
         if (hits.Length > 0)
         {
+
             if (targetNearest == true)
             {
                 Transform nearest = null;
@@ -262,14 +345,18 @@ public class Movement : MonoBehaviour
                             nearest = hit.gameObject.transform;
                         }
                     }
+                    else
+                    {
+
+                    }
                 }
 
                 return nearest;
-
             }
+
             else
             {
-                Debug.Log(hits.Length);
+                //Debug.Log(hits.Length);
                 foreach (Collider2D hit in hits)
                 {
                     if (tag == "None")
@@ -292,20 +379,19 @@ public class Movement : MonoBehaviour
         }
     }
 
-
     public bool CheckRange(LayerMask _layerMask, float _searchRadius, string tag = "None")
     {
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
+        //Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius);
 
         //RaycastHit2D ray = Physics2D.ra
 
         if (hits.Length > 0)
         {
+
             foreach (Collider2D hit in hits)
             {
-                
-
                 if (tag == "None")
                 {
                     return true;
@@ -322,6 +408,7 @@ public class Movement : MonoBehaviour
             return false;
         }
     }
+    #endregion
 
     private void OnDrawGizmos()
     {
@@ -332,7 +419,7 @@ public class Movement : MonoBehaviour
         }
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, collisionDetectRadius);
+        //Gizmos.DrawWireSphere(transform.position, collisionDetectRadius);
 
         if (checkForwardPath != null)
         {
@@ -341,9 +428,10 @@ public class Movement : MonoBehaviour
         }
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, patrolTarget);
+        Gizmos.DrawLine(transform.position, currentJumpForce);
+        //Gizmos.DrawLine(transform.position, patrolTarget);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, resetPathDistance);
+        //Gizmos.DrawWireSphere(transform.position, resetPathDistance);
     }
 }
