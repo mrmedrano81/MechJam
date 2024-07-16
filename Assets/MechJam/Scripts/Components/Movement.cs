@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -11,13 +12,14 @@ public class Movement : MonoBehaviour
 {
     public float moveSpeed;
     public float slowingSpeed;
+    public bool balanceRB;
     private float currentSpeed;
     private Vector2 currentLookDir;
     private Vector2 lookDir;
     private Rigidbody2D rb;
 
     [Header("Patrol Settings")]
-    public float patrolMoveSpeed;
+    public float patrolMoveSpeedMultiplier;
     public float patrolRange;
     public float collisionDetectRadius;
     public float resetPathDistance;
@@ -27,6 +29,13 @@ public class Movement : MonoBehaviour
     private float lastDirectionChangeTime;
     private Vector2 patrolTarget;
 
+    [Header("Ground Settings")]
+    public Transform checkGround;
+    public Transform checkForwardPath;
+    public float forwardPathCheckDistance;
+    public Vector2 groundCheckSize;
+    public LayerMask groundLayer;
+    public Vector2 jumpForce;
 
     protected virtual void Awake()
     {
@@ -35,6 +44,17 @@ public class Movement : MonoBehaviour
         originalPosition = transform.position;
         patrolTarget = SetNewTarget();
         lookDir = (patrolTarget - (Vector2)transform.position);
+        lastDirectionChangeTime = Time.time;
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        if (balanceRB) BalanceRB();
+    }
+
+    public void BalanceRB()
+    {
+        transform.rotation = Quaternion.identity;
     }
 
     public void StopMovement()
@@ -53,6 +73,7 @@ public class Movement : MonoBehaviour
         originalPosition = _newTransform.position;
     }
 
+    #region Patrol functions
     public void Patrol()
     {
         if (Time.time - lastDirectionChangeTime > changeDirectionCooldown)
@@ -72,9 +93,8 @@ public class Movement : MonoBehaviour
         }
 
         ChangeSpeedGradual(moveSpeed);
-        MoveTowardsDirection(lookDir);
+        MoveTowardsDirection(lookDir, patrolMoveSpeedMultiplier);
     }
-
 
     public void SetNewPatrolPath()
     {
@@ -103,6 +123,77 @@ public class Movement : MonoBehaviour
         return randomPoint;
     }
 
+    #endregion
+
+
+    #region Ground Functions
+
+    public bool isGrounded()
+    {
+        if (Physics2D.OverlapBox(checkGround.position, groundCheckSize, 0, groundLayer))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void GroundPatrol()
+    {
+        MoveInHorizontalDirection(lookDir);
+    }
+
+    public void JumpTowards(Vector2 _jumpForce)
+    {
+        rb.velocity = _jumpForce;
+    }
+
+    public void JumpTowards()
+    {
+        rb.velocity = jumpForce;
+    }
+
+    public void MoveInHorizontalDirection(Vector2 lookDir, float _patrolMoveSpeedMult = 0)
+    {
+        if (_patrolMoveSpeedMult != 0)
+        {
+            rb.velocity = new Vector2(lookDir.x * currentSpeed * _patrolMoveSpeedMult, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(lookDir.x * currentSpeed, rb.velocity.y);
+        }
+    }
+
+    public void GetRandomGroundDirection()
+    {
+        int randomFloat = UnityEngine.Random.Range(0, 11);
+
+        if (randomFloat == 0)                           lookDir = new Vector2(0, 0);
+        else if (randomFloat > 0 && randomFloat <= 5)   lookDir = new Vector2(-1, lookDir.y);
+        else                                            lookDir = new Vector2(1, lookDir.y);
+    }
+
+    public bool FrontBlocked(Transform _eyeLevel, float _checkDistance, LayerMask _mask)
+    {
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)_eyeLevel.position, new Vector2(lookDir.x,0), _checkDistance, _mask);
+
+        if (hit) return true;
+        else return false;
+    }
+
+    public bool FrontBlocked()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(
+            (Vector2)checkForwardPath.position, 
+            new Vector2(lookDir.x, 0), 
+            forwardPathCheckDistance, solidBlockMask);
+
+        if (hit) return true;
+        else return false;
+    }
+
+    #endregion
+
     public Vector2 SetOppositeDirection(Vector2 direction)
     {
         return -direction;
@@ -121,9 +212,16 @@ public class Movement : MonoBehaviour
         currentSpeed = moveSpeed;
     }
 
-    public void MoveTowardsDirection(Vector2 _lookDir)
+    public void MoveTowardsDirection(Vector2 _lookDir, float _patrolMultiplier = 0)
     {
-        rb.velocity = _lookDir.normalized * currentSpeed;
+        if (_patrolMultiplier != 0)
+        {
+            rb.velocity = _lookDir.normalized * currentSpeed * _patrolMultiplier;
+        }
+        else
+        {
+            rb.velocity = _lookDir.normalized * currentSpeed;
+        }
     }
 
     public void ChangeSpeedGradual(float _finalSpeed)
@@ -194,6 +292,7 @@ public class Movement : MonoBehaviour
         }
     }
 
+
     public bool CheckRange(LayerMask _layerMask, float _searchRadius, string tag = "None")
     {
 
@@ -234,6 +333,12 @@ public class Movement : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, collisionDetectRadius);
+
+        if (checkForwardPath != null)
+        {
+            Gizmos.DrawWireSphere(checkForwardPath.position, forwardPathCheckDistance);
+
+        }
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, patrolTarget);

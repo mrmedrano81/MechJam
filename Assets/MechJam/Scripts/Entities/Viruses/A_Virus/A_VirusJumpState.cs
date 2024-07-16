@@ -2,58 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
+public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
 {
-    Unit pathfInder;
-    Movement movement;
-    private float lastGroundChangeDirectionTime;
+    private Movement movement;
 
-    public A_VirusIdleState(A_VirusStateMachine.EState key, Unit _pathFinder, Movement _g_Movement) : base(key)
+    public A_VirusJumpState(A_VirusStateMachine.EState key, Movement movement) : base(key)
     {
-        pathfInder = _pathFinder;
-        movement = _g_Movement;
+        this.movement = movement;
     }
 
     public override void EnterState()
     {
-        
+        movement.JumpTowards();
     }
 
     public override void ExitState()
     {
-
     }
-
     public override void UpdateState()
     {
-
     }
 
     public override void FixedUpdateState()
     {
-        if (Time.time - lastGroundChangeDirectionTime > movement.changeDirectionCooldown)
-        {
-            movement.GetRandomGroundDirection();
-            lastGroundChangeDirectionTime = Time.time;
-        }
-        movement.GroundPatrol();
+        
     }
-
 
     public override A_VirusStateMachine.EState GetNextState()
     {
-        if (movement.isGrounded() && movement.FrontBlocked())
-        {
-            return A_VirusStateMachine.EState.Jump;
-        }
-        else
+        if (movement.isGrounded())
         {
             return A_VirusStateMachine.EState.Idle;
         }
+        else
+        {
+            return A_VirusStateMachine.EState.Jump;
+        }
     }
 
-    #region Collision and Trigger Logic
+    #region Collision and Trigger logic
     public override void OnCollisionEnter2D(Collision2D other)
     {
     }

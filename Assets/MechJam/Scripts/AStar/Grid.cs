@@ -26,6 +26,8 @@ public class Grid : MonoBehaviour
     int penaltyMin =  int.MaxValue;
     int penaltyMax = int.MinValue;
 
+    private Camera cam;
+
     private void Awake()
     {
         nodeDiameter = nodeRadius * 2;
@@ -37,12 +39,18 @@ public class Grid : MonoBehaviour
             walkableMask.value |= region.terrainMask.value;
             walkableRegionsDictionary.Add((int)Mathf.Log(region.terrainMask.value, 2),region.terrainPenalty);
         }
-        CreateGrid();
+        
     }
 
-    private void Update()
+
+    private void Start()
     {
         CreateGrid();
+    }
+    private void Update()
+    {
+        //TrackCamera();
+        //CreateGrid();
     }
 
     public int MaxSize
@@ -51,6 +59,12 @@ public class Grid : MonoBehaviour
         { 
             return gridSizeX*gridSizeY; 
         }
+    }
+
+    private void TrackCamera()
+    {
+        cam = Camera.main;
+        transform.position = cam.transform.position;
     }
 
     private void CreateGrid()
