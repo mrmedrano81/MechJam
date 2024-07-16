@@ -65,7 +65,6 @@ public class Attack : MonoBehaviour
         {
             foreach (Collider2D hit in hits)
             {
-                Debug.Log(hit.gameObject.name);
                 if (tag == "None")
                 {
                     return hit.gameObject.GetComponent<Health>();
