@@ -50,7 +50,7 @@ public class Grid : MonoBehaviour
     private void Update()
     {
         //TrackCamera();
-        //CreateGrid();
+        CreateGrid();
     }
 
     public int MaxSize
@@ -213,7 +213,7 @@ public class Grid : MonoBehaviour
                 Gizmos.color = Color.Lerp(Color.white, Color.black, Mathf.InverseLerp(penaltyMin, penaltyMax, node.movementPenalty));
 
                 Gizmos.color = (node.walkable) ? Gizmos.color : Color.red;
-                Gizmos.DrawWireCube(node.worldPosition, Vector2.one * (nodeDiameter - 0.1f));
+                Gizmos.DrawWireCube(node.worldPosition, Vector2.one * (nodeDiameter));
                 //Gizmos.DrawCube(node.worldPosition, Vector2.one * (nodeDiameter));
             }
 

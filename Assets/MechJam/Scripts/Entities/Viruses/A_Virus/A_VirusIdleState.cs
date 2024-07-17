@@ -19,6 +19,10 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
 
     public override void EnterState()
     {
+        Debug.Log("Entering IdleState");
+        movement.ResetSpeed();
+        //movement.GetRandomGroundDirection();
+        lastGroundChangeDirectionTime = Time.time;
         targetFound = false;
     }
 
@@ -29,7 +33,7 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
 
     public override void UpdateState()
     {
-        Debug.Log("In IdleState");
+        //Debug.Log("In IdleState");
     }
 
     public override void FixedUpdateState()
@@ -40,6 +44,7 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
             lastGroundChangeDirectionTime = Time.time;
         }
         movement.GroundPatrol();
+
     }
 
 
@@ -49,6 +54,7 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
         {
             if (movement.FrontBlocked())
             {
+                movement.JumpTowards(movement.jumpForce);
                 return A_VirusStateMachine.EState.Jump;
             }
             else if (targetFound)

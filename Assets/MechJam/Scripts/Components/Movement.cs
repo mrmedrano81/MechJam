@@ -42,6 +42,12 @@ public class Movement : MonoBehaviour
     public float jumpCooldown;
     private Vector2 currentJumpForce;
     private float lastJumpTime;
+    public int baseGravity;
+    public int fallSpeedMultiplier;
+    public int maxFallSpeed;
+
+    private Transform jumpTarget;
+    public bool showJumpTarget = false;
 
     protected virtual void Awake()
     {
@@ -150,10 +156,10 @@ public class Movement : MonoBehaviour
 
     public void GetRandomGroundDirection()
     {
-        int randomFloat = UnityEngine.Random.Range(0, 11);
+        int randomFloat = UnityEngine.Random.Range(0, 20);
 
         if (randomFloat == 0)                           lookDir = new Vector2(0, 0);
-        else if (randomFloat > 0 && randomFloat <= 5)   lookDir = new Vector2(-1, lookDir.y);
+        else if (randomFloat > 0 && randomFloat <= 12)   lookDir = new Vector2(-1, lookDir.y);
         else                                            lookDir = new Vector2(1, lookDir.y);
     }
 
@@ -181,27 +187,28 @@ public class Movement : MonoBehaviour
     #region Jumping
     public void SetJumpForceBasedOnTarget(Transform target)
     {
+        jumpTarget = target;
         currentJumpForce = (target.position - transform.position);
         currentJumpForce = SetJumpForceToHitTarget(currentJumpForce);
-        Debug.Log(currentJumpForce);
     }
 
     public Vector2 SetJumpForceToHitTarget(Vector2 target)
     {
-        // Calculate the vertical velocity needed to reach the target height
+        //Debug.Log("Gravity scale Before VV calc: " + rb.gravityScale);
         float verticalVelocity = Mathf.Sqrt(Mathf.Abs(2 * rb.gravityScale * target.y));
 
-        // Calculate the time to reach the highest point
+        //Debug.Log("Vertical Velocity: " + verticalVelocity);
+
         float timeToPeak = verticalVelocity / rb.gravityScale;
 
-        // Calculate the horizontal velocity needed to reach the target distance in the time to reach the highest point
+        //Debug.Log("time to peak: " + timeToPeak);
+        //Debug.Break();
         float horizontalVelocity = target.x / timeToPeak;
 
         //Debug.Log(verticalVelocity + ", " + timeToPeak + ", " + horizontalVelocity);
 
-        Vector2 newJumpForce = new Vector2(horizontalVelocity, verticalVelocity);
+        Vector2 newJumpForce = new Vector2(horizontalVelocity, verticalVelocity)*f_jumpForce;
 
-        // Combine the horizontal and vertical components to get the jump force
         return newJumpForce;
     }
 
@@ -212,18 +219,24 @@ public class Movement : MonoBehaviour
 
     public void JumpTowards(Vector2 _jumpForce)
     {
-        rb.velocity = currentJumpForce;
-        lastJumpTime = Time.time;
+        if (CanJump())
+        {
+            rb.velocity = new Vector2(Mathf.Sign(lookDir.x) * jumpForce.x, _jumpForce.y);
+            lastJumpTime = Time.time;
+        }
     }
 
     public void JumpTowards()
     {
-        rb.velocity = currentJumpForce * f_jumpForce;
-        //Vector2 jumpDirection = currentJumpForce * f_jumpForce;
-        //rb.AddForce(new Vector2(currentJumpForce.x * f_jumpForce, f_jumpForce), ForceMode2D.Impulse);
-        //rb.velocity = jumpForce;
-        //rb.velocity = new Vector2(currentJumpForce.x, currentJumpForce.y*f_jumpForce);
-        lastJumpTime = Time.time;
+        if (CanJump())
+        {
+            rb.velocity = currentJumpForce;
+            //Vector2 jumpDirection = currentJumpForce * f_jumpForce;
+            //rb.AddForce(new Vector2(currentJumpForce.x * f_jumpForce, f_jumpForce), ForceMode2D.Impulse);
+            //rb.velocity = jumpForce;
+            //rb.velocity = new Vector2(currentJumpForce.x, currentJumpForce.y*f_jumpForce);
+            lastJumpTime = Time.time;
+        }
     }
 
     public bool CanJump()
@@ -235,6 +248,25 @@ public class Movement : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    public void ResetGravity()
+    {
+        rb.gravityScale = baseGravity;
+    }
+
+    public void ModifyGravityForFalling()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = baseGravity * fallSpeedMultiplier;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, -maxFallSpeed));
+        }
+
+        else
+        {
+            rb.gravityScale = baseGravity;
         }
     }
     #endregion
@@ -315,6 +347,7 @@ public class Movement : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
 
+        Array.Reverse(hits);
         if (hits.Length > 0)
         {
 
@@ -387,6 +420,7 @@ public class Movement : MonoBehaviour
 
         //RaycastHit2D ray = Physics2D.ra
 
+        Array.Reverse(hits);
         if (hits.Length > 0)
         {
 
@@ -419,7 +453,7 @@ public class Movement : MonoBehaviour
         }
 
         Gizmos.color = Color.blue;
-        //Gizmos.DrawWireSphere(transform.position, collisionDetectRadius);
+        Gizmos.DrawWireSphere(transform.position, collisionDetectRadius);
 
         if (checkForwardPath != null)
         {
@@ -427,11 +461,15 @@ public class Movement : MonoBehaviour
 
         }
 
+        if (jumpTarget != null && showJumpTarget)
+        {
+            Gizmos.DrawCube(jumpTarget.transform.position, new Vector3(1, 1, 1));
+        }
+
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, currentJumpForce);
-        //Gizmos.DrawLine(transform.position, patrolTarget);
+        Gizmos.DrawLine(transform.position, patrolTarget);
 
         Gizmos.color = Color.green;
-        //Gizmos.DrawWireSphere(transform.position, resetPathDistance);
+        Gizmos.DrawWireSphere(transform.position, resetPathDistance);
     }
 }

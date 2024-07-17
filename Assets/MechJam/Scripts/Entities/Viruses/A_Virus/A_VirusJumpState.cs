@@ -19,28 +19,33 @@ public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
     public override void EnterState()
     {
         //if (movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
-        if (!movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
-        {
-            Debug.Log("Enter: not in range");
-            Debug.Break();
-        }
+        //if (!movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
+        //{
+        //    Debug.Log("Enter: not in range");
+        //}
 
-        target = movement.GetTargetIfInRange(targetMask, attack.range, "RedBloodCell", true);
+        //target = movement.GetTargetIfInRange(targetMask, attack.range, "RedBloodCell", true);
 
-        if (target != null)
-        {
-            movement.SetJumpForceBasedOnTarget(target);
+        //if (target != null)
+        //{
+        //    movement.SetJumpForceBasedOnTarget(target);
 
-            if (movement.CanJump())
-            {
-                movement.JumpTowards();
-            }
-        }
+        //    if (movement.CanJump())
+        //    {
+        //        movement.JumpTowards();
+        //    }
+        //}
+        //else
+        //{
+        //    movement.JumpTowards(movement.jumpForce);
+        //}
+
+        
     }
 
     public override void ExitState()
     {
-        
+
     }
     public override void UpdateState()
     {
@@ -48,19 +53,14 @@ public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
 
     public override void FixedUpdateState()
     {
-
+        movement.ModifyGravityForFalling();
     }
 
     public override A_VirusStateMachine.EState GetNextState()
     {
-        if (movement.isGrounded())
+        if (movement.CanJump())
         {
-            if (target == null)
-            {
-                Debug.Log("Null target");
-                Debug.Break();
-            }
-            if (movement.CheckRange(targetMask, attack.range, "RedBloodCell") && target != null)
+            if (movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
             {
                 return A_VirusStateMachine.EState.Track;
             }

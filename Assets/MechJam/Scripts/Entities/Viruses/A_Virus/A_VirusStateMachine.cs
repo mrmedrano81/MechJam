@@ -15,6 +15,7 @@ public class A_VirusStateMachine : StateManager<A_VirusStateMachine.EState>
 
     public float detectionRadius;
     public LayerMask targetMask;
+    public JumpTriggerBox jumpTriggerBox;
 
     public enum EState
     {
@@ -34,7 +35,7 @@ public class A_VirusStateMachine : StateManager<A_VirusStateMachine.EState>
 
         states.Add(EState.Idle, new A_VirusIdleState(EState.Idle, pathFinder, movement));
         states.Add(EState.Jump, new A_VirusJumpState(EState.Jump, movement, attack, targetMask));
-        states.Add(EState.Track, new A_VirusTrackTargetState(EState.Track, pathFinder, movement, targetMask, detectionRadius, attack));
+        states.Add(EState.Track, new A_VirusTrackTargetState(EState.Track, pathFinder, movement, targetMask, jumpTriggerBox, detectionRadius, attack));
         states.Add(EState.Attack, new A_VirusAttackScript(EState.Attack));
         states.Add(EState.Death, new A_VirusDeathState(EState.Death));
 
