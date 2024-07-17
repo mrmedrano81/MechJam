@@ -180,17 +180,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0204a67186d14f943abf934021afab6f, type: 3}
---- !u!114 &548146173 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1809710310604897824, guid: 0204a67186d14f943abf934021afab6f, type: 3}
-  m_PrefabInstance: {fileID: 548146172}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71fe60651215fc74d870b15dd97baa31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1298242692
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +272,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1631952714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6789470266752633751, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+  m_PrefabInstance: {fileID: 5927553626957687204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &1631952724
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631952714}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 0.99999994}
+  m_Direction: 0
 --- !u!1 &1669382192
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,26 +570,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
-      propertyPath: Logger
-      value: 
-      objectReference: {fileID: 548146173}
-    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
-      propertyPath: blurSize
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
-      propertyPath: nodeRadius
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
-      propertyPath: gridWorldSize.x
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
-      propertyPath: gridWorldSize.y
-      value: 24
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -617,10 +626,6 @@ PrefabInstance:
     - target: {fileID: 7848297312522965428, guid: d087a3a09a96d0040a4ff01ced94d31a, type: 3}
       propertyPath: m_Name
       value: WhiteBloodCell
-      objectReference: {fileID: 0}
-    - target: {fileID: 7848297312522965428, guid: d087a3a09a96d0040a4ff01ced94d31a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -732,21 +737,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2265960167877229598, guid: 41206b066d3a90d46b7337bd865d8977, type: 3}
-      propertyPath: minPathUpdateTime
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2265960167877229598, guid: 41206b066d3a90d46b7337bd865d8977, type: 3}
-      propertyPath: pathUpdateMoveThreshold
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 3961614746113330636, guid: 41206b066d3a90d46b7337bd865d8977, type: 3}
       propertyPath: m_Name
       value: C_Virus
-      objectReference: {fileID: 0}
-    - target: {fileID: 3961614746113330636, guid: 41206b066d3a90d46b7337bd865d8977, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -805,10 +798,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: A_Virus
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8769479384061514320, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+      propertyPath: m_Size.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8769479384061514320, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6789470266752633751, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1631952724}
   m_SourcePrefab: {fileID: 100100000, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
