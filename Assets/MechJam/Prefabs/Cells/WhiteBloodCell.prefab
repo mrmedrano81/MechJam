@@ -23,7 +23,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &94415771264269538
 Transform:
   m_ObjectHideFlags: 0
@@ -187,7 +187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   slowingSpeed: 0.2
-  patrolMoveSpeed: 0
+  balanceRB: 0
+  patrolMoveSpeedMultiplier: 0
   patrolRange: 8
   collisionDetectRadius: 0.5
   resetPathDistance: 0.3
@@ -196,6 +197,20 @@ MonoBehaviour:
     m_Bits: 128
   changeDirectionCooldown: 0.3
   originalPosition: {x: 0, y: 0, z: 0}
+  checkGround: {fileID: 0}
+  checkForwardPath: {fileID: 0}
+  forwardPathCheckDistance: 0
+  groundCheckSize: {x: 0, y: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpForce: {x: 0, y: 0}
+  f_jumpForce: 0
+  jumpCooldown: 0
+  baseGravity: 0
+  fallSpeedMultiplier: 0
+  maxFallSpeed: 0
+  showJumpTarget: 0
 --- !u!114 &968691436673969959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +225,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  scoreSource: 3
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2173457909337828230
 MonoBehaviour:
   m_ObjectHideFlags: 0

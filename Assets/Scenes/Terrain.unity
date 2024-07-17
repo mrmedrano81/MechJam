@@ -125598,13 +125598,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d092d957bf02b7d49891381c6f16119a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onTileDestroyed:
-    m_PersistentCalls:
-      m_Calls: []
   cellBlockTilemap: {fileID: 2053909443}
   cellBlockHealth: 5
   cholesterolBlockTilemap: {fileID: 163165801}
   cholesterolBlockHealth: 10
+  cellBlockScoreSource: 0
+  cholesterolBlockScoreSource: 1
+  onTileDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2053909440
 GameObject:
   m_ObjectHideFlags: 0

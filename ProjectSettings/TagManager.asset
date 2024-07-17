@@ -13,6 +13,8 @@ TagManager:
   - A_Virus
   - Grid
   - AStar
+  - ScoreManager
+  - C_Virus
   layers:
   - Default
   - TransparentFX

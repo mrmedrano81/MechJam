@@ -24,9 +24,17 @@ public class DestructableTiles : MonoBehaviour
         {
             hitPos.x = hit.point.x - 0.01f * hit.normal.x;
             hitPos.y = hit.point.y - 0.01f * hit.normal.y;
+            Debug.Log("hit: (" + hitPos.x + ", " + hitPos.y + ")");
             healthManager.ChangeHealth(hitPos, damage, destructibleTileMap);
         }
-        
+
+        //ContactPoint2D hit = collision.contacts[0];
+        //hitPos.x = hit.point.x - 0.01f * hit.normal.x;
+        //hitPos.y = hit.point.y - 0.01f * hit.normal.y;
+        //Debug.Log("hit: (" + hitPos.x + ", " + hitPos.y + ")");
+        //healthManager.ChangeHealth(hitPos, damage, destructibleTileMap);
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
