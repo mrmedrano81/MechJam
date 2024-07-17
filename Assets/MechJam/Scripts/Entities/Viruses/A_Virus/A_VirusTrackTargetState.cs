@@ -27,7 +27,7 @@ public class A_VirusTrackTargetState : BaseState<A_VirusStateMachine.EState>
     public override void EnterState()
     {
 
-        Debug.Log("In Tracking State");
+        //Debug.Log("In Tracking State");
         jumpToTarget = false;
 
         movement.ResetGravity();
@@ -39,7 +39,7 @@ public class A_VirusTrackTargetState : BaseState<A_VirusStateMachine.EState>
         }
         else
         {
-            Debug.Log("Null target on entry of tracking state");
+            //Debug.Log("Null target on entry of tracking state");
             //Debug.Break();
             target = movement.GetTargetIfInRange(targetMask, detectionRadius, "RedBloodCell");
         }

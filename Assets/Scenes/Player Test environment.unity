@@ -259,6 +259,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1362772441
       objectReference: {fileID: 0}
+    - target: {fileID: 5112634627974781710, guid: 4cdd4a0e4627c7f45a094d1704a21ff5, type: 3}
+      propertyPath: m_Distance
+      value: 4.78553
+      objectReference: {fileID: 0}
     - target: {fileID: 5765462998726941164, guid: 4cdd4a0e4627c7f45a094d1704a21ff5, type: 3}
       propertyPath: m_SortingLayer
       value: 3

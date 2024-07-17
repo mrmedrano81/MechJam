@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1445614022204037189}
   m_Layer: 0
   m_Name: A_
-  m_TagString: Untagged
+  m_TagString: AStar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,16 +50,18 @@ MonoBehaviour:
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 128
-  gridWorldSize: {x: 32, y: 20}
-  nodeRadius: 0.2
+  gridWorldSize: {x: 60, y: 24}
+  nodeRadius: 0.25
   walkableRegions:
   - terrainMask:
       serializedVersion: 2
       m_Bits: 256
     terrainPenalty: 10
-  blurSize: 3
+  blurSize: 2
   obstacleProximityPenalty: 30
-  Logger: {fileID: 0}
+  onTileDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5763395556309846127
 MonoBehaviour:
   m_ObjectHideFlags: 0

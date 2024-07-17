@@ -10,6 +10,9 @@ TagManager:
   - WhiteBloodCell
   - CholesterolBlock
   - CellBlock
+  - A_Virus
+  - Grid
+  - AStar
   layers:
   - Default
   - TransparentFX

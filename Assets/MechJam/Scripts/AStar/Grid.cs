@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class Grid : MonoBehaviour
@@ -18,7 +19,7 @@ public class Grid : MonoBehaviour
     Node[,] grid;
     Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
 
-    public Logger Logger;
+    public UnityEvent onTileDestroyed;
 
     float nodeDiameter;
     int gridSizeX, gridSizeY;
@@ -50,7 +51,7 @@ public class Grid : MonoBehaviour
     private void Update()
     {
         //TrackCamera();
-        CreateGrid();
+        //CreateGrid();
     }
 
     public int MaxSize
@@ -67,7 +68,7 @@ public class Grid : MonoBehaviour
         transform.position = cam.transform.position;
     }
 
-    private void CreateGrid()
+    public void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
         Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x/ 2 - Vector3.up * gridWorldSize.y/2;
