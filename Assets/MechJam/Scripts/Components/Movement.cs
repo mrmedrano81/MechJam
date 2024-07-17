@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -11,13 +12,14 @@ public class Movement : MonoBehaviour
 {
     public float moveSpeed;
     public float slowingSpeed;
+    public bool balanceRB;
     private float currentSpeed;
     private Vector2 currentLookDir;
     private Vector2 lookDir;
     private Rigidbody2D rb;
 
     [Header("Patrol Settings")]
-    public float patrolMoveSpeed;
+    public float patrolMoveSpeedMultiplier;
     public float patrolRange;
     public float collisionDetectRadius;
     public float resetPathDistance;
@@ -27,6 +29,25 @@ public class Movement : MonoBehaviour
     private float lastDirectionChangeTime;
     private Vector2 patrolTarget;
 
+    [Header("Ground Settings")]
+    public Transform checkGround;
+    public Transform checkForwardPath;
+    public float forwardPathCheckDistance;
+    public Vector2 groundCheckSize;
+    public LayerMask groundLayer;
+
+    [Header("Jump Settings")]
+    public Vector2 jumpForce;
+    public float f_jumpForce;
+    public float jumpCooldown;
+    private Vector2 currentJumpForce;
+    private float lastJumpTime;
+    public int baseGravity;
+    public int fallSpeedMultiplier;
+    public int maxFallSpeed;
+
+    private Transform jumpTarget;
+    public bool showJumpTarget = false;
 
     protected virtual void Awake()
     {
@@ -35,24 +56,20 @@ public class Movement : MonoBehaviour
         originalPosition = transform.position;
         patrolTarget = SetNewTarget();
         lookDir = (patrolTarget - (Vector2)transform.position);
+        lastDirectionChangeTime = Time.time;
+        currentJumpForce = jumpForce;
     }
 
-    public void StopMovement()
+    private void Start()
     {
-        rb.velocity = Vector3.zero;
-        currentSpeed = 0;
+        lastJumpTime = Time.time;
     }
-
-    public void UpdateOriginalPosition()
+    protected virtual void FixedUpdate()
     {
-        originalPosition = transform.position;
+        if (balanceRB) BalanceRB();
     }
 
-    public void UpdateOriginalPosition(Transform _newTransform)
-    {
-        originalPosition = _newTransform.position;
-    }
-
+    #region Patrol functions
     public void Patrol()
     {
         if (Time.time - lastDirectionChangeTime > changeDirectionCooldown)
@@ -72,9 +89,8 @@ public class Movement : MonoBehaviour
         }
 
         ChangeSpeedGradual(moveSpeed);
-        MoveTowardsDirection(lookDir);
+        MoveTowardsDirection(lookDir, patrolMoveSpeedMultiplier);
     }
-
 
     public void SetNewPatrolPath()
     {
@@ -103,6 +119,169 @@ public class Movement : MonoBehaviour
         return randomPoint;
     }
 
+    #endregion
+
+    #region Ground Functions
+
+    public bool isGrounded()
+    {
+        if (Physics2D.OverlapBox(checkGround.position, groundCheckSize, 0, groundLayer))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void GroundPatrol()
+    {
+        MoveInHorizontalDirection(lookDir);
+    }
+
+    public void MoveInHorizontalDirection(Vector2 lookDir, float _patrolMoveSpeedMult = 0)
+    {
+        if (_patrolMoveSpeedMult != 0)
+        {
+            rb.velocity = new Vector2(lookDir.x * currentSpeed * _patrolMoveSpeedMult, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(lookDir.x * currentSpeed, rb.velocity.y);
+        }
+    }
+
+    public void MoveInHorizontalDirection()
+    {
+       rb.velocity = new Vector2(lookDir.x * currentSpeed, rb.velocity.y);
+    }
+
+    public void GetRandomGroundDirection()
+    {
+        int randomFloat = UnityEngine.Random.Range(0, 20);
+
+        if (randomFloat == 0)                           lookDir = new Vector2(0, 0);
+        else if (randomFloat > 0 && randomFloat <= 12)   lookDir = new Vector2(-1, lookDir.y);
+        else                                            lookDir = new Vector2(1, lookDir.y);
+    }
+
+    public bool FrontBlocked(Transform _eyeLevel, float _checkDistance, LayerMask _mask)
+    {
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)_eyeLevel.position, new Vector2(lookDir.x,0), _checkDistance, _mask);
+
+        if (hit) return true;
+        else return false;
+    }
+
+    public bool FrontBlocked()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(
+            (Vector2)checkForwardPath.position, 
+            new Vector2(lookDir.x, 0), 
+            forwardPathCheckDistance, solidBlockMask);
+
+        if (hit) return true;
+        else return false;
+    }
+
+    #endregion
+
+    #region Jumping
+    public void SetJumpForceBasedOnTarget(Transform target)
+    {
+        jumpTarget = target;
+        currentJumpForce = (target.position - transform.position);
+        currentJumpForce = SetJumpForceToHitTarget(currentJumpForce);
+    }
+
+    public Vector2 SetJumpForceToHitTarget(Vector2 target)
+    {
+        //Debug.Log("Gravity scale Before VV calc: " + rb.gravityScale);
+        float verticalVelocity = Mathf.Sqrt(Mathf.Abs(2 * rb.gravityScale * target.y));
+
+        //Debug.Log("Vertical Velocity: " + verticalVelocity);
+
+        float timeToPeak = verticalVelocity / rb.gravityScale;
+
+        //Debug.Log("time to peak: " + timeToPeak);
+        //Debug.Break();
+        float horizontalVelocity = target.x / timeToPeak;
+
+        //Debug.Log(verticalVelocity + ", " + timeToPeak + ", " + horizontalVelocity);
+
+        Vector2 newJumpForce = new Vector2(horizontalVelocity, verticalVelocity)*f_jumpForce;
+
+        return newJumpForce;
+    }
+
+    public void ResetJumpForce()
+    {
+        currentJumpForce = jumpForce;
+    }
+
+    public void JumpTowards(Vector2 _jumpForce)
+    {
+        if (CanJump())
+        {
+            rb.velocity = new Vector2(Mathf.Sign(lookDir.x) * jumpForce.x, _jumpForce.y);
+            lastJumpTime = Time.time;
+        }
+    }
+
+    public void JumpTowards()
+    {
+        if (CanJump())
+        {
+            rb.velocity = currentJumpForce;
+            //Vector2 jumpDirection = currentJumpForce * f_jumpForce;
+            //rb.AddForce(new Vector2(currentJumpForce.x * f_jumpForce, f_jumpForce), ForceMode2D.Impulse);
+            //rb.velocity = jumpForce;
+            //rb.velocity = new Vector2(currentJumpForce.x, currentJumpForce.y*f_jumpForce);
+            lastJumpTime = Time.time;
+        }
+    }
+
+    public bool CanJump()
+    {
+        if (Time.time - lastJumpTime > jumpCooldown && isGrounded())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void ResetGravity()
+    {
+        rb.gravityScale = baseGravity;
+    }
+
+    public void ModifyGravityForFalling()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = baseGravity * fallSpeedMultiplier;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, -maxFallSpeed));
+        }
+
+        else
+        {
+            rb.gravityScale = baseGravity;
+        }
+    }
+    #endregion
+
+    #region Direction and Position
+    public void UpdateOriginalPosition()
+    {
+        originalPosition = transform.position;
+    }
+
+    public void UpdateOriginalPosition(Transform _newTransform)
+    {
+        originalPosition = _newTransform.position;
+    }
+
     public Vector2 SetOppositeDirection(Vector2 direction)
     {
         return -direction;
@@ -116,27 +295,62 @@ public class Movement : MonoBehaviour
         lastDirectionChangeTime = Time.time;
     }
 
+    public void BalanceRB()
+    {
+        transform.rotation = Quaternion.identity;
+    }
+
+    public void SetLookDir(Vector3 _lookDir)
+    {
+        lookDir = _lookDir;
+    }
+
+    public void SetLookDirFacing(Vector3 target)
+    {
+        lookDir = (target - transform.position).normalized;
+    }
+
+    #endregion
+
+    #region Speed and General Movement
+    public void StopMovement()
+    {
+        rb.velocity = Vector3.zero;
+        currentSpeed = 0;
+    }
+
     public void ResetSpeed()
     {
         currentSpeed = moveSpeed;
     }
 
-    public void MoveTowardsDirection(Vector2 _lookDir)
+    public void MoveTowardsDirection(Vector2 _lookDir, float _patrolMultiplier = 0)
     {
-        rb.velocity = _lookDir.normalized * currentSpeed;
+        if (_patrolMultiplier != 0)
+        {
+            rb.velocity = _lookDir.normalized * currentSpeed * _patrolMultiplier;
+        }
+        else
+        {
+            rb.velocity = _lookDir.normalized * currentSpeed;
+        }
     }
 
     public void ChangeSpeedGradual(float _finalSpeed)
     {
         currentSpeed = Mathf.Lerp(currentSpeed, _finalSpeed, Time.deltaTime * slowingSpeed);
     }
+    #endregion
 
+    #region Range Functions
     public Transform GetTargetIfInRange(LayerMask _layerMask, float _searchRadius, string tag = "None", bool targetNearest = false)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
 
+        Array.Reverse(hits);
         if (hits.Length > 0)
         {
+
             if (targetNearest == true)
             {
                 Transform nearest = null;
@@ -164,14 +378,18 @@ public class Movement : MonoBehaviour
                             nearest = hit.gameObject.transform;
                         }
                     }
+                    else
+                    {
+
+                    }
                 }
 
                 return nearest;
-
             }
+
             else
             {
-                Debug.Log(hits.Length);
+                //Debug.Log(hits.Length);
                 foreach (Collider2D hit in hits)
                 {
                     if (tag == "None")
@@ -198,15 +416,16 @@ public class Movement : MonoBehaviour
     {
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
+        //Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius);
 
         //RaycastHit2D ray = Physics2D.ra
 
+        Array.Reverse(hits);
         if (hits.Length > 0)
         {
+
             foreach (Collider2D hit in hits)
             {
-                
-
                 if (tag == "None")
                 {
                     return true;
@@ -223,6 +442,7 @@ public class Movement : MonoBehaviour
             return false;
         }
     }
+    #endregion
 
     private void OnDrawGizmos()
     {
@@ -234,6 +454,17 @@ public class Movement : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, collisionDetectRadius);
+
+        if (checkForwardPath != null)
+        {
+            Gizmos.DrawWireSphere(checkForwardPath.position, forwardPathCheckDistance);
+
+        }
+
+        if (jumpTarget != null && showJumpTarget)
+        {
+            Gizmos.DrawCube(jumpTarget.transform.position, new Vector3(1, 1, 1));
+        }
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, patrolTarget);
