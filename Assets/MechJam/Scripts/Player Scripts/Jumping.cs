@@ -51,7 +51,7 @@ public class Jumping : MonoBehaviour
         //    ChangeAnimationState(PLAYER_MIDAIR);
         //}
 
-        
+
     }
 
     public void Jump(InputAction.CallbackContext context)
