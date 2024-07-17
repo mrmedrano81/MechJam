@@ -129,10 +129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa98d2112ca4fce469abd1a55b20d4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 0
   slowingSpeed: 0.6
-  patrolMoveSpeed: 1
-  patrolRange: 8
+  balanceRB: 0
+  patrolMoveSpeedMultiplier: 0.5
+  patrolRange: 15.52
   collisionDetectRadius: 0.81
   resetPathDistance: 1
   solidBlockMask:
@@ -140,6 +141,20 @@ MonoBehaviour:
     m_Bits: 128
   changeDirectionCooldown: 2
   originalPosition: {x: 0, y: 0, z: 0}
+  checkGround: {fileID: 0}
+  checkForwardPath: {fileID: 0}
+  forwardPathCheckDistance: 0
+  groundCheckSize: {x: 0, y: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpForce: {x: 0, y: 0}
+  f_jumpForce: 0
+  jumpCooldown: 0
+  baseGravity: 0
+  fallSpeedMultiplier: 0
+  maxFallSpeed: 0
+  showJumpTarget: 0
 --- !u!50 &3785782929341749281
 Rigidbody2D:
   serializedVersion: 4
@@ -148,7 +163,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8300419338941372580}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
