@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6311317166005567497}
   - component: {fileID: 6626214764116955156}
   m_Layer: 0
-  m_Name: WhiteSplattr
+  m_Name: WhiteHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
