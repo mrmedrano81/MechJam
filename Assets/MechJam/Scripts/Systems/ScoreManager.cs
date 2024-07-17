@@ -23,8 +23,6 @@ public class PointSystem
 
     public float GetSourcePoint(EScoreSource sourceEnum)
     {
-        Debug.Log("Subtracting: " + scoreDict[sourceEnum] + ", from: " + sourceEnum);
-        Debug.Break();
         return scoreDict[sourceEnum];
     }
 }

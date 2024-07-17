@@ -24,7 +24,6 @@ public class DestructableTiles : MonoBehaviour
         {
             hitPos.x = hit.point.x - 0.01f * hit.normal.x;
             hitPos.y = hit.point.y - 0.01f * hit.normal.y;
-            Debug.Log("hit: (" + hitPos.x + ", " + hitPos.y + ")");
             healthManager.ChangeHealth(hitPos, damage, destructibleTileMap);
         }
 
