@@ -16,6 +16,8 @@ public class HookShot : MonoBehaviour
     [SerializeField] private float hookLength;
     [SerializeField] private LayerMask hookLayer;
 
+    [SerializeField] private LineRenderer grappleRope;
+
 
     private Vector3 hookPoint;
     [SerializeField] private DistanceJoint2D joint;
@@ -35,7 +37,6 @@ public class HookShot : MonoBehaviour
         Vector2 lookDir = (mousePos - firePoint.position);
         Debug.DrawRay(firePoint.position, lookDir, Color.red);
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.DrawRay(firePoint.position, lookDir, Color.red);
         //Vector2 rotation = (mousePos - transform.position).normalized;
 
         //float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
@@ -48,9 +49,9 @@ public class HookShot : MonoBehaviour
             //hook.GetComponent<Grapplehook>().caster = transform;
 
             RaycastHit2D hit = Physics2D.Raycast(
-            transform.position,
+            firePoint.position,
             lookDir,
-            hookDistance,
+            Mathf.Infinity,
             hookLayer
             );
 
@@ -61,11 +62,15 @@ public class HookShot : MonoBehaviour
                 joint.connectedAnchor = hookPoint;
                 joint.enabled = true;
                 joint.distance = hookLength;
+                grappleRope.enabled = true;
+                grappleRope.SetPosition(0, hookPoint);
+                grappleRope.SetPosition(1, firePoint.position);
             }
         }
         else if (Input.GetMouseButtonUp(1))
         {
             joint.enabled = false;
+            grappleRope.enabled = false;
         }
 
     }
