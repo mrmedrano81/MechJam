@@ -5,7 +5,6 @@ using System;
 
 public class PathRequestManager : MonoBehaviour
 {
-
     Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
 
     PathRequest currentPathRequest;

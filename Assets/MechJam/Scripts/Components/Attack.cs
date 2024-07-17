@@ -25,7 +25,7 @@ public class Attack : MonoBehaviour
     {
         if (Time.time - s_timeSinceLastAttack > s_damageCooldown)
         {
-            Debug.Log((Time.time - s_timeSinceLastAttack) + " : " + s_damageCooldown);
+            //Debug.Log((Time.time - s_timeSinceLastAttack) + " : " + s_damageCooldown);
             targetHealth.TakeDamage(damage);
             s_timeSinceLastAttack = Time.time;
         }
@@ -55,6 +55,11 @@ public class Attack : MonoBehaviour
             yield return new WaitForSeconds(s_dotInterval);
             elapsedTime += s_dotInterval;
         }
+    }
+
+    public float DistanceFromTarget(Vector3 targetPosition)
+    {
+        return Vector2.Distance(transform.position, targetPosition);
     }
 
     public Health GetHealthComponentIfInRange(LayerMask _layerMask, float _searchRadius, string tag = "None")

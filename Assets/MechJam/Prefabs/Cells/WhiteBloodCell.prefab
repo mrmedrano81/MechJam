@@ -23,7 +23,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &94415771264269538
 Transform:
   m_ObjectHideFlags: 0
@@ -34,8 +34,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.56, y: -1.35, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.6, z: 0.6}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.05, y: 1.05, z: 1.05}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77,9 +77,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 809685375
-  m_SortingLayer: 2
-  m_SortingOrder: 2
+  m_SortingLayerID: 1839899477
+  m_SortingLayer: 5
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2139138152, guid: 7e4bfcfe7bbcb96469a1f06afa5a094e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -125,7 +125,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.24
 --- !u!50 &8389776861198228606
 Rigidbody2D:
   serializedVersion: 4
@@ -140,7 +140,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.3
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -172,7 +172,7 @@ MonoBehaviour:
   virusLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  detectVirusRadius: 13.25
+  detectVirusRadius: 7.6
 --- !u!114 &1304233780272953425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,9 +185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa98d2112ca4fce469abd1a55b20d4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  slowingSpeed: 0.5
-  patrolMoveSpeed: 0
+  moveSpeed: 1
+  slowingSpeed: 0.2
+  balanceRB: 0
+  patrolMoveSpeedMultiplier: 0
   patrolRange: 8
   collisionDetectRadius: 0.5
   resetPathDistance: 0.3
@@ -196,6 +197,20 @@ MonoBehaviour:
     m_Bits: 128
   changeDirectionCooldown: 0.3
   originalPosition: {x: 0, y: 0, z: 0}
+  checkGround: {fileID: 0}
+  checkForwardPath: {fileID: 0}
+  forwardPathCheckDistance: 0
+  groundCheckSize: {x: 0, y: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpForce: {x: 0, y: 0}
+  f_jumpForce: 0
+  jumpCooldown: 0
+  baseGravity: 0
+  fallSpeedMultiplier: 0
+  maxFallSpeed: 0
+  showJumpTarget: 0
 --- !u!114 &968691436673969959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +225,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  scoreSource: 3
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2173457909337828230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,4 +262,4 @@ MonoBehaviour:
   dotDamage: 1
   s_dotDuration: 1
   s_dotInterval: 1
-  range: 0.67
+  range: 0.33

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class Grid : MonoBehaviour
@@ -18,13 +19,15 @@ public class Grid : MonoBehaviour
     Node[,] grid;
     Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
 
-    public Logger Logger;
+    public UnityEvent onTileDestroyed;
 
     float nodeDiameter;
     int gridSizeX, gridSizeY;
 
     int penaltyMin =  int.MaxValue;
     int penaltyMax = int.MinValue;
+
+    private Camera cam;
 
     private void Awake()
     {
@@ -37,12 +40,18 @@ public class Grid : MonoBehaviour
             walkableMask.value |= region.terrainMask.value;
             walkableRegionsDictionary.Add((int)Mathf.Log(region.terrainMask.value, 2),region.terrainPenalty);
         }
-        CreateGrid();
+        
     }
 
-    private void Update()
+
+    private void Start()
     {
         CreateGrid();
+    }
+    private void Update()
+    {
+        //TrackCamera();
+        //CreateGrid();
     }
 
     public int MaxSize
@@ -53,7 +62,13 @@ public class Grid : MonoBehaviour
         }
     }
 
-    private void CreateGrid()
+    private void TrackCamera()
+    {
+        cam = Camera.main;
+        transform.position = cam.transform.position;
+    }
+
+    public void CreateGrid()
     {
         grid = new Node[gridSizeX, gridSizeY];
         Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x/ 2 - Vector3.up * gridWorldSize.y/2;
@@ -199,7 +214,7 @@ public class Grid : MonoBehaviour
                 Gizmos.color = Color.Lerp(Color.white, Color.black, Mathf.InverseLerp(penaltyMin, penaltyMax, node.movementPenalty));
 
                 Gizmos.color = (node.walkable) ? Gizmos.color : Color.red;
-                Gizmos.DrawWireCube(node.worldPosition, Vector2.one * (nodeDiameter - 0.1f));
+                Gizmos.DrawWireCube(node.worldPosition, Vector2.one * (nodeDiameter));
                 //Gizmos.DrawCube(node.worldPosition, Vector2.one * (nodeDiameter));
             }
 
