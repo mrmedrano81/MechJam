@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float currentHealth;
     [SerializeField] public PointSystem.EScoreSource scoreSource;
     [SerializeField] public UnityPointEvent deathEvent;
+    [SerializeField] public UnityEvent integrityEvent;
 
     private bool isDead;
 
@@ -18,6 +20,7 @@ public class Health : MonoBehaviour
         {
             ScoreManager scoreManager = scoreManagerObject.GetComponent<ScoreManager>();
             deathEvent.AddListener(scoreManager.AddPoints);
+            integrityEvent.AddListener(scoreManager.SubtractIntegrity);
         }
         else
         {
@@ -38,6 +41,8 @@ public class Health : MonoBehaviour
         {
             isDead = true;
             deathEvent?.Invoke(scoreSource);
+            integrityEvent?.Invoke();
+            Destroy(gameObject);
         }
     }
 

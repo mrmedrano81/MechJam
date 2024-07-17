@@ -125599,7 +125599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellBlockTilemap: {fileID: 2053909443}
-  cellBlockHealth: 5
+  cellBlockHealth: 50
   cholesterolBlockTilemap: {fileID: 163165801}
   cholesterolBlockHealth: 10
   cellBlockScoreSource: 0

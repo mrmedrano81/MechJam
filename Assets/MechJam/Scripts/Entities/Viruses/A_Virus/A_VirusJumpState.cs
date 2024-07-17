@@ -90,6 +90,12 @@ public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("RedBloodCell"))
+        {
+            Health redBloodCellHealth = other.gameObject.GetComponent<Health>();
+            redBloodCellHealth.TakeDamage(attack.damage);
+
+        }
     }
 
     public override void OnTriggerExit2D(Collider2D other)

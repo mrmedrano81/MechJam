@@ -225,8 +225,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  scoreSource: 3
+  scoreSource: 0
   deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  integrityEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &2173457909337828230

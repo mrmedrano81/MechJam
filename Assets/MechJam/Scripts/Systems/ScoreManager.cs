@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PointSystem
 {
@@ -40,7 +42,12 @@ public class ScoreManager : MonoBehaviour
     private PointSystem pointSystem;
 
     [Header("Score Variables")]
-    public float totalScore;
+    public TMP_Text scoreDisplayText;
+    private float totalScore;    
+    public Image integrityBar;
+    public float initialIntegrity;
+    private float totalIntegrity;
+    
 
     private void Awake()
     {
@@ -54,14 +61,56 @@ public class ScoreManager : MonoBehaviour
         pointSystem.AddScoreSource(PointSystem.EScoreSource.C_Virus, c_Virus);
     }
 
+    private void Update()
+    {
+        if (scoreDisplayText != null)
+        {
+            if (totalScore < 0)
+            {
+                scoreDisplayText.color = Color.red;
+                scoreDisplayText.text = "Score: " + totalScore.ToString();
+            }
+            else
+            {
+                scoreDisplayText.color = Color.green;
+                scoreDisplayText.text = "Score: " + totalScore.ToString();
+            }
+        }
+        if (integrityBar != null)
+        {
+            if (totalIntegrity < initialIntegrity/4)
+            {
+                integrityBar.color = Color.red;
+                integrityBar.fillAmount = totalIntegrity / initialIntegrity;
+            }
+            else if (totalIntegrity < initialIntegrity / 2)
+            {
+                integrityBar.color = new Color(1f, 0.5f, 0f);
+                integrityBar.fillAmount = totalIntegrity / initialIntegrity;
+            }
+            else
+            {
+                integrityBar.color = Color.green;
+                integrityBar.fillAmount = totalIntegrity / initialIntegrity;
+            }
+
+        }
+    }
+
     private void Start()
     {
         totalScore = 0;
+        totalIntegrity = initialIntegrity;
     }
 
     public void AddPoints(PointSystem.EScoreSource enumSource)
     {
         totalScore += pointSystem.GetSourcePoint(enumSource);
+    }
+
+    public void SubtractIntegrity()
+    {
+        totalIntegrity -= 1;
     }
 
 }

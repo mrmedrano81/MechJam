@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class Lasering : MonoBehaviour
 {
@@ -55,6 +56,14 @@ public class Lasering : MonoBehaviour
 
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
+        if (Time.timeScale != 0)
+        {
+            Vector2 dirVec = (mousePos - transform.position).normalized;
+            transform.localScale = new Vector3(
+                Mathf.Sign(dirVec.x) * Mathf.Abs(transform.localScale.x),
+                transform.localScale.y,
+                transform.localScale.z);
+        }
 
         if (Input.GetMouseButton(0))
         {

@@ -115,10 +115,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a856f5e853dad59488b84af1f455c253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 20
   currentHealth: 0
-  scoreSource: 2
+  scoreSource: 0
   deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  integrityEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &7559966648258579326
