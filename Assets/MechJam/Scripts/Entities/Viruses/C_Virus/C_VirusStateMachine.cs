@@ -15,6 +15,7 @@ public class C_VirusStateMachine : StateManager<C_VirusStateMachine.EState>
 
     public C_VirusSO c_virusSO;
 
+
     public enum EState
     {
         Moving,

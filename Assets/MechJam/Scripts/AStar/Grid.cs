@@ -26,6 +26,8 @@ public class Grid : MonoBehaviour
     int penaltyMin =  int.MaxValue;
     int penaltyMax = int.MinValue;
 
+    private Camera cam;
+
     private void Awake()
     {
         nodeDiameter = nodeRadius * 2;
@@ -37,11 +39,17 @@ public class Grid : MonoBehaviour
             walkableMask.value |= region.terrainMask.value;
             walkableRegionsDictionary.Add((int)Mathf.Log(region.terrainMask.value, 2),region.terrainPenalty);
         }
-        CreateGrid();
+        
     }
 
+
+    private void Start()
+    {
+        CreateGrid();
+    }
     private void Update()
     {
+        //TrackCamera();
         CreateGrid();
     }
 
@@ -51,6 +59,12 @@ public class Grid : MonoBehaviour
         { 
             return gridSizeX*gridSizeY; 
         }
+    }
+
+    private void TrackCamera()
+    {
+        cam = Camera.main;
+        transform.position = cam.transform.position;
     }
 
     private void CreateGrid()
@@ -199,7 +213,7 @@ public class Grid : MonoBehaviour
                 Gizmos.color = Color.Lerp(Color.white, Color.black, Mathf.InverseLerp(penaltyMin, penaltyMax, node.movementPenalty));
 
                 Gizmos.color = (node.walkable) ? Gizmos.color : Color.red;
-                Gizmos.DrawWireCube(node.worldPosition, Vector2.one * (nodeDiameter - 0.1f));
+                Gizmos.DrawWireCube(node.worldPosition, Vector2.one * (nodeDiameter));
                 //Gizmos.DrawCube(node.worldPosition, Vector2.one * (nodeDiameter));
             }
 
