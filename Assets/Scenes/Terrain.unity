@@ -125607,6 +125607,9 @@ MonoBehaviour:
   onTileDestroyed:
     m_PersistentCalls:
       m_Calls: []
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2053909440
 GameObject:
   m_ObjectHideFlags: 0

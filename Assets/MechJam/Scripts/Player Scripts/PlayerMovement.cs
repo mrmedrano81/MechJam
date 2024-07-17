@@ -42,18 +42,25 @@ public class PlayerMovement : MonoBehaviour
     {
         movementInput = context.ReadValue<Vector2>().x;
 
-        if (movementInput > 0)
+        //if (movementInput > 0)
+        //{
+        //    
+
+        //}
+
+        //else if(movementInput < 0)
+        //{
+        //    transform.localScale = new Vector3(-5f,5f,1f);
+
+        //}
+
+        if (movementInput != 0)
         {
-            transform.localScale = new Vector3(5f, 5f, 1f);
-
+            transform.localScale = new Vector3(
+                Mathf.Sign(context.ReadValue<Vector2>().x) * Mathf.Abs(transform.localScale.x),
+                transform.localScale.y,
+                transform.localScale.z);
         }
-
-        else if(movementInput < 0)
-        {
-            transform.localScale = new Vector3(-5f,5f,1f);
-
-        }
-
 
         if (movementInput != 0)
         {
