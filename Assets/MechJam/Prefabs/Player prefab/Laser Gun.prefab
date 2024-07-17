@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4480321140786752633}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23, y: 0, z: 0}
+  m_LocalPosition: {x: 0.25, y: -0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -105,8 +105,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1362772441
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1856858889, guid: 12974904831b161449966423a1220693, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,9 +133,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSomething:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   lineRenderer: {fileID: 4578474962742459494}
-  firePoint: {fileID: 5451416553375104312}
+  laserFirePoint: {fileID: 5451416553375104312}
+  armRotation: {fileID: 1473594481454785233}
+  laserEffect: {fileID: 3585451540595752389, guid: 91a880bb8c4b0e14cab4e1272eb91688, type: 3}
 --- !u!120 &4578474962742459494
 LineRenderer:
   serializedVersion: 2
@@ -157,7 +159,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 5b76cf82ba263e5498da8962af76e0a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -175,9 +177,9 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1362772441
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}

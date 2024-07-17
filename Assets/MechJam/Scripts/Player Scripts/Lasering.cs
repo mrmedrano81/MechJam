@@ -51,6 +51,7 @@ public class Lasering : MonoBehaviour
         Vector2 laserLookDir = (mousePos - laserFirePoint.position);
         Debug.DrawRay(laserFirePoint.position, laserLookDir, Color.red);
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         Vector2 rotation = (mousePos - armRotation.position).normalized;
 
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
@@ -58,8 +59,9 @@ public class Lasering : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
 
+            Debug.Log(rotZ);
+            //armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
 
             lineRenderer.enabled = true;
 
@@ -70,8 +72,9 @@ public class Lasering : MonoBehaviour
             if (hit.collider != null)
             {
                 //do damage to blocks
-                GameObject effectImpact = Instantiate(laserEffect, hit.point, Quaternion.Euler(0f, 0f, rotZ));
-                Destroy(effectImpact, 2f);
+                Debug.Log(hit.collider.gameObject.name);
+                GameObject effectImpact = Instantiate(laserEffect, hit.point, Quaternion.identity);
+                Destroy(effectImpact, 0.5f);
             }
 
 
@@ -105,6 +108,7 @@ public class Lasering : MonoBehaviour
     {
         var mousPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+
         lineRenderer.SetPosition(0, laserFirePoint.position);
         lineRenderer.SetPosition(1, mousPos);
 
@@ -114,6 +118,7 @@ public class Lasering : MonoBehaviour
 
         if (laserHit)
         {
+            Debug.Log(laserHit);
             lineRenderer.SetPosition(1, laserHit.point);
         }
     }

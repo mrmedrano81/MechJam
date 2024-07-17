@@ -11,6 +11,7 @@ public class HookShot : MonoBehaviour
 
     [SerializeField] private Transform firePoint;
 
+    [SerializeField] private GameObject grappleHook;
 
     [SerializeField] private float hookDistance;
     [SerializeField] private float hookLength;
@@ -65,6 +66,9 @@ public class HookShot : MonoBehaviour
                 grappleRope.enabled = true;
                 grappleRope.SetPosition(0, hookPoint);
                 grappleRope.SetPosition(1, firePoint.position);
+
+                GameObject latchedHook = Instantiate(grappleHook, hit.point, Quaternion.identity);
+                Destroy(latchedHook, 0.5f);
             }
         }
         else if (Input.GetMouseButtonUp(1))

@@ -44,13 +44,13 @@ public class PlayerMovement : MonoBehaviour
 
         //if (movementInput > 0)
         //{
-        //    
 
+        //    transform.Rotate(0f , 0f, 0f);
         //}
 
-        //else if(movementInput < 0)
+        //else if (movementInput < 0)
         //{
-        //    transform.localScale = new Vector3(-5f,5f,1f);
+        //    transform.Rotate(new Vector3(0f, 180f, 0f));
 
         //}
 
