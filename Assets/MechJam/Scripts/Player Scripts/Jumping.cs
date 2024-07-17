@@ -23,8 +23,8 @@ public class Jumping : MonoBehaviour
     private string currentState;
 
     //ANIMATION STATE
+    const string PLAYER_WALK = "player_walk";
     const string PLAYER_IDLE = "idle";
-    const string PLAYER_JUMP_FULL = "player_jump_full";
     const string PLAYER_MIDAIR = "player_MidAir";
     const string PLAYER_JUMP_ONLY = "player_JumpOnly";
     const string PLAYER_JUMP_LANDING = "player_JumpLanding";
@@ -40,6 +40,18 @@ public class Jumping : MonoBehaviour
     {
         Gravity();
 
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    ChangeAnimationState(PLAYER_JUMP_ONLY);
+        //}
+
+
+        //if (!isGrounded())
+        //{
+        //    ChangeAnimationState(PLAYER_MIDAIR);
+        //}
+
+        
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -58,8 +70,6 @@ public class Jumping : MonoBehaviour
         if (context.performed && coyoteTimeCounter > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            ChangeAnimationState(PLAYER_JUMP_ONLY);
-            
         }
 
         else if (context.canceled && rb.velocity.y > 0f)
@@ -100,9 +110,11 @@ public class Jumping : MonoBehaviour
     }
     void ChangeAnimationState(string newState)
     {
-        if (currentState == newState) return;
+        if (newState == currentState) return;
 
         _animator.Play(newState);
+
+        currentState = newState;
     }
 
     //A bool checker to check if animation is still playing

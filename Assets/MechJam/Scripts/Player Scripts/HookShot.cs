@@ -16,6 +16,8 @@ public class HookShot : MonoBehaviour
     [SerializeField] private float hookLength;
     [SerializeField] private LayerMask hookLayer;
 
+    [SerializeField] private LineRenderer grappleRope;
+
 
     private Vector3 hookPoint;
     [SerializeField] private DistanceJoint2D joint;
@@ -60,11 +62,15 @@ public class HookShot : MonoBehaviour
                 joint.connectedAnchor = hookPoint;
                 joint.enabled = true;
                 joint.distance = hookLength;
+                grappleRope.enabled = true;
+                grappleRope.SetPosition(0, hookPoint);
+                grappleRope.SetPosition(1, firePoint.position);
             }
         }
         else if (Input.GetMouseButtonUp(1))
         {
             joint.enabled = false;
+            grappleRope.enabled = false;
         }
 
     }

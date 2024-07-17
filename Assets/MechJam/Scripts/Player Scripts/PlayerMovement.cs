@@ -69,9 +69,11 @@ public class PlayerMovement : MonoBehaviour
 
     void ChangeAnimationState(string newState)
     {
-        if (currentState == newState) return;
+        if (newState == currentState) return;
 
         animator.Play(newState);
+
+        currentState = newState;
     }
     
 }
