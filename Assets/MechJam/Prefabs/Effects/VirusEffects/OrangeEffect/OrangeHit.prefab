@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6311317166005567497}
   - component: {fileID: 6626214764116955156}
   m_Layer: 0
-  m_Name: VirusGreen
+  m_Name: OrangeHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4777,7 +4777,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: adad69edd92ba2740bfed145b71767c0, type: 2}
+  - {fileID: 2100000, guid: f13b1d740143cbf4fa95f53c33e15753, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

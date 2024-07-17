@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6311317166005567497}
   - component: {fileID: 6626214764116955156}
   m_Layer: 0
-  m_Name: VirusOrange
+  m_Name: RedHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,8 +256,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
-        key0: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-        key1: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+        key0: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+        key1: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -665,7 +665,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 24
+    angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 60
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4777,7 +4777,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f13b1d740143cbf4fa95f53c33e15753, type: 2}
+  - {fileID: 2100000, guid: a1385cbbf293f4942bfd6f69a9d659cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
