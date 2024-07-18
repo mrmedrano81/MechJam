@@ -530,18 +530,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
-      propertyPath: nodeRadius
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
-      propertyPath: gridWorldSize.x
-      value: 1024
-      objectReference: {fileID: 0}
-    - target: {fileID: 8429649952070251356, guid: 41ac6026868559a4eb7a70d3e845f2ea, type: 3}
-      propertyPath: gridWorldSize.y
-      value: 22
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -595,29 +583,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 968691436673969959, guid: d087a3a09a96d0040a4ff01ced94d31a, type: 3}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304233780272953425, guid: d087a3a09a96d0040a4ff01ced94d31a, type: 3}
-      propertyPath: moveSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2284374560831928718, guid: d087a3a09a96d0040a4ff01ced94d31a, type: 3}
-      propertyPath: detectVirusRadius
-      value: 19.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3551389702089895165, guid: d087a3a09a96d0040a4ff01ced94d31a, type: 3}
-      propertyPath: range
-      value: 1.26
-      objectReference: {fileID: 0}
     - target: {fileID: 7848297312522965428, guid: d087a3a09a96d0040a4ff01ced94d31a, type: 3}
       propertyPath: m_Name
       value: WhiteBloodCell
-      objectReference: {fileID: 0}
-    - target: {fileID: 7848297312522965428, guid: d087a3a09a96d0040a4ff01ced94d31a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -672,17 +640,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7559966648258579326, guid: 4385c24775961674d91e572c9186a108, type: 3}
-      propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8300419338941372580, guid: 4385c24775961674d91e572c9186a108, type: 3}
       propertyPath: m_Name
       value: RedBloodCell
-      objectReference: {fileID: 0}
-    - target: {fileID: 8300419338941372580, guid: 4385c24775961674d91e572c9186a108, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -741,10 +701,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: C_Virus
       objectReference: {fileID: 0}
-    - target: {fileID: 3961614746113330636, guid: 41206b066d3a90d46b7337bd865d8977, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -797,78 +753,6 @@ PrefabInstance:
     - target: {fileID: 246963251859215108, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 690334225141531257, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: jumpCooldown
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 690334225141531257, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: forwardPathCheckDistance
-      value: 1.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 1834114674693453936, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 2916705959426881583, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2916705959426881583, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -634692225
-      objectReference: {fileID: 0}
-    - target: {fileID: 3094251117561706112, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3094251117561706112, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -634692225
-      objectReference: {fileID: 0}
-    - target: {fileID: 3993208548775404842, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3993208548775404842, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -634692225
-      objectReference: {fileID: 0}
-    - target: {fileID: 4069351650102164815, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: randStickRange
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429254109480679908, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429254109480679908, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -634692225
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465522895421415943, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: detectionRadius
-      value: 29.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063258102171368183, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063258102171368183, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -634692225
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360845715260090278, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_Size.y
-      value: 13.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360845715260090278, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_Offset.y
-      value: 4.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6781132375851652405, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6789470266752633751, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
       propertyPath: m_Name

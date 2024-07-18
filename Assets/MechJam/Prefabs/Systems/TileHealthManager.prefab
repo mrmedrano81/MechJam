@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1659153090667511649
+--- !u!1 &187619669214884938
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,55 +8,55 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6680184179416508328}
-  - component: {fileID: 1769066349116381236}
+  - component: {fileID: 6248950344975141053}
+  - component: {fileID: 3276644169904329922}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: TileHealthManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6680184179416508328
+--- !u!4 &6248950344975141053
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659153090667511649}
+  m_GameObject: {fileID: 187619669214884938}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 789.88025, y: 716.8269, z: 3.9057646}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1769066349116381236
+--- !u!114 &3276644169904329922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659153090667511649}
+  m_GameObject: {fileID: 187619669214884938}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b502e986ab39afc4490310da1d128923, type: 3}
+  m_Script: {fileID: 11500000, guid: d092d957bf02b7d49891381c6f16119a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CellBlock: {fileID: 0}
-  CholesterolBlock: {fileID: 0}
-  RedBloodCell: {fileID: 0}
-  WhiteBloodCell: {fileID: 0}
-  A_Virus: {fileID: 0}
-  C_Virus: {fileID: 0}
-  audioSource: {fileID: 0}
-  musicSource: {fileID: 0}
-  musicList: []
-  CellBlockSFX: []
-  CholesterolBlockSFX: []
-  RedBloodCellSFX: []
-  WhiteBloodCellSFX: []
-  A_VirusSFX: []
-  C_VirusSFX: []
-  buttonSfxList: []
+  cellBlockTilemap: {fileID: 0}
+  cellBlockHealth: 10
+  cholesterolBlockTilemap: {fileID: 0}
+  cholesterolBlockHealth: 10
+  cellBlockScoreSource: 0
+  cholesterolBlockScoreSource: 1
+  refreshGridRadius: 10
+  onTileDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  refreshGridEvent:
+    m_PersistentCalls:
+      m_Calls: []

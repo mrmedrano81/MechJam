@@ -23,7 +23,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &94415771264269538
 Transform:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   virusLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  detectVirusRadius: 7.6
+  detectVirusRadius: 19.1
 --- !u!114 &1304233780272953425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa98d2112ca4fce469abd1a55b20d4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 3
   slowingSpeed: 0.2
   balanceRB: 0
   patrolMoveSpeedMultiplier: 0
@@ -232,6 +232,7 @@ MonoBehaviour:
   integrityEvent:
     m_PersistentCalls:
       m_Calls: []
+  randStickRange: 0
 --- !u!114 &2173457909337828230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,4 +266,4 @@ MonoBehaviour:
   dotDamage: 1
   s_dotDuration: 1
   s_dotInterval: 1
-  range: 0.33
+  range: 1.26

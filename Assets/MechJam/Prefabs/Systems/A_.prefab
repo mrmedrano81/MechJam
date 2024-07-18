@@ -50,8 +50,8 @@ MonoBehaviour:
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 128
-  gridWorldSize: {x: 60, y: 24}
-  nodeRadius: 0.25
+  gridWorldSize: {x: 1024, y: 22}
+  nodeRadius: 0.4
   walkableRegions:
   - terrainMask:
       serializedVersion: 2

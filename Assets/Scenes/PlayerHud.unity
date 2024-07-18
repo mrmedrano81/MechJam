@@ -414,10 +414,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 1769066349116381236, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
-      propertyPath: CellBlockSFX.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6680184179416508328, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 789.88025
@@ -515,10 +511,6 @@ PrefabInstance:
       propertyPath: integrityBar
       value: 
       objectReference: {fileID: 878507968}
-    - target: {fileID: 6161853627319240465, guid: 68fc5a7b7df01fa44ae2d6cf34498814, type: 3}
-      propertyPath: initialIntegrity
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 6161853627319240465, guid: 68fc5a7b7df01fa44ae2d6cf34498814, type: 3}
       propertyPath: scoreDisplayText
       value: 

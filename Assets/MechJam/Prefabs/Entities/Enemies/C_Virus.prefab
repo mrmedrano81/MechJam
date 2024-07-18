@@ -163,6 +163,7 @@ MonoBehaviour:
   integrityEvent:
     m_PersistentCalls:
       m_Calls: []
+  randStickRange: 0
 --- !u!114 &6393213117362323109
 MonoBehaviour:
   m_ObjectHideFlags: 0
