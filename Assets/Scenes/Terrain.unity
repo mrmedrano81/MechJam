@@ -10170,10 +10170,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: THE PLAYER
       objectReference: {fileID: 0}
-    - target: {fileID: 477395267700576195, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6223264168974664308, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
       propertyPath: m_LocalPosition.x
       value: -371.8
@@ -10213,10 +10209,6 @@ PrefabInstance:
     - target: {fileID: 6223264168974664308, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7887391349298153948, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 1024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

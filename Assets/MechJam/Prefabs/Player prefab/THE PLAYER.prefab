@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 1252095966359215049}
   - component: {fileID: 4834854495587091429}
   - component: {fileID: 7887391349298153948}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: THE PLAYER
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1362772441
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -367,13 +367,22 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.6538443
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0.30769968
+        inSlope: -0.7398559
+        outSlope: -0.7398559
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.103960395
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -453,7 +462,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
