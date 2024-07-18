@@ -216,10 +216,10 @@ public class Grid : MonoBehaviour
         int originGridPosY = nearestNodeFromCollision.gridY;
 
         
-        int upper_searchRangeX = Mathf.Clamp((originGridPosX + radius + blurSize), 0, gridSizeX);
-        int lower_searchRangeX = Mathf.Clamp((originGridPosX - radius - blurSize), 0, gridSizeX);        
-        int upper_searchRangeY = Mathf.Clamp((originGridPosY + radius + blurSize), 0, gridSizeY);
-        int lower_searchRangeY = Mathf.Clamp((originGridPosY - radius - blurSize), 0, gridSizeY);
+        int upper_searchRangeX = Mathf.Clamp((originGridPosX + radius), 0, gridSizeX);
+        int lower_searchRangeX = Mathf.Clamp((originGridPosX - radius), 0, gridSizeX);        
+        int upper_searchRangeY = Mathf.Clamp((originGridPosY + radius), 0, gridSizeY);
+        int lower_searchRangeY = Mathf.Clamp((originGridPosY - radius), 0, gridSizeY);
 
 
         for (int x = lower_searchRangeX; x < upper_searchRangeX; x++)

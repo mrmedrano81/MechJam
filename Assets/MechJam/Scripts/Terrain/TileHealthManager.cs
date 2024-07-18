@@ -113,8 +113,15 @@ public class TileHealthManager : MonoBehaviour
         {
             deathEvent?.Invoke(destructableTilemap.scoreSource);
             tilemap.SetTile(gridPosition, null);
+
+            if (destructableTilemap.scoreSource == PointSystem.EScoreSource.CellBlock)
+            {
+                onTileDestroyed?.Invoke();
+            }
+
             destructableTilemap.healthTiles.Remove(gridPosition);
             refreshGridEvent?.Invoke(worldPosition, refreshGridRadius);
+            refreshGridEvent?.Invoke(worldPosition, Mathf.RoundToInt(refreshGridRadius/2));
         }
         else
         {

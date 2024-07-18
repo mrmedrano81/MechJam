@@ -3125,6 +3125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructibleTileMap: {fileID: 0}
   healthManager: {fileID: 1938407026}
+  isCellBlock: 0
   interactionTags: []
 --- !u!1 &476579366
 GameObject:
@@ -143725,6 +143726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructibleTileMap: {fileID: 0}
   healthManager: {fileID: 1938407026}
+  isCellBlock: 1
   interactionTags: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

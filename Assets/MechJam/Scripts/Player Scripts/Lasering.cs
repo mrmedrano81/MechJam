@@ -7,6 +7,7 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 public class Lasering : MonoBehaviour
 {
     [SerializeField] private float laserDamage;
+    [SerializeField] private float laserRange;
     [SerializeField] private float laserICD;
 
     [SerializeField] private LayerMask hitSomething;
@@ -74,13 +75,15 @@ public class Lasering : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
+
                 armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
 
                 lineRenderer.enabled = true;
 
                 RaycastHit2D hit = Physics2D.Raycast(laserFirePoint.position, laserLookDir, hitSomething);
 
-                LaserUpdate();
+                //LaserUpdate();
+                lineRenderer.SetPosition(0, laserFirePoint.position);
 
                 if (hit.collider != null)
                 {
@@ -108,7 +111,12 @@ public class Lasering : MonoBehaviour
                     GameObject effectImpact = Instantiate(laserEffect, hit.point, Quaternion.Euler(0f, 0f, rotZ));
                     Destroy(effectImpact, 0.3f);
                 }
-
+                else
+                {
+                    lineRenderer.SetPosition(1, mousePos);
+                    GameObject effectImpact = Instantiate(laserEffect, mousePos, Quaternion.Euler(0f, 0f, rotZ));
+                    Destroy(effectImpact, 0.3f);
+                }
 
             }
             else if (Input.GetMouseButtonUp(0))
@@ -142,15 +150,22 @@ public class Lasering : MonoBehaviour
         var mousPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         lineRenderer.SetPosition(0, laserFirePoint.position);
-        lineRenderer.SetPosition(1, mousPos);
-
+        
         Vector2 direction = mousePos - laserFirePoint.position;
 
-        RaycastHit2D laserHit = Physics2D.Raycast(laserFirePoint.position, direction.normalized, direction.magnitude);
+        RaycastHit2D laserHit = Physics2D.Raycast(laserFirePoint.position, direction.normalized, laserRange);
 
         if (laserHit)
         {
             lineRenderer.SetPosition(1, laserHit.point);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        Vector2 direction = mousePos - laserFirePoint.position;
+        Gizmos.DrawLine(laserFirePoint.position, direction.normalized * laserRange);
     }
 }

@@ -30,7 +30,7 @@ public class JumpTriggerBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("trigger: "+collision.gameObject.name);
+        //Debug.Log("trigger: "+collision.gameObject.name);
 
         if (collision.gameObject.CompareTag("RedBloodCell"))
         {
