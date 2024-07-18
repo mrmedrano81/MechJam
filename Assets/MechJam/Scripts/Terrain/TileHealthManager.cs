@@ -125,11 +125,13 @@ public class TileHealthManager : MonoBehaviour
 
             if (destructableTilemap.scoreSource == PointSystem.EScoreSource.CellBlock)
             {
+                AudioManager.instance.PlayRandomSFX("CellBlock", 1f);
                 anim.playCellBlockDeath(worldPosition);
                 onTileDestroyed?.Invoke();
             }
             else
             {
+                AudioManager.instance.PlayRandomSFX("CholesterolBlock", 1f);
                 anim.playCholBlockDeath(worldPosition);
             }
             destructableTilemap.healthTiles.Remove(gridPosition);
