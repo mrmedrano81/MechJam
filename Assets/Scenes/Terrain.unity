@@ -252,6 +252,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4553550797105630761, guid: 4385c24775961674d91e572c9186a108, type: 3}
   m_PrefabInstance: {fileID: 17297546}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &21982471 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6205938967266765237, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+  m_PrefabInstance: {fileID: 389767226}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &26870721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2812,6 +2817,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4553550797105630761, guid: 4385c24775961674d91e572c9186a108, type: 3}
   m_PrefabInstance: {fileID: 541535363}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &598516102 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 211862382236940790, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
+  m_PrefabInstance: {fileID: 5535663604156377690}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &599557923
 PrefabInstance:
@@ -8840,13 +8850,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3749656347896052700, guid: 41206b066d3a90d46b7337bd865d8977, type: 3}
+      propertyPath: checkGround
+      value: 
+      objectReference: {fileID: 1978823566}
+    - target: {fileID: 3749656347896052700, guid: 41206b066d3a90d46b7337bd865d8977, type: 3}
+      propertyPath: checkForwardPath
+      value: 
+      objectReference: {fileID: 21982471}
     - target: {fileID: 3961614746113330636, guid: 41206b066d3a90d46b7337bd865d8977, type: 3}
       propertyPath: m_Name
       value: C_Virus
-      objectReference: {fileID: 0}
-    - target: {fileID: 6200629655090441432, guid: 41206b066d3a90d46b7337bd865d8977, type: 3}
-      propertyPath: scoreSource
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9930,6 +9944,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4553550797105630761, guid: 4385c24775961674d91e572c9186a108, type: 3}
   m_PrefabInstance: {fileID: 1968188943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1978823566 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6502253862789822453, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+  m_PrefabInstance: {fileID: 1637495707}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1990886162
 PrefabInstance:
@@ -11058,7 +11077,7 @@ PrefabInstance:
     - target: {fileID: 1769066349116381236, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
       propertyPath: CellBlock
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 598516102}
     - target: {fileID: 6680184179416508328, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 789.88025
@@ -11120,10 +11139,18 @@ PrefabInstance:
       propertyPath: healthManager
       value: 
       objectReference: {fileID: 1938407026}
+    - target: {fileID: 1740876953077640919, guid: 982a6688abdbb2043aea6c888c193c2b, type: 3}
+      propertyPath: destructibleTileMap
+      value: 
+      objectReference: {fileID: 163165801}
     - target: {fileID: 2820749985109335647, guid: 982a6688abdbb2043aea6c888c193c2b, type: 3}
       propertyPath: healthManager
       value: 
       objectReference: {fileID: 1938407026}
+    - target: {fileID: 2820749985109335647, guid: 982a6688abdbb2043aea6c888c193c2b, type: 3}
+      propertyPath: destructibleTileMap
+      value: 
+      objectReference: {fileID: 2053909443}
     - target: {fileID: 3428196049280906360, guid: 982a6688abdbb2043aea6c888c193c2b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 246.9
