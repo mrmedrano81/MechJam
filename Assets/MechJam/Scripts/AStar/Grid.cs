@@ -19,6 +19,7 @@ public class Grid : MonoBehaviour
     Node[,] grid;
     Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
 
+    [Header("Refresh Grid Settings")]
     public UnityEvent onTileDestroyed;
 
     float nodeDiameter;
@@ -202,6 +203,63 @@ public class Grid : MonoBehaviour
 
         return grid[x, y];
     }
+
+    public void RefreshGridSection(Vector3 collisionPoint, int radius)
+    {
+        Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.up * gridWorldSize.y / 2;
+        Node nearestNodeFromCollision = GetNodeFromWorldPoint(collisionPoint);
+
+        float refreshOriginX = nearestNodeFromCollision.worldPosition.x;
+        float refreshOriginY = nearestNodeFromCollision.worldPosition.y;
+
+        int originGridPosX = nearestNodeFromCollision.gridX;
+        int originGridPosY = nearestNodeFromCollision.gridY;
+
+        
+        int upper_searchRangeX = Mathf.Clamp((originGridPosX + radius + blurSize), 0, gridSizeX);
+        int lower_searchRangeX = Mathf.Clamp((originGridPosX - radius - blurSize), 0, gridSizeX);        
+        int upper_searchRangeY = Mathf.Clamp((originGridPosY + radius + blurSize), 0, gridSizeY);
+        int lower_searchRangeY = Mathf.Clamp((originGridPosY - radius - blurSize), 0, gridSizeY);
+
+
+        for (int x = lower_searchRangeX; x < upper_searchRangeX; x++)
+        {
+            for (int y = lower_searchRangeY; y < upper_searchRangeY; y++)
+            {
+                Vector3 worldPoint = worldBottomLeft +
+                    Vector3.right * (x * nodeDiameter + nodeRadius) +
+                    Vector3.up * (y * nodeDiameter + nodeRadius);
+                //bool walkable =  !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
+                bool walkable = !Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask);
+
+                int movementPenalty = 0;
+
+                // raycast code
+                RaycastHit2D[] hits = Physics2D.CircleCastAll(worldPoint, nodeRadius, (Vector2)transform.position, 0f, walkableMask);
+
+                if (!walkable)
+                {
+                    movementPenalty += obstacleProximityPenalty;
+                }
+
+                if (walkable)
+                {
+                    foreach (RaycastHit2D hit in hits)
+                    {
+                        if (hit.collider != null)
+                        {
+                            walkableRegionsDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
+                        }
+                    }
+                }
+
+                grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
+            }
+        }
+
+        //BlurPenaltyMap(blurSize);
+    }
+
 
     private void OnDrawGizmos()
     {
