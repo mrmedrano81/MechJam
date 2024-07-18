@@ -54,13 +54,13 @@ public class PlayerMovement : MonoBehaviour
 
         //}
 
-        if (movementInput != 0)
-        {
-            transform.localScale = new Vector3(
-                Mathf.Sign(context.ReadValue<Vector2>().x) * Mathf.Abs(transform.localScale.x),
-                transform.localScale.y,
-                transform.localScale.z);
-        }
+        //if (movementInput != 0)
+        //{
+        //    transform.localScale = new Vector3(
+        //        Mathf.Sign(context.ReadValue<Vector2>().x) * Mathf.Abs(transform.localScale.x),
+        //        transform.localScale.y,
+        //        transform.localScale.z);
+        //}
 
         if (movementInput != 0)
         {

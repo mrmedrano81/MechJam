@@ -272,46 +272,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1631952714 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6789470266752633751, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-  m_PrefabInstance: {fileID: 5927553626957687204}
-  m_PrefabAsset: {fileID: 0}
---- !u!70 &1631952724
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1631952714}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 0.99999994}
-  m_Direction: 0
 --- !u!1 &1669382192
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,6 +640,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7429983670646668737, guid: 4385c24775961674d91e572c9186a108, type: 3}
+      propertyPath: maxHealth
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 8300419338941372580, guid: 4385c24775961674d91e572c9186a108, type: 3}
       propertyPath: m_Name
       value: RedBloodCell
@@ -794,22 +758,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3785763808289678472, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785763808289678472, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+      propertyPath: m_TagString
+      value: TriggerBox
+      objectReference: {fileID: 0}
     - target: {fileID: 6789470266752633751, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
       propertyPath: m_Name
       value: A_Virus
       objectReference: {fileID: 0}
-    - target: {fileID: 8769479384061514320, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      propertyPath: m_Size.x
-      value: 0.3
+    - target: {fileID: 7667823990963342290, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8769479384061514320, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6789470266752633751, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1631952724}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

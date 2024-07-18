@@ -50,4 +50,6 @@ MonoBehaviour:
   whiteBloodCell: -100
   a_Virus: 1500
   c_Virus: 1500
-  totalScore: 0
+  scoreDisplayText: {fileID: 0}
+  integrityBar: {fileID: 0}
+  initialIntegrity: 5

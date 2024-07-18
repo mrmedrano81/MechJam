@@ -61,6 +61,7 @@ public class TileHealthManager : MonoBehaviour
         {
             ScoreManager scoreManager = scoreManagerObject.GetComponent<ScoreManager>();
             deathEvent.AddListener(scoreManager.AddPoints);
+            onTileDestroyed.AddListener(scoreManager.SubtractIntegrity);
         }
         else
         {

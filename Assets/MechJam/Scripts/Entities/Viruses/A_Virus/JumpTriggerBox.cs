@@ -30,6 +30,8 @@ public class JumpTriggerBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("trigger: "+collision.gameObject.name);
+
         if (collision.gameObject.CompareTag("RedBloodCell"))
         {
             redBloodCellTransform = collision.transform;
@@ -43,5 +45,9 @@ public class JumpTriggerBox : MonoBehaviour
         {
             redBloodCellInJumpRange = false;
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("collision: " + collision.gameObject.name);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class RedBCDeathState : BaseState<RedBCStateMachine.RedBCEState>
@@ -26,6 +27,7 @@ public class RedBCDeathState : BaseState<RedBCStateMachine.RedBCEState>
 
     public override void FixedUpdateState()
     {
+        
     }
 
     public override RedBCStateMachine.RedBCEState GetNextState()
