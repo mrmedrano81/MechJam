@@ -51,12 +51,21 @@ public class Lasering : MonoBehaviour
 
             Vector2 rotation = (mousePos - armRotation.position).normalized;
 
+            // this is it
             float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+
+            if (Mathf.Sign(dirVec.x) > 0)
+            {
+                armRotation.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rotZ);
+            }
+            else
+            {
+                armRotation.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, rotZ+180f);
+            }
+            //
 
             if (Input.GetMouseButton(0))
             {
-                armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
-
                 lineRenderer.enabled = true;
 
                 RaycastHit2D hit = Physics2D.Raycast(laserFirePoint.position, laserLookDir, hitSomething);

@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     [SerializeField] public UnityPointEvent deathEvent;
     [SerializeField] public UnityEvent integrityEvent;
     [SerializeField] public float randStickRange;
+    [SerializeField] public Material flashingMaterial;
 
     private bool isDead;
 
@@ -42,8 +43,6 @@ public class Health : MonoBehaviour
         {
             if (!isDead)
             {
-                Debug.Log("Dying");
-                Debug.Break();
                 isDead = true;
                 deathEvent?.Invoke(scoreSource);
                 integrityEvent?.Invoke();
