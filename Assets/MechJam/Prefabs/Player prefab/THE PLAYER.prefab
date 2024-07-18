@@ -93,8 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b871a1353dd96cf4886de9fd28a0c8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserDamage: 50
-  laserICD: 0.5
+  laserDamage: 20
+  laserRange: 1
+  laserICD: 0.05
   hitSomething:
     serializedVersion: 2
     m_Bits: 128

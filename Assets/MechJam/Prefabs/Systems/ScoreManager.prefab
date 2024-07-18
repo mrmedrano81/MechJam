@@ -52,4 +52,4 @@ MonoBehaviour:
   c_Virus: 1500
   scoreDisplayText: {fileID: 0}
   integrityBar: {fileID: 0}
-  initialIntegrity: 5
+  initialIntegrity: 100

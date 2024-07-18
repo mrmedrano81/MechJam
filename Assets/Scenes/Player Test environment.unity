@@ -1284,18 +1284,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 238320949708126028, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
-      propertyPath: laserICD
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 238320949708126028, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
-      propertyPath: laserRange
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 238320949708126028, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
-      propertyPath: laserDamage
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 477395267700576195, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
       propertyPath: m_Name
       value: THE PLAYER

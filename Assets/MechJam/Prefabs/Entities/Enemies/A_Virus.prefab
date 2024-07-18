@@ -65,7 +65,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 3.03}
+  m_Offset: {x: 0, y: 4.7}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.96, y: 8.67}
+  m_Size: {x: 3.96, y: 13.5}
   m_EdgeRadius: 0
 --- !u!114 &2756654839954236794
 MonoBehaviour:
@@ -188,14 +188,14 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   checkGround: {fileID: 6502253862789822453}
   checkForwardPath: {fileID: 6205938967266765237}
-  forwardPathCheckDistance: 1.8
+  forwardPathCheckDistance: 1.31
   groundCheckSize: {x: 0, y: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
   jumpForce: {x: 4, y: 15}
   f_jumpForce: 3.2
-  jumpCooldown: 1
+  jumpCooldown: 2.5
   baseGravity: 2
   fallSpeedMultiplier: 3
   maxFallSpeed: 18
@@ -221,6 +221,7 @@ MonoBehaviour:
   integrityEvent:
     m_PersistentCalls:
       m_Calls: []
+  randStickRange: 0.3
 --- !u!114 &6863145355003282178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42476e47a1abd3443a38c71b55f440a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 34.1
+  detectionRadius: 29.3
   targetMask:
     serializedVersion: 2
     m_Bits: 512
@@ -304,7 +305,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.06}
+  m_Offset: {x: 0, y: -0.03}
   m_Size: {x: 0.37, y: 1.13}
   m_Direction: 0
 --- !u!1 &7667823990963342290
@@ -454,6 +455,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 246963251859215108}
     m_Modifications:
+    - target: {fileID: 2952431698753960488, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952431698753960488, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -634692225
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059035543106794631, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059035543106794631, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -634692225
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028934296629536557, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028934296629536557, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -634692225
+      objectReference: {fileID: 0}
+    - target: {fileID: 4464407827820755939, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4464407827820755939, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -634692225
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100135313577654512, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100135313577654512, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -634692225
+      objectReference: {fileID: 0}
     - target: {fileID: 6816329526041876274, guid: f3fc9119acd63704397ffe797187820e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -493,6 +534,10 @@ PrefabInstance:
     - target: {fileID: 6816329526041876274, guid: f3fc9119acd63704397ffe797187820e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816329526041876274, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7725017195135334917, guid: f3fc9119acd63704397ffe797187820e, type: 3}
       propertyPath: m_Name
