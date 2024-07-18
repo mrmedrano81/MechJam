@@ -23,9 +23,21 @@ public class SpawnSectionScript : MonoBehaviour
         {
             foreach (GameObject mob in mobList)
             {
-                mob.SetActive(true);
+                if (mob != null) mob.SetActive(true);
             }
             Spawned=true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && Spawned == true)
+        {
+            foreach (GameObject mob in mobList)
+            {
+                if (mob != null) mob.SetActive(false);
+            }
+            Spawned = false;
         }
     }
 

@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     [SerializeField] public PointSystem.EScoreSource scoreSource;
     [SerializeField] public UnityPointEvent deathEvent;
     [SerializeField] public UnityEvent integrityEvent;
+    [SerializeField] public UnityEvent virusKillIntegrityEvent;
     [SerializeField] public float randStickRange;
 
     private bool isDead;
@@ -39,6 +40,7 @@ public class Health : MonoBehaviour
             ScoreManager scoreManager = scoreManagerObject.GetComponent<ScoreManager>();
             deathEvent.AddListener(scoreManager.AddPoints);
             integrityEvent.AddListener(scoreManager.SubtractIntegrity);
+            virusKillIntegrityEvent.AddListener(scoreManager.AddIntegrityFromVirusKill);
         }
         else
         {
@@ -70,8 +72,15 @@ public class Health : MonoBehaviour
                 //AudioManager.instance.PlayRandomSFX("CellBlock");
                 isDead = true;
                 deathEvent?.Invoke(scoreSource);
-                integrityEvent?.Invoke();
-                //Destroy(gameObject);
+
+                if (gameObject.CompareTag("WhiteBloodCell") || gameObject.CompareTag("RedBloodCell"))
+                {
+                    integrityEvent?.Invoke();
+                }
+                else
+                {
+                    virusKillIntegrityEvent?.Invoke();
+                }
             }
         }
     }

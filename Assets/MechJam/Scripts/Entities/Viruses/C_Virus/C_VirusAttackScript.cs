@@ -53,6 +53,10 @@ public class C_VirusAttackScript : BaseState<C_VirusStateMachine.EState>
                         attack.DoDamage(cellHealth);
                     }   
                 }
+                else
+                {
+                    targetMovedAway = true;
+                }
             }
             else
             {

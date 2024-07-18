@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 4465522895421415943}
   - component: {fileID: 1834114674693453936}
   - component: {fileID: 2615399750170895246}
+  - component: {fileID: 3515712393424686543}
   m_Layer: 10
   m_Name: A_Virus
   m_TagString: A_Virus
@@ -195,7 +196,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  jumpForce: {x: 4, y: 15}
+  jumpForce: {x: 3, y: 14}
   f_jumpForce: 3.2
   jumpCooldown: 2.5
   baseGravity: 2
@@ -214,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a856f5e853dad59488b84af1f455c253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 450
   currentHealth: 0
   scoreSource: 4
   deathEvent:
@@ -240,8 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb742ff4067cb7a4aa06d2cd19a96490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  s_damageCooldown: 2
+  damage: 10
+  s_damageCooldown: 1
   dotDamage: 0
   s_dotDuration: 0
   s_dotInterval: 0
@@ -274,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42476e47a1abd3443a38c71b55f440a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 39.5
+  detectionRadius: 31.9
   targetMask:
     serializedVersion: 2
     m_Bits: 512
@@ -329,6 +330,41 @@ MonoBehaviour:
   particlePrefab: {fileID: 2387895009255881440, guid: 1aa46a44605e558418295135f664246b, type: 3}
   deathAnim: RBC_Death
   deathAnimdelay: 0.2
+--- !u!58 &3515712393424686543
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789470266752633751}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.02, y: 0.3}
+  serializedVersion: 2
+  m_Radius: 0.34
 --- !u!1 &7667823990963342290
 GameObject:
   m_ObjectHideFlags: 0

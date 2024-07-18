@@ -4,6 +4,7 @@ using System.Threading;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PointSystem
@@ -68,7 +69,7 @@ public class ScoreManager : MonoBehaviour
         pointSystem.AddScoreSource(PointSystem.EScoreSource.C_Virus, c_Virus);
 
         totalScore = 0;
-        totalIntegrity = initialIntegrity;
+        totalIntegrity = initialIntegrity/2;
     }
 
     private void Update()
@@ -88,6 +89,11 @@ public class ScoreManager : MonoBehaviour
         }
         if (integrityBar != null)
         {
+            if (totalIntegrity <= 0)
+            {
+                SceneManager.LoadScene(0);
+            }
+
             if (totalIntegrity < initialIntegrity/4)
             {
                 integrityBar.color = Color.red;
@@ -103,7 +109,6 @@ public class ScoreManager : MonoBehaviour
                 integrityBar.color = Color.green;
                 integrityBar.fillAmount = totalIntegrity / initialIntegrity;
             }
-
         }
     }
 
@@ -116,7 +121,17 @@ public class ScoreManager : MonoBehaviour
 
     public void SubtractIntegrity()
     {
-        totalIntegrity -= 1;
+        totalIntegrity -= 20;
+    }
+
+    public void AddIntegrity()
+    {
+        totalIntegrity += 1;
+    }    
+    
+    public void AddIntegrityFromVirusKill()
+    {
+        totalIntegrity += 30;
     }
 
 }

@@ -75,10 +75,17 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
         if (movementComponent.CheckRange(virusMasks, attackComponent.range))
         {
             //Debug.Log("Should stick");
-            movementComponent.StickToTarget(virusHealth.gameObject.transform, virusStickOffset);
+            
             if (virusHealth != null)
             {
+                movementComponent.StickToTarget(virusHealth.gameObject.transform, virusStickOffset);
                 attackComponent.DoDamage(virusHealth);
+                Attack virusAttack = virusHealth.gameObject.GetComponent<Attack>();
+                if (virusAttack != null)
+                {
+                    virusAttack.DoDamage(healthComponent);
+                }
+
             }
             else
             {

@@ -81,7 +81,13 @@ public class C_VirusMovingState : BaseState<C_VirusStateMachine.EState>
     #region Collision and Trigger Logic
     public override void OnCollisionEnter2D(Collision2D other)
     {
-
+        foreach (string _tag in c_virusSO.targetTags)
+        {
+            if (other.gameObject.CompareTag(_tag))
+            {
+                transitionToAttack = true;
+            }
+        }
     }
 
     public override void OnCollisionExit2D(Collision2D other)

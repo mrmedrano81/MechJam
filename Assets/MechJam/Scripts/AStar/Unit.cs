@@ -61,8 +61,12 @@ public class Unit : MonoBehaviour
         {
             path = newPath;
             targetIndex = 0;
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
+
+            if (gameObject.activeInHierarchy)
+            {
+                StopCoroutine("FollowPath");
+                StartCoroutine("FollowPath");
+            }
         }
     }
 

@@ -45,6 +45,11 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
         {
             targetFound = true;
         }
+        else
+        {
+            Debug.Log("not in range");
+            Debug.Break();
+        }
     }
 
     public override void FixedUpdateState()

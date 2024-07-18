@@ -36,7 +36,7 @@ public class A_VirusTrackTargetState : BaseState<A_VirusStateMachine.EState>
         movement.ResetGravity();
         movement.ResetSpeed();
 
-        if (!jumpTriggerBox.targetAcquired && target == null)
+        if (!jumpTriggerBox.targetAcquired || target == null)
         {
             //Debug.Log("Null target on entry of tracking state");
             //Debug.Break();
@@ -57,6 +57,12 @@ public class A_VirusTrackTargetState : BaseState<A_VirusStateMachine.EState>
 
     public override void FixedUpdateState()
     {
+        if (jumpTriggerBox.targetAcquired)
+        {
+            //Debug.Log("Null target on entry of tracking state");
+            //Debug.Break();
+            target = jumpTriggerBox.redBloodCellTransform;
+        }
         //target = movement.GetTargetIfInRange(targetMask, detectionRadius, "RedBloodCell");
         //pathFinder.SetConditions(target, true);
         if (jumpTriggerBox.targetAcquired && jumpTriggerBox.redBloodCellTransform == null)
@@ -64,7 +70,7 @@ public class A_VirusTrackTargetState : BaseState<A_VirusStateMachine.EState>
             jumpTriggerBox.targetAcquired = false;
         }
 
-        if (movement.isGrounded())
+        if (movement.isGrounded() && target != null)
         {
             //movement.MoveInHorizontalDirection(pathFinder.lookDir.normalized);
             movement.SetLookDirFacing(target.position);
@@ -76,7 +82,7 @@ public class A_VirusTrackTargetState : BaseState<A_VirusStateMachine.EState>
                 movement.JumpTowards();
             }
 
-            else if (movement.FrontBlocked())
+            if (movement.FrontBlocked())
             {
                 movement.JumpTowards(movement.jumpForce);
             }

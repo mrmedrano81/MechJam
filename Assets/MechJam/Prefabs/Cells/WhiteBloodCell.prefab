@@ -175,12 +175,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.24
+  m_Radius: 0.5
 --- !u!50 &8389776861198228606
 Rigidbody2D:
   serializedVersion: 4
@@ -189,7 +189,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7848297312522965428}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   virusLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  detectVirusRadius: 19.1
+  detectVirusRadius: 30
 --- !u!114 &1304233780272953425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a856f5e853dad59488b84af1f455c253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 400
   currentHealth: 0
   scoreSource: 3
   deathEvent:
@@ -287,8 +287,8 @@ MonoBehaviour:
   integrityEvent:
     m_PersistentCalls:
       m_Calls: []
-  randStickRange: 0
-  flashDuration: 0
+  randStickRange: 1
+  flashDuration: 0.03
   flashingMaterial: {fileID: 2100000, guid: 890ca3e954ab97045aabc1dc9e79671b, type: 2}
   originalMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
@@ -320,12 +320,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb742ff4067cb7a4aa06d2cd19a96490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  s_damageCooldown: 1
+  damage: 1
+  s_damageCooldown: 0.5
   dotDamage: 1
   s_dotDuration: 1
   s_dotInterval: 1
-  range: 1.26
+  range: 2
 --- !u!114 &9064382607652670324
 MonoBehaviour:
   m_ObjectHideFlags: 0

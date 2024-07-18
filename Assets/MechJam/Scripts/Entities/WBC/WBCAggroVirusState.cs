@@ -33,7 +33,7 @@ public class WBCAggroVirusState : BaseState<WBCStateMachine.WBCState>
     {
         transitionToAttack = false;
         virus = null;
-        virus = movementComponent.GetTargetIfInRange(virusMask, Mathf.Infinity);
+        virus = movementComponent.GetTargetIfInRange(virusMask, detectVirusRadius);
     }
 
     public override void ExitState()
@@ -65,9 +65,13 @@ public class WBCAggroVirusState : BaseState<WBCStateMachine.WBCState>
         {
             return WBCStateMachine.WBCState.AttackVirus;
         }
-        else
+        else if (virus != null)
         {
             return WBCStateMachine.WBCState.AggroVirus;
+        }
+        else
+        {
+            return WBCStateMachine.WBCState.Idle;
         }
     }
 
@@ -90,7 +94,7 @@ public class WBCAggroVirusState : BaseState<WBCStateMachine.WBCState>
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("A_Virus") || other.gameObject.CompareTag("C_Virus"))
         {
             transitionToAttack = true;
         }

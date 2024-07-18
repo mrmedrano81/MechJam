@@ -349,8 +349,8 @@ public class Movement : MonoBehaviour
 
     public Vector2 GetRandomStickOffset(float randRadius)
     {
-        float offsetX = UnityEngine.Random.Range(0, randRadius);
-        float offsetY = UnityEngine.Random.Range(0, randRadius);
+        float offsetX = UnityEngine.Random.Range(-randRadius, randRadius);
+        float offsetY = UnityEngine.Random.Range(-randRadius, randRadius);
 
         return new Vector3(offsetX, offsetY);
     }
@@ -361,70 +361,42 @@ public class Movement : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _searchRadius, _layerMask);
 
-        Array.Reverse(hits);
         if (hits.Length > 0)
         {
-
-            if (targetNearest == true)
+            if (targetNearest)
             {
                 Transform nearest = null;
                 float shortestDistance = Mathf.Infinity;
                 foreach (Collider2D hit in hits)
                 {
-                    if (tag == "None")
+                    if (tag == "None" || hit.gameObject.CompareTag(tag))
                     {
-                        float currentDistance = Vector3.Distance(transform.position, hit.gameObject.transform.position);
+                        float currentDistance = Vector3.Distance(transform.position, hit.transform.position);
 
-                        if (shortestDistance > currentDistance)
+                        if (currentDistance < shortestDistance)
                         {
                             shortestDistance = currentDistance;
-                            nearest = hit.gameObject.transform;
+                            nearest = hit.transform;
                         }
-
-                    }
-                    else if (hit.gameObject.CompareTag(tag))
-                    {
-                        float currentDistance = Vector3.Distance(transform.position, hit.gameObject.transform.position);
-
-                        if (shortestDistance > currentDistance)
-                        {
-                            shortestDistance = currentDistance;
-                            nearest = hit.gameObject.transform;
-                        }
-                    }
-                    else
-                    {
-
                     }
                 }
-
                 return nearest;
             }
-
             else
             {
-                //Debug.Log(hits.Length);
                 foreach (Collider2D hit in hits)
                 {
-                    if (tag == "None")
+                    if (tag == "None" || hit.gameObject.CompareTag(tag))
                     {
-                        return hit.gameObject.transform;
+                        return hit.transform;
                     }
-                    else if (hit.gameObject.CompareTag(tag))
-                    {
-                        return hit.gameObject.transform;
-                    }
-
-                    else return null;
                 }
-                return null;
             }
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     }
+
 
     public bool CheckRange(LayerMask _layerMask, float _searchRadius, string tag = "None")
     {

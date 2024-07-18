@@ -36,6 +36,7 @@ public class TileHealthManager : MonoBehaviour
     [Header("Events")]
     public int refreshGridRadius;
     public UnityEvent onTileDestroyed;
+    public UnityEvent onCholesterolDestroyed;
     public UnityPointEvent deathEvent;
     public UnityEventRefreshGrid refreshGridEvent;
 
@@ -73,6 +74,7 @@ public class TileHealthManager : MonoBehaviour
             ScoreManager scoreManager = scoreManagerObject.GetComponent<ScoreManager>();
             deathEvent.AddListener(scoreManager.AddPoints);
             onTileDestroyed.AddListener(scoreManager.SubtractIntegrity);
+            onCholesterolDestroyed.AddListener(scoreManager.AddIntegrity);
         }
         else
         {
@@ -131,8 +133,10 @@ public class TileHealthManager : MonoBehaviour
             }
             else
             {
+                
                 AudioManager.instance.PlayRandomSFX("CholesterolBlock", 1f);
                 anim.playCholBlockDeath(worldPosition);
+                onCholesterolDestroyed?.Invoke();
             }
             destructableTilemap.healthTiles.Remove(gridPosition);
 
