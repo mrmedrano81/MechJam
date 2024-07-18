@@ -7,14 +7,16 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
 {
     Unit pathfInder;
     Movement movement;
+    Health health;
     private float lastGroundChangeDirectionTime;
 
     private bool targetFound;
 
-    public A_VirusIdleState(A_VirusStateMachine.EState key, Unit _pathFinder, Movement _g_Movement) : base(key)
+    public A_VirusIdleState(A_VirusStateMachine.EState key, Unit _pathFinder, Movement _g_Movement, Health health) : base(key)
     {
         pathfInder = _pathFinder;
         movement = _g_Movement;
+        this.health = health;
     }
 
     public override void EnterState()
@@ -50,7 +52,11 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
 
     public override A_VirusStateMachine.EState GetNextState()
     {
-        if (movement.isGrounded())
+        if (health.IsDead)
+        {
+            return A_VirusStateMachine.EState.Death;
+        }
+        else if (movement.isGrounded())
         {
             if (movement.FrontBlocked())
             {

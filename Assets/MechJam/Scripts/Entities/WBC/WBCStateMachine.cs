@@ -22,13 +22,15 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
     private Movement movementComponent;
 
     private Unit WBCPathfinder;
+    private WBCAnimationScript anim;
 
     public enum WBCState
     {
         Idle,
         AggroPlayer,
         AggroVirus,
-        AttackVirus
+        AttackVirus,
+        Death
     }
 
     private void Awake()
@@ -39,6 +41,7 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
         movementComponent = GetComponent<Movement>();
 
         WBCPathfinder = GetComponent<Unit>();
+        anim = GetComponentInChildren<WBCAnimationScript>();
 
         states.Add(WBCState.Idle, 
             new WBCIdleState(
@@ -47,7 +50,8 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
                 playerLayerMask,
                 maintainAggroRadius,
                 virusLayerMask,
-                detectVirusRadius));
+                detectVirusRadius,
+                healthComponent));
 
         states.Add(WBCState.AggroPlayer, 
             new WBCAggroPlayerState(
@@ -57,7 +61,9 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
                 playerLayerMask,
                 maintainAggroRadius,
                 virusLayerMask,
-                detectVirusRadius
+                detectVirusRadius,
+                healthComponent,
+                attackComponent
                 ));
 
         states.Add(WBCState.AggroVirus,
@@ -66,7 +72,7 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
                 WBCPathfinder,
                 movementComponent,
                 virusLayerMask,
-                detectVirusRadius
+                detectVirusRadius, healthComponent
                 ));
 
         states.Add(WBCState.AttackVirus, 
@@ -78,8 +84,10 @@ public class WBCStateMachine : StateManager<WBCStateMachine.WBCState>
                 playerLayerMask,
                 maintainAggroRadius,
                 virusLayerMask,
-                detectVirusRadius
+                detectVirusRadius, healthComponent
                 ));
+
+        states.Add(WBCState.Death, new WBCDeathState(WBCState.Death, anim));
 
         currentState = states[WBCState.Idle];
     }

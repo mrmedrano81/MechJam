@@ -11,19 +11,22 @@ public class WBCAggroVirusState : BaseState<WBCStateMachine.WBCState>
     public LayerMask virusMask;
     public float detectVirusRadius;
     private bool transitionToAttack;
+    private Health health;
 
     public WBCAggroVirusState(
         WBCStateMachine.WBCState key,
         Unit _pathFinder,
         Movement _movementComponent,
         LayerMask _virusMask,
-        float _detectVirusRadius)
+        float _detectVirusRadius,
+        Health health)
         : base(key)
     {
         movementComponent = _movementComponent;
         pathFinder = _pathFinder;
         virusMask = _virusMask;
         detectVirusRadius = _detectVirusRadius;
+        this.health = health;
     }
 
     public override void EnterState()
@@ -54,7 +57,11 @@ public class WBCAggroVirusState : BaseState<WBCStateMachine.WBCState>
 
     public override WBCStateMachine.WBCState GetNextState()
     {
-        if (transitionToAttack == true)
+        if (health.IsDead)
+        {
+            return WBCStateMachine.WBCState.Death;
+        }
+        else if (transitionToAttack == true)
         {
             return WBCStateMachine.WBCState.AttackVirus;
         }

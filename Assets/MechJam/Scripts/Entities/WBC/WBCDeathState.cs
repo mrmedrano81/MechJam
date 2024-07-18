@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class C_VirusDeathState : BaseState<C_VirusStateMachine.EState>
+public class WBCDeathState : BaseState<WBCStateMachine.WBCState>
 {
-    private C_VirusAnimationScript anim;
-
-    public C_VirusDeathState(C_VirusStateMachine.EState key, C_VirusAnimationScript anim) : base(key)
+    WBCAnimationScript anim;
+    public WBCDeathState(WBCStateMachine.WBCState key, WBCAnimationScript anim) : base(key)
     {
         this.anim = anim;
     }
@@ -20,16 +19,20 @@ public class C_VirusDeathState : BaseState<C_VirusStateMachine.EState>
     {
     }
 
+
+    public override void UpdateState()
+    {
+    }
+
     public override void FixedUpdateState()
     {
     }
 
-    public override C_VirusStateMachine.EState GetNextState()
+    public override WBCStateMachine.WBCState GetNextState()
     {
-        return C_VirusStateMachine.EState.Death;
+        return WBCStateMachine.WBCState.Death;
     }
 
-    #region Collider and Trigger logic
     public override void OnCollisionEnter2D(Collision2D other)
     {
     }
@@ -54,8 +57,4 @@ public class C_VirusDeathState : BaseState<C_VirusStateMachine.EState>
     {
     }
 
-    public override void UpdateState()
-    {
-    }
-    #endregion
 }

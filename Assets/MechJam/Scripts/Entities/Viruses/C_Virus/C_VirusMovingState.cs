@@ -7,18 +7,20 @@ public class C_VirusMovingState : BaseState<C_VirusStateMachine.EState>
 
     Unit pathfInder;
     Movement movement;
+    Health health;
 
     C_VirusSO c_virusSO;
 
     Transform target;
     bool transitionToAttack;
 
-    public C_VirusMovingState(C_VirusStateMachine.EState key, Unit _pathFinder, Movement _movement, C_VirusSO _c_virusSO) : base(key)
+    public C_VirusMovingState(C_VirusStateMachine.EState key, Unit _pathFinder, Movement _movement, C_VirusSO _c_virusSO, Health health) : base(key)
     {
         transitionToAttack = false;
         pathfInder = _pathFinder;
         movement = _movement;
         c_virusSO = _c_virusSO;
+        this.health = health;
     }
 
     public override void EnterState()
@@ -62,7 +64,11 @@ public class C_VirusMovingState : BaseState<C_VirusStateMachine.EState>
 
     public override C_VirusStateMachine.EState GetNextState()
     {
-        if (transitionToAttack == true)
+        if (health.IsDead)
+        {
+            return C_VirusStateMachine.EState.Death;
+        }
+        else if (transitionToAttack == true)
         {
             return C_VirusStateMachine.EState.Attack;
         }

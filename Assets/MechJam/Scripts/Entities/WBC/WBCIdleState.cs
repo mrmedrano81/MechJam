@@ -5,6 +5,7 @@ using UnityEngine;
 public class WBCIdleState : BaseState<WBCStateMachine.WBCState>
 {
     private Movement movementComponent;
+    private Health health;
 
     [Header("Player Aggro Parameters")]
     public Transform player;
@@ -20,8 +21,10 @@ public class WBCIdleState : BaseState<WBCStateMachine.WBCState>
         Movement _movementComponent,
         LayerMask _playerMask,
         float _maintainAggroRadius,
-        LayerMask _virusMasks, 
+        LayerMask _virusMasks,
         float _detectVirusRadius
+,
+        Health health
         ) : base(key)
     {
         movementComponent = _movementComponent;
@@ -29,6 +32,7 @@ public class WBCIdleState : BaseState<WBCStateMachine.WBCState>
         virusMask = _virusMasks;
         maintainAggroRadius = _maintainAggroRadius;
         detectVirusRadius = _detectVirusRadius;
+        this.health = health;
     }
 
     public override void EnterState()
@@ -45,7 +49,11 @@ public class WBCIdleState : BaseState<WBCStateMachine.WBCState>
 
     public override WBCStateMachine.WBCState GetNextState()
     {
-        if (movementComponent.CheckRange(virusMask, detectVirusRadius))
+        if (health.IsDead)
+        {
+            return WBCStateMachine.WBCState.Death;
+        }
+        else if (movementComponent.CheckRange(virusMask, detectVirusRadius))
         {
             return WBCStateMachine.WBCState.AggroVirus;
         }

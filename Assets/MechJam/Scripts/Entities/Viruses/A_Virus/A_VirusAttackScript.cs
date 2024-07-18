@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class A_VirusAttackScript : BaseState<A_VirusStateMachine.EState>
 {
-    public A_VirusAttackScript(A_VirusStateMachine.EState key) : base(key)
+    public A_VirusAttackScript(A_VirusStateMachine.EState key, Health health) : base(key)
     {
     }
 

@@ -40,10 +40,13 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            isDead = true;
-            deathEvent?.Invoke(scoreSource);
-            integrityEvent?.Invoke();
-            Destroy(gameObject);
+            if (!isDead)
+            {
+                isDead = true;
+                deathEvent?.Invoke(scoreSource);
+                integrityEvent?.Invoke();
+                //Destroy(gameObject);
+            }
         }
     }
 
