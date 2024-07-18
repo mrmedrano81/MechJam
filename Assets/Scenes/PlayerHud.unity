@@ -422,6 +422,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 1769066349116381236, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
       propertyPath: A_VirusSFX.Array.size
       value: 3
@@ -526,6 +527,8 @@ PrefabInstance:
       propertyPath: CholesterolBlockSFX.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 5c3c5e0804f921140aebb944a8f7c248, type: 3}
+=======
+>>>>>>> master
     - target: {fileID: 6680184179416508328, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
       propertyPath: m_LocalPosition.x
       value: 789.88025
