@@ -96,13 +96,13 @@ public class Lasering : MonoBehaviour
 
                     //do damage to blocks
                     lineRenderer.SetPosition(1, hit.point);
-                    GameObject effectImpact = Instantiate(laserEffect, hit.point, Quaternion.Euler(0f, 0f, rotZ));
+                    GameObject effectImpact = Instantiate(laserEffect, hit.point, Quaternion.identity);
                     Destroy(effectImpact, 0.3f);
                 }
                 else
                 {
                     lineRenderer.SetPosition(1, mousePos);
-                    GameObject effectImpact = Instantiate(laserEffect, mousePos, Quaternion.Euler(0f, 0f, rotZ));
+                    GameObject effectImpact = Instantiate(laserEffect, mousePos, Quaternion.identity);
                     Destroy(effectImpact, 0.3f);
                 }
 

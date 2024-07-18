@@ -219,6 +219,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   randStickRange: 0
+  flashDuration: 0
+  flashingMaterial: {fileID: 2100000, guid: 890ca3e954ab97045aabc1dc9e79671b, type: 2}
+  originalMaterial: {fileID: 0}
+  spriteRenderer: {fileID: 0}
 --- !u!114 &6393213117362323109
 MonoBehaviour:
   m_ObjectHideFlags: 0

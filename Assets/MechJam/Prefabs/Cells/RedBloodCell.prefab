@@ -96,7 +96,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1952322041, guid: 7e4bfcfe7bbcb96469a1f06afa5a094e, type: 3}
-  m_Color: {r: 0.7509433, g: 0.4973228, b: 0.4973228, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -179,6 +179,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   randStickRange: 0
+  flashDuration: 0.02
+  flashingMaterial: {fileID: 2100000, guid: 890ca3e954ab97045aabc1dc9e79671b, type: 2}
+  originalMaterial: {fileID: 0}
+  spriteRenderer: {fileID: 0}
 --- !u!114 &7559966648258579326
 MonoBehaviour:
   m_ObjectHideFlags: 0
