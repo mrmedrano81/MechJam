@@ -33,46 +33,47 @@ public class HookShot : MonoBehaviour
     }
     private void Update()
     {
-
-        Vector2 lookDir = (mousePos - firePoint.position);
-        Debug.DrawRay(firePoint.position, lookDir, Color.red);
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Vector2 rotation = (mousePos - transform.position).normalized;
-
-        //float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-
-        //rb.rotation = rotZ;
-
-        if (Input.GetMouseButton(1))
+        if (Time.timeScale != 0)
         {
-            //var hook = Instantiate(grapple, firePoint.position, firePoint.rotation);
-            //hook.GetComponent<Grapplehook>().caster = transform;
+            Vector2 lookDir = (mousePos - firePoint.position);
+            Debug.DrawRay(firePoint.position, lookDir, Color.red);
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //Vector2 rotation = (mousePos - transform.position).normalized;
 
-            RaycastHit2D hit = Physics2D.Raycast(
-            firePoint.position,
-            lookDir,
-            Mathf.Infinity,
-            hookLayer
-            );
+            //float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-            if (hit.collider != null)
+            //rb.rotation = rotZ;
+
+            if (Input.GetMouseButton(1))
             {
-                hookPoint = hit.point;
-                hookPoint.z = 0;
-                joint.connectedAnchor = hookPoint;
-                joint.enabled = true;
-                joint.distance = hookLength;
-                grappleRope.enabled = true;
-                grappleRope.SetPosition(0, hookPoint);
-                grappleRope.SetPosition(1, firePoint.position);
+                //var hook = Instantiate(grapple, firePoint.position, firePoint.rotation);
+                //hook.GetComponent<Grapplehook>().caster = transform;
+
+                RaycastHit2D hit = Physics2D.Raycast(
+                firePoint.position,
+                lookDir,
+                Mathf.Infinity,
+                hookLayer
+                );
+
+                if (hit.collider != null)
+                {
+                    hookPoint = hit.point;
+                    hookPoint.z = 0;
+                    joint.connectedAnchor = hookPoint;
+                    joint.enabled = true;
+                    joint.distance = hookLength;
+                    grappleRope.enabled = true;
+                    grappleRope.SetPosition(0, hookPoint);
+                    grappleRope.SetPosition(1, firePoint.position);
+                }
+            }
+            else if (Input.GetMouseButtonUp(1))
+            {
+                joint.enabled = false;
+                grappleRope.enabled = false;
             }
         }
-        else if (Input.GetMouseButtonUp(1))
-        {
-            joint.enabled = false;
-            grappleRope.enabled = false;
-        }
-
     }
 
     private void OnDrawGizmos()

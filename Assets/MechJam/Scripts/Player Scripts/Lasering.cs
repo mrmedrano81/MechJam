@@ -54,67 +54,68 @@ public class Lasering : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 laserLookDir = (mousePos - laserFirePoint.position);
-        Debug.DrawRay(laserFirePoint.position, laserLookDir, Color.red);
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-
         if (Time.timeScale != 0)
         {
+            Vector2 laserLookDir = (mousePos - laserFirePoint.position);
+            Debug.DrawRay(laserFirePoint.position, laserLookDir, Color.red);
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+
             Vector2 dirVec = (mousePos - transform.position).normalized;
             transform.localScale = new Vector3(
                 Mathf.Sign(dirVec.x) * Mathf.Abs(transform.localScale.x),
                 transform.localScale.y,
                 transform.localScale.z);
-        }
 
-        Vector2 rotation = (mousePos - armRotation.position).normalized;
+            Vector2 rotation = (mousePos - armRotation.position).normalized;
 
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+            float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-        if (Input.GetMouseButton(0))
-        {
-            armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
-
-            lineRenderer.enabled = true;
-
-            RaycastHit2D hit = Physics2D.Raycast(laserFirePoint.position, laserLookDir, hitSomething);
-
-            LaserUpdate();
-
-            if (hit.collider != null)
+            if (Input.GetMouseButton(0))
             {
-                if (Time.time - lastLaserTickTime > laserICD)
-                {
-                    if (hit.collider.gameObject.CompareTag("CellBlock") || hit.collider.gameObject.CompareTag("CholesterolBlock"))
-                    {
-                        DestructableTiles tiles = hit.collider.GetComponent<DestructableTiles>();
-                        tiles.DamageTileFromRaycast(hit.point, hit.normal, laserDamage);
-                    }
-                    else
-                    {
-                        Health healthComponent;
+                armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
 
-                        if (hit.collider.gameObject.TryGetComponent<Health>(out healthComponent))
+                lineRenderer.enabled = true;
+
+                RaycastHit2D hit = Physics2D.Raycast(laserFirePoint.position, laserLookDir, hitSomething);
+
+                LaserUpdate();
+
+                if (hit.collider != null)
+                {
+                    if (Time.time - lastLaserTickTime > laserICD)
+                    {
+                        if (hit.collider.gameObject.CompareTag("CellBlock") || hit.collider.gameObject.CompareTag("CholesterolBlock"))
                         {
-                            healthComponent.TakeDamage(laserDamage);
+                            DestructableTiles tiles = hit.collider.GetComponent<DestructableTiles>();
+                            tiles.DamageTileFromRaycast(hit.point, hit.normal, laserDamage);
                         }
+                        else
+                        {
+                            Health healthComponent;
+
+                            if (hit.collider.gameObject.TryGetComponent<Health>(out healthComponent))
+                            {
+                                healthComponent.TakeDamage(laserDamage);
+                            }
+                        }
+                        lastLaserTickTime = Time.time;
                     }
-                    lastLaserTickTime = Time.time;
+
+                    //do damage to blocks
+                    lineRenderer.SetPosition(1, hit.point);
+                    GameObject effectImpact = Instantiate(laserEffect, hit.point, Quaternion.Euler(0f, 0f, rotZ));
+                    Destroy(effectImpact, 0.3f);
                 }
 
-                //do damage to blocks
-                lineRenderer.SetPosition(1, hit.point);
-                GameObject effectImpact = Instantiate(laserEffect, hit.point, Quaternion.Euler(0f, 0f, rotZ));
-                Destroy(effectImpact, 0.3f);
+
             }
-
-
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            lineRenderer.enabled = false;
-            armRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
+            else if (Input.GetMouseButtonUp(0))
+            {
+                lineRenderer.enabled = false;
+                armRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
         }
     }
 

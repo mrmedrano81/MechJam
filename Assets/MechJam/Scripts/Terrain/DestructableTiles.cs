@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,15 +54,17 @@ public class DestructableTiles : MonoBehaviour
     {
         //Debug.Log(collision.gameObject.tag);
 
-        foreach (string tag in interactionTags)
+        if (interactionTags.Length > 0)
         {
-            if (collision.gameObject.CompareTag(tag))
+            foreach (string tag in interactionTags)
             {
-                float damage = collision.gameObject.GetComponent<Attack>().damage;
+                if (collision.gameObject.CompareTag(tag))
+                {
+                    float damage = collision.gameObject.GetComponent<Attack>().damage;
 
-                DamageTile(collision, damage);
+                    DamageTile(collision, damage);
+                }
             }
         }
-
     }
 }
