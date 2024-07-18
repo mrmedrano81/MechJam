@@ -15,6 +15,7 @@ TagManager:
   - AStar
   - ScoreManager
   - C_Virus
+  - TriggerBox
   layers:
   - Default
   - TransparentFX

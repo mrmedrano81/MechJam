@@ -640,6 +640,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7429983670646668737, guid: 4385c24775961674d91e572c9186a108, type: 3}
+      propertyPath: maxHealth
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 8300419338941372580, guid: 4385c24775961674d91e572c9186a108, type: 3}
       propertyPath: m_Name
       value: RedBloodCell
@@ -754,9 +758,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3785763808289678472, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785763808289678472, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+      propertyPath: m_TagString
+      value: TriggerBox
+      objectReference: {fileID: 0}
     - target: {fileID: 6789470266752633751, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
       propertyPath: m_Name
       value: A_Virus
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667823990963342290, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

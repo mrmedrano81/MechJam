@@ -6,6 +6,9 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class Lasering : MonoBehaviour
 {
+    [SerializeField] private float laserDamage;
+    [SerializeField] private float laserICD;
+
     [SerializeField] private LayerMask hitSomething;
 
     [SerializeField] private NanoBotInputs nanoBotInput;
@@ -22,7 +25,8 @@ public class Lasering : MonoBehaviour
 
     Rigidbody2D rb;
 
-     private InputAction fire;
+    private InputAction fire;
+    private float lastLaserTickTime;
 
     //private void OnEnable()
     //{
@@ -42,6 +46,7 @@ public class Lasering : MonoBehaviour
     //}
     void Start()
     {
+        lastLaserTickTime = Time.time;
         lineRenderer = GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -52,9 +57,7 @@ public class Lasering : MonoBehaviour
         Vector2 laserLookDir = (mousePos - laserFirePoint.position);
         Debug.DrawRay(laserFirePoint.position, laserLookDir, Color.red);
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 rotation = (mousePos - armRotation.position).normalized;
 
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
         if (Time.timeScale != 0)
         {
@@ -65,10 +68,13 @@ public class Lasering : MonoBehaviour
                 transform.localScale.z);
         }
 
+        Vector2 rotation = (mousePos - armRotation.position).normalized;
+
+        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+
         if (Input.GetMouseButton(0))
         {
             armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
-
 
             lineRenderer.enabled = true;
 
@@ -78,9 +84,29 @@ public class Lasering : MonoBehaviour
 
             if (hit.collider != null)
             {
+                if (Time.time - lastLaserTickTime > laserICD)
+                {
+                    if (hit.collider.gameObject.CompareTag("CellBlock") || hit.collider.gameObject.CompareTag("CholesterolBlock"))
+                    {
+                        DestructableTiles tiles = hit.collider.GetComponent<DestructableTiles>();
+                        tiles.DamageTileFromRaycast(hit.point, hit.normal, laserDamage);
+                    }
+                    else
+                    {
+                        Health healthComponent;
+
+                        if (hit.collider.gameObject.TryGetComponent<Health>(out healthComponent))
+                        {
+                            healthComponent.TakeDamage(laserDamage);
+                        }
+                    }
+                    lastLaserTickTime = Time.time;
+                }
+
                 //do damage to blocks
+                lineRenderer.SetPosition(1, hit.point);
                 GameObject effectImpact = Instantiate(laserEffect, hit.point, Quaternion.Euler(0f, 0f, rotZ));
-                Destroy(effectImpact, 2f);
+                Destroy(effectImpact, 0.3f);
             }
 
 

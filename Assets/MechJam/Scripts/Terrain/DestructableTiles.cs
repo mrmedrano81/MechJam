@@ -32,13 +32,26 @@ public class DestructableTiles : MonoBehaviour
         //hitPos.y = hit.point.y - 0.01f * hit.normal.y;
         //Debug.Log("hit: (" + hitPos.x + ", " + hitPos.y + ")");
         //healthManager.ChangeHealth(hitPos, damage, destructibleTileMap);
-
-
     }
+
+    public void DamageTileFromRaycast(Vector2 hitPoint, Vector2 hitNormal, float damage)
+    {
+        Vector3 hitPos = Vector3.zero;
+
+        // Adjust the hit position based on the normal
+        hitPos.x = hitPoint.x - 0.01f * hitNormal.x;
+        hitPos.y = hitPoint.y - 0.01f * hitNormal.y;
+
+        Debug.Log($"Hit position: ({hitPos.x}, {hitPos.y})");
+
+        // Pass the adjusted hit position to your health manager
+        healthManager.ChangeHealth(hitPos, damage, destructibleTileMap);
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
+        //Debug.Log(collision.gameObject.tag);
 
         foreach (string tag in interactionTags)
         {

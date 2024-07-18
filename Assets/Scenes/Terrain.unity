@@ -125625,7 +125625,7 @@ GameObject:
   - component: {fileID: 2053909445}
   m_Layer: 7
   m_Name: CellBlockLayer
-  m_TagString: CholesterolBlock
+  m_TagString: CellBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
