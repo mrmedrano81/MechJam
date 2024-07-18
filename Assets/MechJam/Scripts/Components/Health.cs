@@ -37,7 +37,7 @@ public class Health : MonoBehaviour
     {
         currentHealth -= damage;
         //Debug.Log("taking damage, health: " + currentHealth);
-
+        AudioManager.instance.PlayRandomSFX("RedBloodCell", 1f);
         if (currentHealth <= 0)
         {
             if (!isDead)

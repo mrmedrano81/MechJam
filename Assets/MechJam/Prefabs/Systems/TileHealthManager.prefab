@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6248950344975141053}
   - component: {fileID: 3276644169904329922}
+  - component: {fileID: 6747131584059223402}
   m_Layer: 0
   m_Name: TileHealthManager
   m_TagString: Untagged
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellBlockTilemap: {fileID: 0}
-  cellBlockHealth: 10
+  cellBlockHealth: 30
   cholesterolBlockTilemap: {fileID: 0}
   cholesterolBlockHealth: 10
   cellBlockScoreSource: 0
@@ -60,3 +61,18 @@ MonoBehaviour:
   refreshGridEvent:
     m_PersistentCalls:
       m_Calls: []
+  anim: {fileID: 0}
+--- !u!114 &6747131584059223402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187619669214884938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc29269f15c0c6945b9950c620192420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellBlockBreakPrefab: {fileID: 3585451540595752389, guid: 1d765c5ed994c2143b9193baea4886b4, type: 3}
+  cholBlockBreakPrefab: {fileID: 3585451540595752389, guid: e5790617e4a94d64ebf33e5afa16ee4a, type: 3}

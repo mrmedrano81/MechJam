@@ -9730,36 +9730,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &1938407023 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 187619669214884938, guid: d67e1257109c00043947d85c73ce484c, type: 3}
-  m_PrefabInstance: {fileID: 3072739048148574448}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1938407026 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3276644169904329922, guid: d67e1257109c00043947d85c73ce484c, type: 3}
   m_PrefabInstance: {fileID: 3072739048148574448}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938407023}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d092d957bf02b7d49891381c6f16119a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1938407027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938407023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc29269f15c0c6945b9950c620192420, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellBlockBreakPrefab: {fileID: 3585451540595752389, guid: 1d765c5ed994c2143b9193baea4886b4, type: 3}
-  cholBlockBreakPrefab: {fileID: 3585451540595752389, guid: e5790617e4a94d64ebf33e5afa16ee4a, type: 3}
 --- !u!1001 &1938935519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10873,10 +10854,6 @@ PrefabInstance:
       value: TileHealthManager
       objectReference: {fileID: 0}
     - target: {fileID: 3276644169904329922, guid: d67e1257109c00043947d85c73ce484c, type: 3}
-      propertyPath: cellBlockHealth
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3276644169904329922, guid: d67e1257109c00043947d85c73ce484c, type: 3}
       propertyPath: cellBlockTilemap
       value: 
       objectReference: {fileID: 2053909443}
@@ -10927,10 +10904,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 187619669214884938, guid: d67e1257109c00043947d85c73ce484c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1938407027}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d67e1257109c00043947d85c73ce484c, type: 3}
 --- !u!1001 &4413040450124534667
 PrefabInstance:
@@ -10940,6 +10914,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 217164784978384925, guid: c517f6d7120cebe45b2900f9a85e85b5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 217164784978384925, guid: c517f6d7120cebe45b2900f9a85e85b5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 991241535178413268, guid: c517f6d7120cebe45b2900f9a85e85b5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -11020,9 +11002,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1026505098241422219, guid: c517f6d7120cebe45b2900f9a85e85b5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026505098241422219, guid: c517f6d7120cebe45b2900f9a85e85b5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3612053096027884882, guid: c517f6d7120cebe45b2900f9a85e85b5, type: 3}
       propertyPath: m_Name
       value: PlayerHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785213522940286352, guid: c517f6d7120cebe45b2900f9a85e85b5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785213522940286352, guid: c517f6d7120cebe45b2900f9a85e85b5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142235313123483595, guid: c517f6d7120cebe45b2900f9a85e85b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
