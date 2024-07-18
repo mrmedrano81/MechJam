@@ -68,12 +68,12 @@ public class ScoreManager : MonoBehaviour
             if (totalScore < 0)
             {
                 scoreDisplayText.color = Color.red;
-                scoreDisplayText.text = "Score: " + totalScore.ToString();
+                scoreDisplayText.text = totalScore.ToString();
             }
             else
             {
                 scoreDisplayText.color = Color.green;
-                scoreDisplayText.text = "Score: " + totalScore.ToString();
+                scoreDisplayText.text = totalScore.ToString();
             }
         }
         if (integrityBar != null)

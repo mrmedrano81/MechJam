@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     [SerializeField] public PointSystem.EScoreSource scoreSource;
     [SerializeField] public UnityPointEvent deathEvent;
     [SerializeField] public UnityEvent integrityEvent;
+    [SerializeField] public float randStickRange;
 
     private bool isDead;
 
@@ -49,5 +50,11 @@ public class Health : MonoBehaviour
     public bool IsDead
     {
         get { return isDead; } 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, randStickRange);
     }
 }

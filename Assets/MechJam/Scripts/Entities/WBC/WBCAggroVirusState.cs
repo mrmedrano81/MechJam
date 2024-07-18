@@ -67,7 +67,7 @@ public class WBCAggroVirusState : BaseState<WBCStateMachine.WBCState>
     #region Collision and Trigger logic
     public override void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("A_Virus") || other.gameObject.CompareTag("C_Virus"))
         {
             transitionToAttack = true;
         }

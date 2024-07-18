@@ -34,8 +34,10 @@ public class TileHealthManager : MonoBehaviour
     private Dictionary<Tilemap, DestructableTilemap> breakableDict = new Dictionary<Tilemap, DestructableTilemap>();
 
     [Header("Events")]
+    public int refreshGridRadius;
     public UnityEvent onTileDestroyed;
     public UnityPointEvent deathEvent;
+    public UnityEventRefreshGrid refreshGridEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +48,8 @@ public class TileHealthManager : MonoBehaviour
         if (AStarObject != null)
         {
             Grid grid = AStarObject.GetComponent<Grid>();
-            onTileDestroyed.AddListener(grid.CreateGrid);
-            refreshGridRoutine = StartCoroutine(refreshGridCooldown());
+            //onTileDestroyed.AddListener(grid.CreateGrid);
+            refreshGridEvent.AddListener(grid.RefreshGridSection);
         }
         else
         {
@@ -110,29 +112,21 @@ public class TileHealthManager : MonoBehaviour
         if (newValue <= 0f)
         {
             deathEvent?.Invoke(destructableTilemap.scoreSource);
-            refreshGrid = true;
             tilemap.SetTile(gridPosition, null);
-            destructableTilemap.healthTiles.Remove(gridPosition);
-            if (refreshGridRoutine == null)
+
+            if (destructableTilemap.scoreSource == PointSystem.EScoreSource.CellBlock)
             {
-                StartCoroutine(refreshGridCooldown());
+                onTileDestroyed?.Invoke();
             }
+
+            destructableTilemap.healthTiles.Remove(gridPosition);
+            refreshGridEvent?.Invoke(worldPosition, refreshGridRadius);
+            refreshGridEvent?.Invoke(worldPosition, Mathf.RoundToInt(refreshGridRadius/2));
         }
         else
         {
             destructableTilemap.healthTiles[gridPosition] = newValue;
             //Debug.Log("Health: "+ destructableTilemap.healthTiles[gridPosition]);
         }
-    }
-
-    IEnumerator refreshGridCooldown()
-    {
-        while(refreshGrid)
-        {
-            yield return new WaitForSeconds(0.5f);
-            onTileDestroyed?.Invoke();
-            refreshGrid = false;
-        }
-        yield break;
     }
 }

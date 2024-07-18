@@ -14,6 +14,7 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
     LayerMask virusMasks;
     float detectVirusRadius;
     bool virusGone;
+    Vector2 virusStickOffset;
 
     public WBCAttackVirusState(
         WBCStateMachine.WBCState key,
@@ -37,9 +38,10 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
 
     public override void EnterState()
     {
-
+        Debug.Log("Enter attack state WBC");
         virusGone = false;
         virusHealth = attackComponent.GetHealthComponentIfInRange(virusMasks, attackComponent.range);
+        virusStickOffset = movementComponent.GetRandomStickOffset(virusHealth.randStickRange);
     }
 
     public override void ExitState()
@@ -66,6 +68,8 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
     {
         if (movementComponent.CheckRange(virusMasks, attackComponent.range))
         {
+            Debug.Log("Should stick");
+            movementComponent.StickToTarget(virusHealth.gameObject.transform, virusStickOffset);
             if (virusHealth != null)
             {
                 attackComponent.DoDamage(virusHealth);

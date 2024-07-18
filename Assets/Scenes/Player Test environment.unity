@@ -1289,6 +1289,10 @@ PrefabInstance:
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 238320949708126028, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
+      propertyPath: laserRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 238320949708126028, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
       propertyPath: laserDamage
       value: 20
       objectReference: {fileID: 0}

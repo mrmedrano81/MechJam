@@ -340,6 +340,20 @@ public class Movement : MonoBehaviour
     {
         currentSpeed = Mathf.Lerp(currentSpeed, _finalSpeed, Time.deltaTime * slowingSpeed);
     }
+
+    public void StickToTarget(Transform targetTransform, Vector3 randPoint)
+    {
+
+        transform.position = targetTransform.position + randPoint;
+    }
+
+    public Vector2 GetRandomStickOffset(float randRadius)
+    {
+        float offsetX = UnityEngine.Random.Range(0, randRadius);
+        float offsetY = UnityEngine.Random.Range(0, randRadius);
+
+        return new Vector3(offsetX, offsetY);
+    }
     #endregion
 
     #region Range Functions
