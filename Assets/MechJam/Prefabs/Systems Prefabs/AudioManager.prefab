@@ -53,10 +53,29 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   musicSource: {fileID: 0}
   musicList: []
-  CellBlockSFX: []
-  CholesterolBlockSFX: []
-  RedBloodCellSFX: []
-  WhiteBloodCellSFX: []
-  A_VirusSFX: []
-  C_VirusSFX: []
-  buttonSfxList: []
+  CellBlockSFX:
+  - {fileID: 8300000, guid: 45d802596b4088d41923455476882703, type: 3}
+  - {fileID: 8300000, guid: fcaa31f15237a1b40b4d55b6c60d7732, type: 3}
+  - {fileID: 8300000, guid: 988e6fcaa32639d4b8539f374539496f, type: 3}
+  CholesterolBlockSFX:
+  - {fileID: 8300000, guid: 4a5eb9c16947b8d44ae72299478e3798, type: 3}
+  - {fileID: 8300000, guid: eae3adfbb99cf344ca798118a144b1ae, type: 3}
+  - {fileID: 8300000, guid: 5c3c5e0804f921140aebb944a8f7c248, type: 3}
+  RedBloodCellSFX:
+  - {fileID: 8300000, guid: 261f1b66d173818488b01b16fa7a347c, type: 3}
+  - {fileID: 8300000, guid: 9d5743e90b2f6cc4093995ea55858f26, type: 3}
+  - {fileID: 8300000, guid: 9b235ad1d7381b24ca2f43ae73024085, type: 3}
+  WhiteBloodCellSFX:
+  - {fileID: 8300000, guid: 261f1b66d173818488b01b16fa7a347c, type: 3}
+  - {fileID: 8300000, guid: 9d5743e90b2f6cc4093995ea55858f26, type: 3}
+  - {fileID: 8300000, guid: 9b235ad1d7381b24ca2f43ae73024085, type: 3}
+  A_VirusSFX:
+  - {fileID: 8300000, guid: 261f1b66d173818488b01b16fa7a347c, type: 3}
+  - {fileID: 8300000, guid: 9d5743e90b2f6cc4093995ea55858f26, type: 3}
+  - {fileID: 8300000, guid: 9b235ad1d7381b24ca2f43ae73024085, type: 3}
+  C_VirusSFX:
+  - {fileID: 8300000, guid: 261f1b66d173818488b01b16fa7a347c, type: 3}
+  - {fileID: 8300000, guid: 9d5743e90b2f6cc4093995ea55858f26, type: 3}
+  - {fileID: 8300000, guid: 9b235ad1d7381b24ca2f43ae73024085, type: 3}
+  buttonSfxList:
+  - {fileID: 8300000, guid: 1bb8c6b67fb4d70448fb19a8ffca7374, type: 3}

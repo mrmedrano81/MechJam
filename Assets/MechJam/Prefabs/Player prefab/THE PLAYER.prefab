@@ -19,9 +19,9 @@ GameObject:
   - component: {fileID: 1252095966359215049}
   - component: {fileID: 4834854495587091429}
   - component: {fileID: 7887391349298153948}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: THE PLAYER
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   maxFallSpeed: 25
   fallSpeedMultiplier: 2
   coyoteTime: 0.2
-  jumpingPower: 13
+  jumpingPower: 20
   detectGround: 0
 --- !u!114 &238320949708126028
 MonoBehaviour:
@@ -93,9 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b871a1353dd96cf4886de9fd28a0c8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserDamage: 20
+  laserDamage: 10
   laserRange: 1
-  laserICD: 0.05
+  laserICD: 0.06
   hitSomething:
     serializedVersion: 2
     m_Bits: 128
@@ -425,7 +425,7 @@ DistanceJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477395267700576195}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
@@ -436,7 +436,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
-  m_Distance: 6.1160283
+  m_Distance: 381.50003
   m_MaxDistanceOnly: 0
 --- !u!70 &7887391349298153948
 CapsuleCollider2D:

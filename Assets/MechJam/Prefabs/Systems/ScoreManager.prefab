@@ -46,10 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellBlock: -50
   cholesterolBlock: 50
-  redBloodCell: -1000
-  whiteBloodCell: -1000
-  a_Virus: 1500
-  c_Virus: 1500
+  redBloodCell: -500
+  whiteBloodCell: -500
+  a_Virus: 2000
+  c_Virus: 2500
   scoreDisplayText: {fileID: 0}
   integrityBar: {fileID: 0}
   initialIntegrity: 100

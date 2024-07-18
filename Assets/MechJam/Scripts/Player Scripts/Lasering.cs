@@ -25,25 +25,8 @@ public class Lasering : MonoBehaviour
 
     Rigidbody2D rb;
 
-    private InputAction fire;
     private float lastLaserTickTime;
 
-    //private void OnEnable()
-    //{
-    //    fire = nanoBotInput.Player.Fire;
-    //    fire.Enable();
-    //    fire.performed += Fire;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    fire.Disable();
-    //}
-
-    //private void Awake()
-    //{
-    //    nanoBotInput = new NanoBotInputs();
-    //}
     void Start()
     {
         lastLaserTickTime = Time.time;
@@ -70,11 +53,8 @@ public class Lasering : MonoBehaviour
 
             float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-
-
             if (Input.GetMouseButton(0))
             {
-
                 armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
 
                 lineRenderer.enabled = true;
@@ -125,24 +105,6 @@ public class Lasering : MonoBehaviour
             }
         }
     }
-
-    //private void Fire(InputAction.CallbackContext context)
-    //{
-    //    if (context.performed)
-    //    {
-    //        var mousPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //        RaycastHit2D hit = Physics2D.Raycast(transform.position, mousPos, hitSomething);
-
-    //        lineRenderer.SetPosition(0, firePoint.position);
-    //        lineRenderer.SetPosition(1, mousPos);
-
-
-    //        if (hit.collider != null)
-    //        {
-    //            //do damage to blocks
-    //        }
-    //    }
-    //}
 
     void LaserUpdate()
     {
