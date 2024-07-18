@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,12 +55,20 @@ public class ScoreManager : MonoBehaviour
     {
         pointSystem = new PointSystem();
 
+
+    }
+
+    private void Start()
+    {
         pointSystem.AddScoreSource(PointSystem.EScoreSource.CellBlock, cellBlock);
         pointSystem.AddScoreSource(PointSystem.EScoreSource.CholesterolBlock, cholesterolBlock);
         pointSystem.AddScoreSource(PointSystem.EScoreSource.RedBloodCell, redBloodCell);
         pointSystem.AddScoreSource(PointSystem.EScoreSource.WhiteBloodCell, whiteBloodCell);
         pointSystem.AddScoreSource(PointSystem.EScoreSource.A_Virus, a_Virus);
         pointSystem.AddScoreSource(PointSystem.EScoreSource.C_Virus, c_Virus);
+
+        totalScore = 0;
+        totalIntegrity = initialIntegrity;
     }
 
     private void Update()
@@ -97,11 +107,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        totalScore = 0;
-        totalIntegrity = initialIntegrity;
-    }
+
 
     public void AddPoints(PointSystem.EScoreSource enumSource)
     {

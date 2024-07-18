@@ -223,7 +223,7 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  maintainAggroRadius: 5
+  maintainAggroRadius: 0
   virusLayerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -280,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  scoreSource: 0
+  scoreSource: 3
   deathEvent:
     m_PersistentCalls:
       m_Calls: []

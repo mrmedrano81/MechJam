@@ -6,10 +6,12 @@ public class JumpTriggerBox : MonoBehaviour
 {
     public bool redBloodCellInJumpRange;
     public Transform redBloodCellTransform;
+    public bool targetAcquired;
 
     // Start is called before the first frame update
     void Start()
     {
+        targetAcquired = false;
         redBloodCellTransform = null;
         redBloodCellInJumpRange = false;
     }
@@ -32,10 +34,11 @@ public class JumpTriggerBox : MonoBehaviour
     {
         //Debug.Log("trigger: "+collision.gameObject.name);
 
-        if (collision.gameObject.CompareTag("RedBloodCell"))
+        if (collision.gameObject.CompareTag("RedBloodCell") && targetAcquired == false)
         {
             redBloodCellTransform = collision.transform;
             redBloodCellInJumpRange = true;
+            targetAcquired = true;
         }
     }
 
@@ -45,9 +48,5 @@ public class JumpTriggerBox : MonoBehaviour
         {
             redBloodCellInJumpRange = false;
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("collision: " + collision.gameObject.name);
     }
 }

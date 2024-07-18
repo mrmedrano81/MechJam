@@ -20,6 +20,7 @@ public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
 
     public override void EnterState()
     {
+        Debug.Log("Enter Tracking");
         //if (movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
         //if (!movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
         //{
@@ -56,6 +57,11 @@ public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
     public override void FixedUpdateState()
     {
         movement.ModifyGravityForFalling();
+
+        if (movement.isGrounded())
+        {
+            movement.StopMovement();
+        }
     }
 
     public override A_VirusStateMachine.EState GetNextState()

@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redBloodCellInJumpRange: 0
   redBloodCellTransform: {fileID: 0}
+  targetAcquired: 0
 --- !u!1 &6789470266752633751
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +241,7 @@ MonoBehaviour:
   dotDamage: 0
   s_dotDuration: 0
   s_dotInterval: 0
-  range: 15.5
+  range: 38.4
 --- !u!114 &1130823788686851522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42476e47a1abd3443a38c71b55f440a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 29.3
+  detectionRadius: 39.5
   targetMask:
     serializedVersion: 2
     m_Bits: 512
@@ -363,7 +364,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7667823990963342290}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

@@ -8,5 +8,4 @@ public class C_VirusSO : ScriptableObject
     [SerializeField]
     public LayerMask targetLayer;
     public string[] targetTags;
-    //
 }

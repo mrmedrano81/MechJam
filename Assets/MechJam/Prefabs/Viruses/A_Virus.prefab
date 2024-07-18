@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8676959895624807750}
   - component: {fileID: 4806698912881361888}
   - component: {fileID: 1351114891392345102}
+  - component: {fileID: 2365988925157816152}
   m_Layer: 10
   m_Name: A_Virus
   m_TagString: Enemy
@@ -102,6 +103,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42476e47a1abd3443a38c71b55f440a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectionRadius: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpTriggerBox: {fileID: 0}
 --- !u!114 &9122908003726637596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   slowingSpeed: 0
-  patrolMoveSpeed: 0
+  balanceRB: 0
+  patrolMoveSpeedMultiplier: 0
   patrolRange: 0
   collisionDetectRadius: 0
   resetPathDistance: 0
@@ -141,6 +148,20 @@ MonoBehaviour:
     m_Bits: 128
   changeDirectionCooldown: 0
   originalPosition: {x: 0, y: 0, z: 0}
+  checkGround: {fileID: 0}
+  checkForwardPath: {fileID: 0}
+  forwardPathCheckDistance: 0
+  groundCheckSize: {x: 0, y: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  jumpForce: {x: 0, y: 0}
+  f_jumpForce: 0
+  jumpCooldown: 0
+  baseGravity: 0
+  fallSpeedMultiplier: 0
+  maxFallSpeed: 0
+  showJumpTarget: 0
 --- !u!114 &8676959895624807750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +175,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
+  scoreSource: 4
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  integrityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  randStickRange: 0
 --- !u!50 &4806698912881361888
 Rigidbody2D:
   serializedVersion: 4
@@ -226,3 +256,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2365988925157816152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121360286052183680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb742ff4067cb7a4aa06d2cd19a96490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  s_damageCooldown: 0
+  dotDamage: 0
+  s_dotDuration: 0
+  s_dotInterval: 0
+  range: 0

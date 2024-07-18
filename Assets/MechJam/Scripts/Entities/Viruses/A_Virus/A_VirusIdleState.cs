@@ -11,17 +11,23 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
     private float lastGroundChangeDirectionTime;
 
     private bool targetFound;
+    LayerMask targetMask;
+    float detectionRadius;
 
-    public A_VirusIdleState(A_VirusStateMachine.EState key, Unit _pathFinder, Movement _g_Movement, Health health) : base(key)
+    public A_VirusIdleState(A_VirusStateMachine.EState key, Unit _pathFinder, Movement _g_Movement, 
+        Health health, LayerMask targetMask, float detectionRadius) : base(key)
     {
         pathfInder = _pathFinder;
         movement = _g_Movement;
         this.health = health;
+        this.targetMask = targetMask;
+        this.detectionRadius = detectionRadius;
     }
 
     public override void EnterState()
     {
         Debug.Log("Entering IdleState");
+        movement.StopMovement();
         movement.ResetSpeed();
         //movement.GetRandomGroundDirection();
         lastGroundChangeDirectionTime = Time.time;
@@ -35,7 +41,10 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
 
     public override void UpdateState()
     {
-        //Debug.Log("In IdleState");
+        if (movement.CheckRange(targetMask, detectionRadius, "RedBloodCell"))
+        {
+            targetFound = true;
+        }
     }
 
     public override void FixedUpdateState()
@@ -58,15 +67,16 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
         }
         else if (movement.isGrounded())
         {
-            if (movement.FrontBlocked())
+            if (targetFound)
+            {
+                return A_VirusStateMachine.EState.Track;
+            }
+            else if (movement.FrontBlocked())
             {
                 movement.JumpTowards(movement.jumpForce);
                 return A_VirusStateMachine.EState.Jump;
             }
-            else if (targetFound)
-            {
-                return A_VirusStateMachine.EState.Track;
-            }
+
             else
             {
                 return A_VirusStateMachine.EState.Idle;
@@ -95,16 +105,16 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("RedBloodCell"))
-        {
-            //Debug.Log("RBC found");
-            targetFound = true;
-        }
-        else if (other.gameObject.CompareTag("WhiteBloodCell"))
-        {
-            //Debug.Log("WBC found");
-            targetFound = true;
-        }
+        //if (other.gameObject.CompareTag("RedBloodCell"))
+        //{
+        //    //Debug.Log("RBC found");
+        //    targetFound = true;
+        //}
+        //else if (other.gameObject.CompareTag("WhiteBloodCell"))
+        //{
+        //    //Debug.Log("WBC found");
+        //    targetFound = true;
+        //}
 
         //Debug.Log("targetFound: " + targetFound);
     }
@@ -117,14 +127,14 @@ public class A_VirusIdleState : BaseState<A_VirusStateMachine.EState>
     public override void OnTriggerStay2D(Collider2D other)
     {
 
-        if (other.gameObject.CompareTag("RedBloodCell"))
-        {
-            targetFound = true;
-        }
-        else if (other.gameObject.CompareTag("WhiteBloodCell"))
-        {
-            targetFound = true;
-        }
+        //if (other.gameObject.CompareTag("RedBloodCell"))
+        //{
+        //    targetFound = true;
+        //}
+        //else if (other.gameObject.CompareTag("WhiteBloodCell"))
+        //{
+        //    targetFound = true;
+        //}
     }
     #endregion
 }

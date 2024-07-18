@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class Lasering : MonoBehaviour
 {
@@ -61,8 +60,6 @@ public class Lasering : MonoBehaviour
             Debug.DrawRay(laserFirePoint.position, laserLookDir, Color.red);
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-
-
             Vector2 dirVec = (mousePos - transform.position).normalized;
             transform.localScale = new Vector3(
                 Mathf.Sign(dirVec.x) * Mathf.Abs(transform.localScale.x),
@@ -73,10 +70,12 @@ public class Lasering : MonoBehaviour
 
             float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
+
+
             if (Input.GetMouseButton(0))
             {
 
-                //armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
+                armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
 
                 lineRenderer.enabled = true;
 

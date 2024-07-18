@@ -36,7 +36,7 @@ public class A_VirusStateMachine : StateManager<A_VirusStateMachine.EState>
 
         anim = GetComponentInChildren<A_VirusAnimationScript>();
 
-        states.Add(EState.Idle, new A_VirusIdleState(EState.Idle, pathFinder, movement, health));
+        states.Add(EState.Idle, new A_VirusIdleState(EState.Idle, pathFinder, movement, health, targetMask, detectionRadius));
         states.Add(EState.Jump, new A_VirusJumpState(EState.Jump, movement, attack, targetMask, health));
         states.Add(EState.Track, new A_VirusTrackTargetState(EState.Track, pathFinder, 
             movement, targetMask, jumpTriggerBox, detectionRadius, attack, health));
