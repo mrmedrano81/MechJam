@@ -76,7 +76,7 @@ public class Lasering : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
 
-                armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
+                //armRotation.rotation = Quaternion.Euler(0f, 0f, rotZ);
 
                 lineRenderer.enabled = true;
 

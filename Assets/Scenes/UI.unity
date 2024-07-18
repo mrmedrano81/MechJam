@@ -291,17 +291,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2519321831460357485, guid: e26f3d1909d24084b9bbf4b57c7f2828, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3106999405028211807, guid: e26f3d1909d24084b9bbf4b57c7f2828, type: 3}
       propertyPath: m_Name
       value: Main Menu UI
       objectReference: {fileID: 0}
     - target: {fileID: 3800242539178521552, guid: e26f3d1909d24084b9bbf4b57c7f2828, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3800242539178521552, guid: e26f3d1909d24084b9bbf4b57c7f2828, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5074422334148790726, guid: e26f3d1909d24084b9bbf4b57c7f2828, type: 3}
       propertyPath: m_Pivot.x
@@ -385,19 +389,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5515977826849043875, guid: e26f3d1909d24084b9bbf4b57c7f2828, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5515977826849043875, guid: e26f3d1909d24084b9bbf4b57c7f2828, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6710797930904176635, guid: e26f3d1909d24084b9bbf4b57c7f2828, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6710797930904176635, guid: e26f3d1909d24084b9bbf4b57c7f2828, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

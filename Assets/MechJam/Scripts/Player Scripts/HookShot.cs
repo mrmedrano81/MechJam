@@ -46,27 +46,27 @@ public class HookShot : MonoBehaviour
 
             if (Input.GetMouseButton(1))
             {
-                //var hook = Instantiate(grapple, firePoint.position, firePoint.rotation);
-                //hook.GetComponent<Grapplehook>().caster = transform;
+                ////var hook = Instantiate(grapple, firePoint.position, firePoint.rotation);
+                ////hook.GetComponent<Grapplehook>().caster = transform;
 
-                RaycastHit2D hit = Physics2D.Raycast(
-                firePoint.position,
-                lookDir,
-                Mathf.Infinity,
-                hookLayer
-                );
+                //RaycastHit2D hit = Physics2D.Raycast(
+                //firePoint.position,
+                //lookDir,
+                //Mathf.Infinity,
+                //hookLayer
+                //);
 
-                if (hit.collider != null)
-                {
-                    hookPoint = hit.point;
-                    hookPoint.z = 0;
-                    joint.connectedAnchor = hookPoint;
-                    joint.enabled = true;
-                    joint.distance = hookLength;
-                    grappleRope.enabled = true;
-                    grappleRope.SetPosition(0, hookPoint);
-                    grappleRope.SetPosition(1, firePoint.position);
-                }
+                //if (hit.collider != null)
+                //{
+                //    hookPoint = hit.point;
+                //    hookPoint.z = 0;
+                //    joint.connectedAnchor = hookPoint;
+                //    joint.enabled = true;
+                //    joint.distance = hookLength;
+                //    grappleRope.enabled = true;
+                //    grappleRope.SetPosition(0, hookPoint);
+                //    grappleRope.SetPosition(1, firePoint.position);
+                //}
             }
             else if (Input.GetMouseButtonUp(1))
             {
