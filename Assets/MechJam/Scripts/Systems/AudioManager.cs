@@ -95,6 +95,7 @@ public class AudioManager : MonoBehaviour
             }
 
             int randomIndex = Random.Range(0, clips.Length);
+
             source.clip = clips[randomIndex];
             source.volume = volume;
             source.Play();

@@ -7657,6 +7657,10 @@ PrefabInstance:
       propertyPath: scoreSource
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4069351650102164815, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
+      propertyPath: flashingMaterial
+      value: 
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6789470266752633751, guid: 01fbe7b33688c73489c94a9bbc050a96, type: 3}
       propertyPath: m_Name
       value: A_Virus
@@ -10151,6 +10155,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: THE PLAYER
       objectReference: {fileID: 0}
+    - target: {fileID: 477395267700576195, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6223264168974664308, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
       propertyPath: m_LocalPosition.x
       value: -371.8
@@ -10190,6 +10198,10 @@ PrefabInstance:
     - target: {fileID: 6223264168974664308, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887391349298153948, guid: 6f607cb606a817b419d0a2acc5446ece, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11042,6 +11054,10 @@ PrefabInstance:
     - target: {fileID: 1659153090667511649, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769066349116381236, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
+      propertyPath: CellBlock
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6680184179416508328, guid: 8d3380df87c1501429355e5469f05c48, type: 3}
       propertyPath: m_LocalPosition.x
