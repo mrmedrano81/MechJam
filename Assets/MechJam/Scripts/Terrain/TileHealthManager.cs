@@ -39,6 +39,15 @@ public class TileHealthManager : MonoBehaviour
     public UnityPointEvent deathEvent;
     public UnityEventRefreshGrid refreshGridEvent;
 
+    [Header("Animation")]
+
+    public TileAnimationScript anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<TileAnimationScript>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -116,10 +125,15 @@ public class TileHealthManager : MonoBehaviour
 
             if (destructableTilemap.scoreSource == PointSystem.EScoreSource.CellBlock)
             {
+                anim.playCellBlockDeath(worldPosition);
                 onTileDestroyed?.Invoke();
             }
-
+            else
+            {
+                anim.playCholBlockDeath(worldPosition);
+            }
             destructableTilemap.healthTiles.Remove(gridPosition);
+
             refreshGridEvent?.Invoke(worldPosition, refreshGridRadius);
             refreshGridEvent?.Invoke(worldPosition, Mathf.RoundToInt(refreshGridRadius/2));
         }

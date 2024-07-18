@@ -6,18 +6,21 @@ public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
 {
     private Movement movement;
     private Attack attack;
+    private Health health;
     private LayerMask targetMask;
     private Transform target;
 
-    public A_VirusJumpState(A_VirusStateMachine.EState key, Movement movement, Attack attack, LayerMask targetMask) : base(key)
+    public A_VirusJumpState(A_VirusStateMachine.EState key, Movement movement, Attack attack, LayerMask targetMask, Health health) : base(key)
     {
         this.movement = movement;
         this.attack = attack;
         this.targetMask = targetMask;
+        this.health = health;
     }
 
     public override void EnterState()
     {
+        Debug.Log("Enter Tracking");
         //if (movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
         //if (!movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
         //{
@@ -54,11 +57,20 @@ public class A_VirusJumpState : BaseState<A_VirusStateMachine.EState>
     public override void FixedUpdateState()
     {
         movement.ModifyGravityForFalling();
+
+        if (movement.isGrounded())
+        {
+            movement.StopMovement();
+        }
     }
 
     public override A_VirusStateMachine.EState GetNextState()
     {
-        if (movement.CanJump())
+        if (health.IsDead)
+        {
+            return A_VirusStateMachine.EState.Death;
+        }
+        else if (movement.CanJump())
         {
             if (movement.CheckRange(targetMask, attack.range, "RedBloodCell"))
             {

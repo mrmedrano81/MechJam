@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   redBloodCellInJumpRange: 0
   redBloodCellTransform: {fileID: 0}
+  targetAcquired: 0
 --- !u!1 &6789470266752633751
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +109,7 @@ GameObject:
   - component: {fileID: 1130823788686851522}
   - component: {fileID: 4465522895421415943}
   - component: {fileID: 1834114674693453936}
+  - component: {fileID: 2615399750170895246}
   m_Layer: 10
   m_Name: A_Virus
   m_TagString: A_Virus
@@ -239,7 +241,7 @@ MonoBehaviour:
   dotDamage: 0
   s_dotDuration: 0
   s_dotInterval: 0
-  range: 15.5
+  range: 38.4
 --- !u!114 &1130823788686851522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42476e47a1abd3443a38c71b55f440a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 29.3
+  detectionRadius: 39.5
   targetMask:
     serializedVersion: 2
     m_Bits: 512
@@ -308,6 +310,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.03}
   m_Size: {x: 0.37, y: 1.13}
   m_Direction: 0
+--- !u!114 &2615399750170895246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789470266752633751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dcdf5d52a31c454a965acae1f45ca34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 2387895009255881440, guid: 1aa46a44605e558418295135f664246b, type: 3}
+  deathAnim: RBC_Death
+  deathAnimdelay: 0.2
 --- !u!1 &7667823990963342290
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +364,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7667823990963342290}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -455,6 +472,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 246963251859215108}
     m_Modifications:
+    - target: {fileID: 2098580619881355579, guid: f3fc9119acd63704397ffe797187820e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1a649978c43c8cb47b423a056cbad99e, type: 2}
     - target: {fileID: 2952431698753960488, guid: f3fc9119acd63704397ffe797187820e, type: 3}
       propertyPath: m_SortingLayer
       value: 4

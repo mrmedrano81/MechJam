@@ -5,9 +5,12 @@ using UnityEngine;
 public class WBCAggroPlayerState : BaseState<WBCStateMachine.WBCState>
 {
     Movement movementComponent;
+    Health health;
+    Attack attack;
     Unit pathFinder;
 
     Transform player;
+    private Vector2 playerStickOffset;
     LayerMask playerMask;
     float maintainAgroRadius;
     bool playerInAggroRange = false;
@@ -23,7 +26,9 @@ public class WBCAggroPlayerState : BaseState<WBCStateMachine.WBCState>
         LayerMask _playerMask,
         float _maintainAggroRadius,
         LayerMask _virusMask,
-        float _detectVirusRadius) 
+        float _detectVirusRadius,
+        Health _health,
+        Attack _attack) 
         : base(key)
     {
         movementComponent = _movementComponent;
@@ -32,11 +37,14 @@ public class WBCAggroPlayerState : BaseState<WBCStateMachine.WBCState>
         maintainAgroRadius = _maintainAggroRadius;
         virusMask = _virusMask;
         detectVirusRadius = _detectVirusRadius;
+        health = _health;
+        attack = _attack;
     }
 
     public override void EnterState()
     {
         player = movementComponent.GetTargetIfInRange(playerMask, maintainAgroRadius);
+        playerStickOffset = movementComponent.GetRandomStickOffset(health.randStickRange);
 
         if (player != null)
         {
@@ -51,9 +59,29 @@ public class WBCAggroPlayerState : BaseState<WBCStateMachine.WBCState>
         pathFinder.SetConditions(null, false);
     }
 
+    public override void UpdateState()
+    {
+        pathFinder.SetConditions(movementComponent.GetTargetIfInRange(playerMask, maintainAgroRadius), true);
+    }
+
+    public override void FixedUpdateState()
+    {
+        movementComponent.MoveTowardsDirection(pathFinder.lookDir);
+
+        if (movementComponent.CheckRange(playerMask, attack.range, "Player"))
+        {
+            movementComponent.StickToTarget(player.transform, playerStickOffset);
+        }
+
+    }
+
     public override WBCStateMachine.WBCState GetNextState()
     {
-        if (movementComponent.CheckRange(virusMask, detectVirusRadius))
+        if (health.IsDead)
+        {
+            return WBCStateMachine.WBCState.Death;
+        }
+        else if (movementComponent.CheckRange(virusMask, detectVirusRadius))
         {
             return WBCStateMachine.WBCState.AttackVirus;
         }
@@ -70,17 +98,14 @@ public class WBCAggroPlayerState : BaseState<WBCStateMachine.WBCState>
 
     public override void OnCollisionEnter2D(Collision2D other)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnCollisionExit2D(Collision2D other)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnCollisionStay2D(Collision2D other)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnTriggerEnter2D(Collider2D other)
@@ -98,13 +123,5 @@ public class WBCAggroPlayerState : BaseState<WBCStateMachine.WBCState>
         //throw new System.NotImplementedException();
     }
 
-    public override void UpdateState()
-    {
-        pathFinder.SetConditions(movementComponent.GetTargetIfInRange(playerMask, maintainAgroRadius), true);
-    }
 
-    public override void FixedUpdateState()
-    {
-        movementComponent.MoveTowardsDirection(pathFinder.lookDir);
-    }
 }

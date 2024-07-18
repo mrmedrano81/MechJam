@@ -39,6 +39,7 @@ public class RedBCIdleState : BaseState<RedBCStateMachine.RedBCEState>
     {
         if (health.IsDead)
         {
+            movement.StopMovement();
             return RedBCStateMachine.RedBCEState.Death;
         }
         else

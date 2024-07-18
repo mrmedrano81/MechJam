@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7848297312522965428
+--- !u!1 &727628076382122696
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,59 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 94415771264269538}
-  - component: {fileID: 8192075263695662783}
-  - component: {fileID: 8869921304651196483}
-  - component: {fileID: 8389776861198228606}
-  - component: {fileID: 2284374560831928718}
-  - component: {fileID: 1304233780272953425}
-  - component: {fileID: 968691436673969959}
-  - component: {fileID: 2173457909337828230}
-  - component: {fileID: 3551389702089895165}
+  - component: {fileID: 9221960077088201548}
+  - component: {fileID: 4438692560031096596}
+  - component: {fileID: 1431854279517202861}
   m_Layer: 9
-  m_Name: WhiteBloodCell
-  m_TagString: WhiteBloodCell
+  m_Name: WBCAnimator
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &94415771264269538
+--- !u!4 &9221960077088201548
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7848297312522965428}
+  m_GameObject: {fileID: 727628076382122696}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.56, y: -1.35, z: 0}
-  m_LocalScale: {x: 1.05, y: 1.05, z: 1.05}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 94415771264269538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8192075263695662783
+--- !u!95 &4438692560031096596
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727628076382122696}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1a649978c43c8cb47b423a056cbad99e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!212 &1431854279517202861
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7848297312522965428}
+  m_GameObject: {fileID: 727628076382122696}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -85,12 +100,52 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.94, y: 0.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7848297312522965428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 94415771264269538}
+  - component: {fileID: 8869921304651196483}
+  - component: {fileID: 8389776861198228606}
+  - component: {fileID: 2284374560831928718}
+  - component: {fileID: 1304233780272953425}
+  - component: {fileID: 968691436673969959}
+  - component: {fileID: 2173457909337828230}
+  - component: {fileID: 3551389702089895165}
+  - component: {fileID: 9064382607652670324}
+  m_Layer: 9
+  m_Name: WhiteBloodCell
+  m_TagString: WhiteBloodCell
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &94415771264269538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7848297312522965428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.56, y: -1.35, z: 0}
+  m_LocalScale: {x: 1.35, y: 1.35, z: 1.35}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 9221960077088201548}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &8869921304651196483
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,7 +223,7 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  maintainAggroRadius: 5
+  maintainAggroRadius: 0
   virusLayerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -225,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  scoreSource: 0
+  scoreSource: 3
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -267,3 +322,18 @@ MonoBehaviour:
   s_dotDuration: 1
   s_dotInterval: 1
   range: 1.26
+--- !u!114 &9064382607652670324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7848297312522965428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6489e9b8ae3a64c4cad5cd5ae05c4b22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 3585451540595752389, guid: 41eb402dc07bd824fa757ef956de74de, type: 3}
+  deathAnim: RBC_Death
+  deathAnimdelay: 0.3

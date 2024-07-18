@@ -15,6 +15,8 @@ public class C_VirusStateMachine : StateManager<C_VirusStateMachine.EState>
 
     public C_VirusSO c_virusSO;
 
+    private C_VirusAnimationScript anim;
+
 
     public enum EState
     {
@@ -30,9 +32,11 @@ public class C_VirusStateMachine : StateManager<C_VirusStateMachine.EState>
         attack = GetComponent<Attack>();
         pathFinder = GetComponent<Unit>();
 
-        states.Add(EState.Moving, new C_VirusMovingState(EState.Moving, pathFinder, movement, c_virusSO));
-        states.Add(EState.Attack, new C_VirusAttackScript(EState.Attack, c_virusSO, attack, movement));
-        states.Add(EState.Death, new C_VirusDeathState(EState.Death));
+        anim = GetComponentInChildren<C_VirusAnimationScript>();
+
+        states.Add(EState.Moving, new C_VirusMovingState(EState.Moving, pathFinder, movement, c_virusSO, health));
+        states.Add(EState.Attack, new C_VirusAttackScript(EState.Attack, c_virusSO, attack, movement, health));
+        states.Add(EState.Death, new C_VirusDeathState(EState.Death, anim));
 
         currentState = states[EState.Moving];
     }

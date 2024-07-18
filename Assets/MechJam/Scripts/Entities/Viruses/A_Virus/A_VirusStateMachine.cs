@@ -12,6 +12,7 @@ public class A_VirusStateMachine : StateManager<A_VirusStateMachine.EState>
     Health health;
     Attack attack;
     Unit pathFinder;
+    A_VirusAnimationScript anim;
 
     public float detectionRadius;
     public LayerMask targetMask;
@@ -33,11 +34,14 @@ public class A_VirusStateMachine : StateManager<A_VirusStateMachine.EState>
         attack = GetComponent<Attack>();
         pathFinder = GetComponent<Unit>();
 
-        states.Add(EState.Idle, new A_VirusIdleState(EState.Idle, pathFinder, movement));
-        states.Add(EState.Jump, new A_VirusJumpState(EState.Jump, movement, attack, targetMask));
-        states.Add(EState.Track, new A_VirusTrackTargetState(EState.Track, pathFinder, movement, targetMask, jumpTriggerBox, detectionRadius, attack));
-        states.Add(EState.Attack, new A_VirusAttackScript(EState.Attack));
-        states.Add(EState.Death, new A_VirusDeathState(EState.Death));
+        anim = GetComponentInChildren<A_VirusAnimationScript>();
+
+        states.Add(EState.Idle, new A_VirusIdleState(EState.Idle, pathFinder, movement, health, targetMask, detectionRadius));
+        states.Add(EState.Jump, new A_VirusJumpState(EState.Jump, movement, attack, targetMask, health));
+        states.Add(EState.Track, new A_VirusTrackTargetState(EState.Track, pathFinder, 
+            movement, targetMask, jumpTriggerBox, detectionRadius, attack, health));
+        states.Add(EState.Attack, new A_VirusAttackScript(EState.Attack, health));
+        states.Add(EState.Death, new A_VirusDeathState(EState.Death, anim));
 
         currentState = states[EState.Idle];
     }

@@ -6,6 +6,7 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
 {
     private Attack attackComponent;
     private Movement movementComponent;
+    private Health healthComponent;
     private Unit pathFinder;
 
     private Health virusHealth;
@@ -24,8 +25,8 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
         LayerMask _playerMask,
         float _maintainAggroRadius,
         LayerMask _virusMasks,
-        float _detectVirusRadius
-        ) : base(key)
+        float _detectVirusRadius,
+        Health healthComponent) : base(key)
     {
         pathFinder = _pathFinder;
         movementComponent = _movementComponent;
@@ -34,6 +35,7 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
         virusMasks = _virusMasks;
         maintainAggroRadius = _maintainAggroRadius;
         detectVirusRadius = _detectVirusRadius;
+        this.healthComponent = healthComponent;
     }
 
     public override void EnterState()
@@ -54,7 +56,11 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
 
     public override WBCStateMachine.WBCState GetNextState()
     {
-        if (virusGone)
+        if (healthComponent.IsDead)
+        {
+            return WBCStateMachine.WBCState.Death;
+        }
+        else if (virusGone)
         {
             return WBCStateMachine.WBCState.Idle;
         }
@@ -68,7 +74,7 @@ public class WBCAttackVirusState : BaseState<WBCStateMachine.WBCState>
     {
         if (movementComponent.CheckRange(virusMasks, attackComponent.range))
         {
-            Debug.Log("Should stick");
+            //Debug.Log("Should stick");
             movementComponent.StickToTarget(virusHealth.gameObject.transform, virusStickOffset);
             if (virusHealth != null)
             {

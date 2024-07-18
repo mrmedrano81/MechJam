@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class C_VirusDeathState : BaseState<C_VirusStateMachine.EState>
 {
-    public C_VirusDeathState(C_VirusStateMachine.EState key) : base(key)
+    private C_VirusAnimationScript anim;
+
+    public C_VirusDeathState(C_VirusStateMachine.EState key, C_VirusAnimationScript anim) : base(key)
     {
+        this.anim = anim;
     }
 
     public override void EnterState()
     {
-        throw new System.NotImplementedException();
+        anim.playDeathAnim();
     }
 
     public override void ExitState()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void FixedUpdateState()
     {
-        throw new System.NotImplementedException();
     }
 
     public override C_VirusStateMachine.EState GetNextState()
     {
-        throw new System.NotImplementedException();
+        return C_VirusStateMachine.EState.Death;
     }
 
     #region Collider and Trigger logic

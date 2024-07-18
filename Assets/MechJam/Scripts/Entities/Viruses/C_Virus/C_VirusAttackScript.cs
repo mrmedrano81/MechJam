@@ -8,15 +8,17 @@ public class C_VirusAttackScript : BaseState<C_VirusStateMachine.EState>
     Attack attack;
     Movement movement;
     Health cellHealth;
+    Health health;
 
     bool targetDead;
     bool targetMovedAway;
 
-    public C_VirusAttackScript(C_VirusStateMachine.EState key, C_VirusSO _c_virusSO, Attack _attack, Movement _movement) : base(key)
+    public C_VirusAttackScript(C_VirusStateMachine.EState key, C_VirusSO _c_virusSO, Attack _attack, Movement _movement, Health health) : base(key)
     {
         c_virusSO = _c_virusSO;
         attack = _attack;
         movement = _movement;
+        this.health = health;
     }
 
     public override void EnterState()
@@ -66,7 +68,11 @@ public class C_VirusAttackScript : BaseState<C_VirusStateMachine.EState>
 
     public override C_VirusStateMachine.EState GetNextState()
     {
-        if (targetDead || targetMovedAway)
+        if (health.IsDead)
+        {
+            return C_VirusStateMachine.EState.Death;
+        }
+        else if (targetDead || targetMovedAway)
         {
             return C_VirusStateMachine.EState.Moving;
         }

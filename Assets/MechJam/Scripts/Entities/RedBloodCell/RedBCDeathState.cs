@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class RedBCDeathState : BaseState<RedBCStateMachine.RedBCEState>
 {
-    Animator anim;
+    RedBCAnimationScript anim;
 
-    public RedBCDeathState(RedBCStateMachine.RedBCEState key, Animator _anim) : base(key)
+    public RedBCDeathState(RedBCStateMachine.RedBCEState key, RedBCAnimationScript _anim) : base(key)
     {
         anim = _anim;
     }
@@ -15,6 +15,7 @@ public class RedBCDeathState : BaseState<RedBCStateMachine.RedBCEState>
     public override void EnterState()
     {
         Debug.Log("Dead");
+        anim.playDeathAnim();
     }
 
     public override void ExitState()
@@ -32,7 +33,7 @@ public class RedBCDeathState : BaseState<RedBCStateMachine.RedBCEState>
 
     public override RedBCStateMachine.RedBCEState GetNextState()
     {
-        return StateKey;
+        return RedBCStateMachine.RedBCEState.Death;
     }
 
     #region Collision and Trigger logic

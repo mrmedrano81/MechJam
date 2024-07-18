@@ -4,13 +4,12 @@ using UnityEngine;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Health))]
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Collider2D))]
 public class RedBCStateMachine : StateManager<RedBCStateMachine.RedBCEState>
 {
     Movement movement;
     Health health;
-    Animator anim;
+    RedBCAnimationScript anim;
 
     public RedBloodCellSO redBCSO;
 
@@ -24,7 +23,7 @@ public class RedBCStateMachine : StateManager<RedBCStateMachine.RedBCEState>
     {
         movement = GetComponent<Movement>();
         health = GetComponent<Health>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<RedBCAnimationScript>();
 
         states.Add(RedBCEState.Idle, new RedBCIdleState(RedBCEState.Idle, redBCSO, movement, health));
         states.Add(RedBCEState.Death, new RedBCDeathState(RedBCEState.Death, anim));
