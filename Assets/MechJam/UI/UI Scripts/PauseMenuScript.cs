@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuScript : MonoBehaviour
 {
@@ -30,5 +32,10 @@ public class PauseMenuScript : MonoBehaviour
         PausePanel.SetActive(true);
         SettingsPanel.SetActive(false );
         Time.timeScale = 0;
+    }
+
+    public void QuitToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
